@@ -18,7 +18,7 @@
     <DEPENDENCY Name="VL.Devices.Leap.vl" Location="..\..\LEAP_VL\vl\VL.Devices.Leap.vl" />
   </DEPENDENCIES>
   <PATCHES>
-    <PATCH Name="DetectKnock" Category="KnockGestureSample" IsDatatype="true" IsMutable="true">
+    <PATCH Name="DetectKnock" Category="Gestures" IsDatatype="true" IsMutable="true">
       <BODY Name="UtilsBody">
         <LAYERS>
           <LAYER Name="OnUpdate" />
@@ -985,7 +985,7 @@
         <NODES>
           <PROCESS Name="DetectKnock">
             <POSITION x="605.0449" y="482.391571" />
-            <NODEREF LastCat="KnockGestureSample" LastFile="VL.Devices.Leap.KnockGestureSample.vl">
+            <NODEREF LastCat="Gestures" LastFile="VL.Devices.Leap.GesturesVL.vl">
               <PROCESSNODE Name="DetectKnock" />
             </NODEREF>
             <INPUTS>
@@ -1021,6 +1021,260 @@
             </SEGMENTS>
           </Link>
         </LINKS>
+      </BODY>
+    </PATCH>
+    <PATCH Name="DetectSwipe" Category="Devices.Touch" Version="Touch" IsDatatype="true" IsMutable="true">
+      <BODY Name="UtilsBody">
+        <LAYERS>
+          <LAYER Name="Create" />
+          <LAYER Name="SetupObservable" />
+          <LAYER Name="OnUpdate" />
+        </LAYERS>
+        <INLETS>
+          <INLET Name="Nofications" Layer="SetupObservable">
+            <POSITION x="317.598938" y="133.128433" />
+          </INLET>
+        </INLETS>
+        <OUTLETS>
+          <OUTLET Name="SwipeGesture" Layer="OnUpdate">
+            <POSITION x="318.057617" y="483.6937" />
+          </OUTLET>
+        </OUTLETS>
+        <CONSTS />
+        <REGIONS>
+          <REGION Name="Where" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="321.021271" y="171.66391" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <OPERATIONNODE Name="Where" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Enabled" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="WhereBody">
+              <LAYERS>
+                <LAYER Name="Predicate" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Source" Layer="Predicate">
+                  <POSITION x="328.811584" y="172.042084" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result" Layer="Predicate">
+                  <POSITION x="326.811584" y="319.042053" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS>
+                <CONST Name="Result" Layer="Predicate">
+                  <POSITION x="326.021271" y="294.3003" />
+                  <VALUE><![CDATA[true]]></VALUE>
+                </CONST>
+              </CONSTS>
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="ClientArea" Layer="Predicate">
+                  <POSITION x="329.957062" y="201.5742" />
+                  <NODEREF LastCat="IO.Touch.TouchNotification" LastFile="VVVV.Utils.dll">
+                    <CATEGORY Name="TouchNotification" />
+                    <OPERATIONNODE Name="ClientArea" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Client Area" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Inlets/Source" sink="Nodes/ClientArea/Inputs/Input" />
+                <Link source="Constants/Result" sink="Outlets/Result" />
+              </LINKS>
+            </BODY>
+          </REGION>
+          <REGION Name="Project#1" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="319.959381" y="345.983948" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <OPERATIONNODE Name="Project" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="ProjectBody">
+              <LAYERS>
+                <LAYER Name="Selector" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Source" Layer="Selector">
+                  <POSITION x="322.459381" y="346.362122" />
+                </INLET>
+                <INLET Name="Index" Layer="Selector">
+                  <POSITION x="402.459381" y="346.362122" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result" Layer="Selector">
+                  <POSITION x="322.459381" y="446.362183" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS>
+                <CONST Name="Result" Layer="Selector">
+                  <POSITION x="353.33136" y="403.5161" />
+                  <VALUE><![CDATA[0.0]]></VALUE>
+                </CONST>
+              </CONSTS>
+              <REGIONS />
+              <NODES />
+              <LINKS>
+                <Link source="Constants/Result" sink="Outlets/Result" />
+              </LINKS>
+            </BODY>
+          </REGION>
+          <REGION Name="Aggregate#1" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="555.180664" y="323.996979" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <OPERATIONNODE Name="Aggregate" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Seed" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="AggregateBody">
+              <LAYERS>
+                <LAYER Name="Accumulator" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Accumulate" Layer="Accumulator">
+                  <POSITION x="558.180664" y="254.53067" />
+                </INLET>
+                <INLET Name="Source" Layer="Accumulator">
+                  <POSITION x="651.55" y="254.53067" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Accumulate" Layer="Accumulator">
+                  <POSITION x="544.81134" y="531.0061" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS />
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="Position" Layer="Accumulator">
+                  <POSITION x="709.5425" y="295.1581" />
+                  <NODEREF LastCat="IO.Touch.TouchNotification" LastFile="VVVV.Utils.dll">
+                    <CATEGORY Name="TouchNotification" />
+                    <OPERATIONNODE Name="Position" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Position" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Join" Layer="Accumulator">
+                  <POSITION x="562.958435" y="486.675079" />
+                  <NODEREF LastCat="Primitive.Tuple (2 Items)" LastFile="CommonLanguageRuntimeLibrary">
+                    <CATEGORY Name="Tuple (2 Items)" />
+                    <OPERATIONNODE Name="Join" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Item 1" />
+                    <INPUT Name="Item 2" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Output" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Split" Layer="Accumulator">
+                  <POSITION x="558.9071" y="285.9506" />
+                  <NODEREF LastCat="Primitive.Tuple (2 Items)" LastFile="VL.Lib.Basics.dll">
+                    <OPERATIONNODE Name="Split" />
+                    <CATEGORY Name="Tuple (2 Items)" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Item 1" />
+                    <OUPUT Name="Item 2" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="IsTouchDown" Layer="Accumulator">
+                  <POSITION x="642.1433" y="334.566437" />
+                  <NODEREF LastCat="IO.Touch.TouchNotification" LastFile="VVVV.Utils.dll">
+                    <OPERATIONNODE Name="IsTouchDown" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Is Touch Down" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="SwitchInput" Layer="Accumulator">
+                  <POSITION x="554.8558" y="429.219971" />
+                  <NODEREF LastCat="Control" LastFile="Basics.vl">
+                    <OPERATIONNODE Name="SwitchInput" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Condition" />
+                    <INPUT Name="False" />
+                    <INPUT Name="True" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Output" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Inlets/Source" sink="Nodes/Position/Inputs/Input" />
+                <Link source="Nodes/Join/Outputs/Output" sink="Outlets/Accumulate" />
+                <Link source="Inlets/Accumulate" sink="Nodes/Split/Inputs/Input" />
+                <Link source="Inlets/Source" sink="Nodes/IsTouchDown/Inputs/Input" />
+                <Link source="Nodes/IsTouchDown/Outputs/Is Touch Down" sink="Nodes/SwitchInput/Inputs/Condition" />
+                <Link source="Nodes/Split/Outputs/Item 1" sink="Nodes/SwitchInput/Inputs/True" />
+              </LINKS>
+            </BODY>
+          </REGION>
+        </REGIONS>
+        <NODES />
+        <LINKS>
+          <Link source="Inlets/Nofications" sink="Regions/Where/Inputs/Input" />
+          <Link source="Regions/Where/Outputs/Output" sink="Regions/Project#1/Inputs/Input" />
+          <Link source="Regions/Project#1/Outputs/Output" sink="Outlets/SwipeGesture" />
+          <Link source="Inlets/Nofications" sink="Regions/Aggregate#1/Inputs/Input" />
+        </LINKS>
+      </BODY>
+    </PATCH>
+    <PATCH Name="DetectSwipe#1" Category="Gestures" IsDatatype="true" IsMutable="true">
+      <BODY Name="UtilsBody">
+        <LAYERS>
+          <LAYER Name="Create" />
+          <LAYER Name="Update" />
+        </LAYERS>
+        <INLETS />
+        <OUTLETS />
+        <CONSTS />
+        <REGIONS />
+        <NODES />
+        <LINKS />
       </BODY>
     </PATCH>
   </PATCHES>

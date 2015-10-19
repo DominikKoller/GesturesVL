@@ -14,7 +14,7 @@
     <DEPENDENCY Name="Basics.vl" Location="Basics.vl" />
     <DEPENDENCY Name="VL.Lib.Integration.dll" Location="VL.Lib.Integration.dll" />
     <DEPENDENCY Name="Integration.vl" Location="Integration.vl" />
-    <DEPENDENCY Name="VL.Devices.Leap.KnockGestureSample.vl" Location="./VL.Devices.Leap.KnockGestureSample.vl" />
+    <DEPENDENCY Name="VL.Devices.Leap.GesturesVL.vl" Location="./VL.Devices.Leap.GesturesVL.vl" />
   </DEPENDENCIES>
   <PATCHES>
     <PATCH Name="DetectKnock" Category="VVVV.Devices.Leap" Version="Leap" IsDatatype="true" IsClosed="true" IsMutable="true">
@@ -44,7 +44,7 @@
         <NODES>
           <PROCESS Name="DetectKnock">
             <POSITION x="646" y="309" />
-            <NODEREF LastCat="KnockGestureSample" LastFile="VL.Devices.Leap.KnockGestureSample.vl">
+            <NODEREF LastCat="KnockGestureSample" LastFile="VL.Devices.Leap.GesturesVL.vl">
               <PROCESSNODE Name="DetectKnock" Version="Leap" />
               <CATEGORY Name="KnockGestureSample" IsDirectParent="true" />
             </NODEREF>
@@ -185,6 +185,102 @@
           <Link source="Nodes/OR/Outputs/Output" sink="Nodes/DetectKnock/Inputs/SetupObservable Enabled" />
           <Link source="Inlets/MaxTimespan" sink="Nodes/FromSeconds/Inputs/Value" />
           <Link source="Nodes/FromSeconds/Outputs/Result" sink="Nodes/DetectKnock/Inputs/MaxTimespan" />
+        </LINKS>
+      </BODY>
+    </PATCH>
+    <PATCH Name="DetectSwipe" Category="VVVV.Devices.Touch" Version="Touch" IsDatatype="true" IsClosed="true" IsMutable="true">
+      <BODY Name="UtilsBody">
+        <LAYERS>
+          <LAYER Name="Create" />
+          <LAYER Name="Update" />
+        </LAYERS>
+        <INLETS>
+          <INLET Name="TouchDevice" Layer="Update">
+            <POSITION x="479" y="71" />
+          </INLET>
+        </INLETS>
+        <OUTLETS>
+          <OUTLET Name="Notifications" Layer="Update">
+            <POSITION x="482.9457" y="296.786163" />
+          </OUTLET>
+        </OUTLETS>
+        <CONSTS />
+        <REGIONS />
+        <NODES>
+          <PROCESS Name="DetectSwipe">
+            <POSITION x="478" y="178" />
+            <NODEREF LastCat="Devices.Touch" LastFile="VL.Devices.Leap.GesturesVL.vl">
+              <PROCESSNODE Name="DetectSwipe" Version="Touch" />
+              <CATEGORY Name="Touch" IsDirectParent="true">
+                <CATEGORY Name="Devices" IsDirectParent="true" IsGlobal="true" />
+              </CATEGORY>
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Nofications#1" FragmentId="SetupObservable" />
+              <INPUT Name="SetupObservable Enabled" FragmentId="SetupObservable" IsEnabled="true" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="SwipeGesture" FragmentId="OnUpdate" />
+            </OUTPUTS>
+            <FRAGMENTS>
+              <FRAGMENT Name="Create" />
+              <FRAGMENT Name="SetupObservable" />
+              <FRAGMENT Name="OnUpdate" />
+            </FRAGMENTS>
+          </PROCESS>
+          <PROCESS Name="Changed">
+            <POSITION x="557" y="133" />
+            <NODEREF LastCat="Control" LastFile="VL.Lib.Basics.dll">
+              <PROCESSNODE Name="Changed" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Value" FragmentId="Update" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Result" FragmentId="Update" />
+              <OUPUT Name="Unchanged" FragmentId="Update" />
+            </OUTPUTS>
+            <FRAGMENTS>
+              <FRAGMENT Name="Update" />
+            </FRAGMENTS>
+          </PROCESS>
+          <OPERATION Name="Notifications" Layer="Update">
+            <POSITION x="478" y="128" />
+            <NODEREF LastCat="IO.Touch.TouchDevice" LastFile="VVVV.Utils.dll">
+              <CATEGORY Name="TouchDevice" />
+              <OPERATIONNODE Name="Notifications" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Notifications" />
+            </OUTPUTS>
+          </OPERATION>
+          <PROCESS Name="Sampler">
+            <POSITION x="480" y="235" />
+            <NODEREF LastCat="Reactive" LastFile="VL.Lib.Basics.dll">
+              <PROCESSNODE Name="Sampler" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Async Notifications" FragmentId="Sample" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" FragmentId="Sample" />
+              <OUPUT Name="Notifications" FragmentId="Sample" />
+            </OUTPUTS>
+            <FRAGMENTS>
+              <FRAGMENT Name="Sample" />
+            </FRAGMENTS>
+          </PROCESS>
+        </NODES>
+        <LINKS>
+          <Link source="Inlets/TouchDevice" sink="Nodes/Notifications/Inputs/Input" />
+          <Link source="Inlets/TouchDevice" sink="Nodes/Changed/Inputs/Value" />
+          <Link source="Nodes/Changed/Outputs/Result" sink="Nodes/DetectSwipe/Inputs/SetupObservable Enabled" />
+          <Link source="Nodes/Notifications/Outputs/Notifications" sink="Nodes/DetectSwipe/Inputs/Nofications#1" />
+          <Link source="Nodes/DetectSwipe/Outputs/SwipeGesture" sink="Nodes/Sampler/Inputs/Async Notifications" />
+          <Link source="Nodes/Sampler/Outputs/Notifications" sink="Outlets/Notifications" />
         </LINKS>
       </BODY>
     </PATCH>
