@@ -17,7 +17,7 @@
     <DEPENDENCY Name="VL.Devices.Leap.KnockGestureSample.vl" Location="./VL.Devices.Leap.KnockGestureSample.vl" />
   </DEPENDENCIES>
   <PATCHES>
-    <PATCH Name="KnockGestures" Category="VVVV.Devices.Leap" Version="Leap" IsDatatype="true" IsClosed="true" IsMutable="true">
+    <PATCH Name="DetectKnock" Category="VVVV.Devices.Leap" Version="Leap" IsDatatype="true" IsClosed="true" IsMutable="true">
       <BODY Name="UtilsBody">
         <LAYERS>
           <LAYER Name="Create" />
@@ -44,9 +44,9 @@
         <NODES>
           <PROCESS Name="DetectKnock">
             <POSITION x="646" y="309" />
-            <NODEREF LastFile="VL.Devices.Leap.KnockGestureSample.vl">
-              <CATEGORYPATH Name="Main" />
+            <NODEREF LastCat="KnockGestureSample" LastFile="VL.Devices.Leap.KnockGestureSample.vl">
               <PROCESSNODE Name="DetectKnock" Version="Leap" />
+              <CATEGORY Name="KnockGestureSample" IsDirectParent="true" />
             </NODEREF>
             <INPUTS>
               <INPUT Name="Frames" FragmentId="SetupObservable" />
@@ -185,62 +185,6 @@
           <Link source="Nodes/OR/Outputs/Output" sink="Nodes/DetectKnock/Inputs/SetupObservable Enabled" />
           <Link source="Inlets/MaxTimespan" sink="Nodes/FromSeconds/Inputs/Value" />
           <Link source="Nodes/FromSeconds/Outputs/Result" sink="Nodes/DetectKnock/Inputs/MaxTimespan" />
-        </LINKS>
-      </BODY>
-    </PATCH>
-    <PATCH Name="KnockGesture" Category="VVVV.Devices.Leap" Version="Leap" IsClosed="true" IsMutable="true">
-      <BODY Name="UtilsBody">
-        <LAYERS>
-          <LAYER Name="KnockGesture" Version="Leap" />
-        </LAYERS>
-        <INLETS>
-          <INLET Name="KnockGesture" Layer="KnockGesture (Leap)">
-            <POSITION x="849" y="263" />
-          </INLET>
-        </INLETS>
-        <OUTLETS>
-          <OUTLET Name="Speed" Layer="KnockGesture (Leap)">
-            <POSITION x="807.5842" y="406.301331" />
-          </OUTLET>
-          <OUTLET Name="Scale" Layer="KnockGesture (Leap)" Type="Float32">
-            <POSITION x="912.017151" y="404.301331" />
-          </OUTLET>
-        </OUTLETS>
-        <CONSTS />
-        <REGIONS />
-        <NODES>
-          <OPERATION Name="GetData" Layer="KnockGesture (Leap)">
-            <POSITION x="847.169861" y="292.633972" />
-            <NODEREF LastCat="KnockGestureSample.KnockGesture" LastFile="VL.Devices.Leap.KnockGestureSample.vl">
-              <CATEGORY Name="KnockGesture" />
-              <OPERATIONNODE Name="GetData" />
-            </NODEREF>
-            <INPUTS>
-              <INPUT Name="Input" />
-            </INPUTS>
-            <OUTPUTS>
-              <OUPUT Name="TimeSpan" />
-              <OUPUT Name="Scale" />
-            </OUTPUTS>
-          </OPERATION>
-          <OPERATION Name="TotalSeconds" Layer="KnockGesture (Leap)">
-            <POSITION x="817.2701" y="345.646332" />
-            <NODEREF LastCat="System.TimeSpan" LastFile="CommonLanguageRuntimeLibrary">
-              <OPERATIONNODE Name="TotalSeconds" />
-            </NODEREF>
-            <INPUTS>
-              <INPUT Name="Input" />
-            </INPUTS>
-            <OUTPUTS>
-              <OUPUT Name="Total Seconds" />
-            </OUTPUTS>
-          </OPERATION>
-        </NODES>
-        <LINKS>
-          <Link source="Inlets/KnockGesture" sink="Nodes/GetData/Inputs/Input" />
-          <Link source="Nodes/GetData/Outputs/Scale" sink="Outlets/Scale" />
-          <Link source="Nodes/GetData/Outputs/TimeSpan" sink="Nodes/TotalSeconds/Inputs/Input" />
-          <Link source="Nodes/TotalSeconds/Outputs/Total Seconds" sink="Outlets/Speed" />
         </LINKS>
       </BODY>
     </PATCH>

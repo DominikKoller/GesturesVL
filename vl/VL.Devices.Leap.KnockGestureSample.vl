@@ -718,7 +718,7 @@
               </LAYERS>
               <INLETS>
                 <INLET Name="Source" Layer="Key Selector">
-                  <POSITION x="572.394836" y="898.779053" />
+                  <POSITION x="573.464539" y="892.3607" />
                 </INLET>
               </INLETS>
               <OUTLETS>
@@ -824,7 +824,7 @@
         </LINKS>
       </BODY>
     </PATCH>
-    <PATCH Name="DetectKnock#1" Category="Main" Version="Leap" IsDatatype="true" IsMutable="true">
+    <PATCH Name="DetectKnock#1" Category="KnockGestureSample" Version="Leap" IsDatatype="true" IsMutable="true">
       <BODY Name="UtilsBody">
         <LAYERS>
           <LAYER Name="OnUpdate" />
@@ -849,7 +849,7 @@
         </OUTLETS>
         <CONSTS>
           <CONST Name="SetupObservable Enabled" Layer="SetupObservable">
-            <POSITION x="681.5128" y="480.6899" />
+            <POSITION x="699.5273" y="479.123444" />
             <VALUE><![CDATA[true]]></VALUE>
           </CONST>
         </CONSTS>
