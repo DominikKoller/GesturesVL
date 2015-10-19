@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VLDOCUMENT Version="0.31.1299.0">
+  <DEPENDENCIES>
+    <DEPENDENCY Name="mscorlib.dll.vlimport" Location="mscorlib.dll.vlimport" />
+    <DEPENDENCY Name="SharpDX.dll.vlimport" Location="SharpDX.dll.vlimport" />
+    <DEPENDENCY Name="System.Collections.Immutable.dll.vlimport" Location="System.Collections.Immutable.dll.vlimport" />
+    <DEPENDENCY Name="System.Core.dll.vlimport" Location="System.Core.dll.vlimport" />
+    <DEPENDENCY Name="System.Interactive.dll.vlimport" Location="System.Interactive.dll.vlimport" />
+    <DEPENDENCY Name="System.Reactive.Linq.dll.vlimport" Location="System.Reactive.Linq.dll.vlimport" />
+    <DEPENDENCY Name="System.Windows.Forms.dll.vlimport" Location="System.Windows.Forms.dll.vlimport" />
+    <DEPENDENCY Name="VVVV.Utils.dll.vlimport" Location="VVVV.Utils.dll.vlimport" />
+    <DEPENDENCY Name="VL.Core.dll" Location="VL.Core.dll" />
+    <DEPENDENCY Name="VL.Lib.Basics.dll" Location="VL.Lib.Basics.dll" />
+    <DEPENDENCY Name="Basics.vl" Location="Basics.vl" />
+    <DEPENDENCY Name="VL.Lib.Integration.dll" Location="VL.Lib.Integration.dll" />
+    <DEPENDENCY Name="Integration.vl" Location="Integration.vl" />
+    <DEPENDENCY Name="VL.Devices.Leap.KnockGestureSample.vl" Location="./VL.Devices.Leap.KnockGestureSample.vl" />
+  </DEPENDENCIES>
+  <PATCHES>
+    <PATCH Name="KnockGestures" Category="VVVV.Devices.Leap" Version="Leap" IsDatatype="true" IsClosed="true" IsMutable="true">
+      <BODY Name="UtilsBody">
+        <LAYERS>
+          <LAYER Name="Create" />
+          <LAYER Name="Update" />
+        </LAYERS>
+        <INLETS>
+          <INLET Name="Frames" Layer="Update">
+            <POSITION x="645" y="158" />
+          </INLET>
+          <INLET Name="MinScale" Layer="Update">
+            <POSITION x="800" y="158" />
+          </INLET>
+          <INLET Name="MaxTimespan" Layer="Update">
+            <POSITION x="893" y="158" />
+          </INLET>
+        </INLETS>
+        <OUTLETS>
+          <OUTLET Name="KnockGestures" Layer="Update">
+            <POSITION x="639.9563" y="387.7153" />
+          </OUTLET>
+        </OUTLETS>
+        <CONSTS />
+        <REGIONS />
+        <NODES>
+          <PROCESS Name="DetectKnock">
+            <POSITION x="646" y="309" />
+            <NODEREF LastFile="VL.Devices.Leap.KnockGestureSample.vl">
+              <CATEGORYPATH Name="Main" />
+              <PROCESSNODE Name="DetectKnock" Version="Leap" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Frames" FragmentId="SetupObservable" />
+              <INPUT Name="MinScale" FragmentId="SetupObservable" />
+              <INPUT Name="MaxTimespan" FragmentId="SetupObservable" />
+              <INPUT Name="SetupObservable Enabled" FragmentId="SetupObservable" IsEnabled="true" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="KnockGestures" FragmentId="OnUpdate" />
+            </OUTPUTS>
+            <FRAGMENTS>
+              <FRAGMENT Name="Create" />
+              <FRAGMENT Name="SetupObservable" />
+              <FRAGMENT Name="OnUpdate" />
+            </FRAGMENTS>
+          </PROCESS>
+          <PROCESS Name="Changed">
+            <POSITION x="822" y="243" />
+            <NODEREF LastCat="Control" LastFile="VL.Lib.Basics.dll">
+              <PROCESSNODE Name="Changed" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Value" FragmentId="Update" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Result" FragmentId="Update" />
+              <OUPUT Name="Unchanged" FragmentId="Update" />
+            </OUTPUTS>
+            <FRAGMENTS>
+              <FRAGMENT Name="Update" />
+            </FRAGMENTS>
+          </PROCESS>
+          <OPERATION Name="ShareInstance" Layer="Update">
+            <POSITION x="648" y="191" />
+            <NODEREF LastCat="Primitive.Object" LastFile="VL.Lib.Basics.dll">
+              <OPERATIONNODE Name="ShareInstance" Version="KillTheSystemsExpectations" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Instance" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output 1" />
+              <OUPUT Name="Output 2" />
+            </OUTPUTS>
+          </OPERATION>
+          <PROCESS Name="Sampler">
+            <POSITION x="644.6248" y="343.129028" />
+            <NODEREF LastCat="Reactive" LastFile="VL.Lib.Basics.dll">
+              <PROCESSNODE Name="Sampler" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Async Notifications" FragmentId="Sample" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" FragmentId="Sample" />
+              <OUPUT Name="Notifications" FragmentId="Sample" />
+            </OUTPUTS>
+            <FRAGMENTS>
+              <FRAGMENT Name="Sample" />
+            </FRAGMENTS>
+          </PROCESS>
+          <PROCESS Name="Changed#1">
+            <POSITION x="887" y="245" />
+            <NODEREF LastCat="Control" LastFile="VL.Lib.Basics.dll">
+              <PROCESSNODE Name="Changed" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Value" FragmentId="Update" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Result" FragmentId="Update" />
+              <OUPUT Name="Unchanged" FragmentId="Update" />
+            </OUTPUTS>
+            <FRAGMENTS>
+              <FRAGMENT Name="Update" />
+            </FRAGMENTS>
+          </PROCESS>
+          <PROCESS Name="Changed#2">
+            <POSITION x="948" y="244" />
+            <NODEREF LastCat="Control" LastFile="VL.Lib.Basics.dll">
+              <PROCESSNODE Name="Changed" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Value" FragmentId="Update" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Result" FragmentId="Update" />
+              <OUPUT Name="Unchanged" FragmentId="Update" />
+            </OUTPUTS>
+            <FRAGMENTS>
+              <FRAGMENT Name="Update" />
+            </FRAGMENTS>
+          </PROCESS>
+          <OPERATION Name="OR" Layer="Update">
+            <POSITION x="872" y="277" />
+            <NODEREF LastCat="Control.Boolean" LastFile="Builtin">
+              <OPERATIONNODE Name="OR" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Input 2" />
+              <INPUT Name="Input 3" />
+              <INPUT Name="Input 4" />
+              <INPUT Name="Enabled" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="FromSeconds" Layer="Update">
+            <POSITION x="720" y="279" />
+            <NODEREF LastCat="System.TimeSpan" LastFile="CommonLanguageRuntimeLibrary">
+              <OPERATIONNODE Name="FromSeconds" />
+              <CATEGORY Name="TimeSpan" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Value" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Result" />
+            </OUTPUTS>
+          </OPERATION>
+        </NODES>
+        <LINKS>
+          <Link source="Inlets/Frames" sink="Nodes/ShareInstance/Inputs/Instance" />
+          <Link source="Nodes/ShareInstance/Outputs/Output 1" sink="Nodes/DetectKnock/Inputs/Frames" />
+          <Link source="Nodes/ShareInstance/Outputs/Output 2" sink="Nodes/Changed/Inputs/Value" />
+          <Link source="Nodes/DetectKnock/Outputs/KnockGestures" sink="Nodes/Sampler/Inputs/Async Notifications" />
+          <Link source="Nodes/Sampler/Outputs/Notifications" sink="Outlets/KnockGestures" />
+          <Link source="Inlets/MinScale" sink="Nodes/DetectKnock/Inputs/MinScale" />
+          <Link source="Inlets/MaxTimespan" sink="Nodes/Changed#2/Inputs/Value" />
+          <Link source="Inlets/MinScale" sink="Nodes/Changed#1/Inputs/Value" />
+          <Link source="Nodes/Changed/Outputs/Result" sink="Nodes/OR/Inputs/Input" />
+          <Link source="Nodes/Changed#1/Outputs/Result" sink="Nodes/OR/Inputs/Input 2" />
+          <Link source="Nodes/Changed#2/Outputs/Result" sink="Nodes/OR/Inputs/Input 3" />
+          <Link source="Nodes/OR/Outputs/Output" sink="Nodes/DetectKnock/Inputs/SetupObservable Enabled" />
+          <Link source="Inlets/MaxTimespan" sink="Nodes/FromSeconds/Inputs/Value" />
+          <Link source="Nodes/FromSeconds/Outputs/Result" sink="Nodes/DetectKnock/Inputs/MaxTimespan" />
+        </LINKS>
+      </BODY>
+    </PATCH>
+    <PATCH Name="KnockGesture" Category="VVVV.Devices.Leap" Version="Leap" IsClosed="true" IsMutable="true">
+      <BODY Name="UtilsBody">
+        <LAYERS>
+          <LAYER Name="KnockGesture" Version="Leap" />
+        </LAYERS>
+        <INLETS>
+          <INLET Name="KnockGesture" Layer="KnockGesture (Leap)">
+            <POSITION x="849" y="263" />
+          </INLET>
+        </INLETS>
+        <OUTLETS>
+          <OUTLET Name="Speed" Layer="KnockGesture (Leap)">
+            <POSITION x="807.5842" y="406.301331" />
+          </OUTLET>
+          <OUTLET Name="Scale" Layer="KnockGesture (Leap)">
+            <POSITION x="912.017151" y="404.301331" />
+          </OUTLET>
+        </OUTLETS>
+        <CONSTS />
+        <REGIONS />
+        <NODES>
+          <OPERATION Name="GetData" Layer="KnockGesture (Leap)">
+            <POSITION x="854" y="294" />
+            <NODEREF LastCat="KnockGestureSample.KnockGesture" LastFile="VL.Devices.Leap.KnockGestureSample.vl">
+              <CATEGORY Name="KnockGesture" />
+              <OPERATIONNODE Name="GetData" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="TimeSpan" />
+              <OUPUT Name="Scale" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="TotalSeconds" Layer="KnockGesture (Leap)">
+            <POSITION x="817.2701" y="345.646332" />
+            <NODEREF LastCat="System.TimeSpan" LastFile="CommonLanguageRuntimeLibrary">
+              <OPERATIONNODE Name="TotalSeconds" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Total Seconds" />
+            </OUTPUTS>
+          </OPERATION>
+        </NODES>
+        <LINKS>
+          <Link source="Inlets/KnockGesture" sink="Nodes/GetData/Inputs/Input" />
+          <Link source="Nodes/GetData/Outputs/Scale" sink="Outlets/Scale" />
+          <Link source="Nodes/GetData/Outputs/TimeSpan" sink="Nodes/TotalSeconds/Inputs/Input" />
+          <Link source="Nodes/TotalSeconds/Outputs/Total Seconds" sink="Outlets/Speed" />
+        </LINKS>
+      </BODY>
+    </PATCH>
+  </PATCHES>
+</VLDOCUMENT>

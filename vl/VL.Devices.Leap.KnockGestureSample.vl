@@ -1,0 +1,1588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VLDOCUMENT Version="0.31.1299.0">
+  <DEPENDENCIES>
+    <DEPENDENCY Name="mscorlib.dll.vlimport" Location="mscorlib.dll.vlimport" />
+    <DEPENDENCY Name="SharpDX.dll.vlimport" Location="SharpDX.dll.vlimport" />
+    <DEPENDENCY Name="System.Collections.Immutable.dll.vlimport" Location="System.Collections.Immutable.dll.vlimport" />
+    <DEPENDENCY Name="System.Core.dll.vlimport" Location="System.Core.dll.vlimport" />
+    <DEPENDENCY Name="System.Interactive.dll.vlimport" Location="System.Interactive.dll.vlimport" />
+    <DEPENDENCY Name="System.Reactive.Linq.dll.vlimport" Location="System.Reactive.Linq.dll.vlimport" />
+    <DEPENDENCY Name="System.Windows.Forms.dll.vlimport" Location="System.Windows.Forms.dll.vlimport" />
+    <DEPENDENCY Name="VVVV.Utils.dll.vlimport" Location="VVVV.Utils.dll.vlimport" />
+    <DEPENDENCY Name="VL.Core.dll" Location="VL.Core.dll" />
+    <DEPENDENCY Name="VL.Lib.Basics.dll" Location="VL.Lib.Basics.dll" />
+    <DEPENDENCY Name="Basics.vl" Location="Basics.vl" />
+    <DEPENDENCY Name="VL.Lib.Integration.dll" Location="VL.Lib.Integration.dll" />
+    <DEPENDENCY Name="Integration.vl" Location="Integration.vl" />
+    <DEPENDENCY Name="KnockGestureSampleWrapper.dll" Location="..\vlimport\KnockGestureSampleWrapper.dll" />
+    <DEPENDENCY Name="VL.Devices.Leap.vl" Location="..\..\LEAP_VL\vl\VL.Devices.Leap.vl" />
+  </DEPENDENCIES>
+  <PATCHES>
+    <PATCH Name="DetectKnock" Category="KnockGestureSample" IsDatatype="true" IsMutable="true">
+      <BODY Name="UtilsBody">
+        <LAYERS>
+          <LAYER Name="OnUpdate" />
+          <LAYER Name="SetupObservable" />
+          <LAYER Name="Create" />
+        </LAYERS>
+        <INLETS>
+          <INLET Name="Values" Layer="SetupObservable">
+            <POSITION x="566.4944" y="156.608246" />
+          </INLET>
+          <INLET Name="MinScale" Layer="SetupObservable">
+            <POSITION x="792.309265" y="156.608246" />
+          </INLET>
+          <INLET Name="MaxTimespan" Layer="SetupObservable">
+            <POSITION x="856.080933" y="156.608246" />
+          </INLET>
+        </INLETS>
+        <OUTLETS>
+          <OUTLET Name="KnockGesture" Layer="OnUpdate" Type="Observable&lt;KnockGesture&gt;">
+            <POSITION x="575.1313" y="1992.5459" />
+          </OUTLET>
+        </OUTLETS>
+        <CONSTS>
+          <CONST Name="Up Enabled" Layer="OnUpdate">
+            <POSITION x="1189.19727" y="1241.21851" />
+            <VALUE><![CDATA[true]]></VALUE>
+          </CONST>
+          <CONST Name="Mode" Layer="OnUpdate">
+            <POSITION x="1158.23462" y="1209.82861" />
+            <SIZE width="73.33344" height="15.50846" />
+            <VALUE><![CDATA[{"type":"CounterMode [Animation]","value":1}]]></VALUE>
+          </CONST>
+          <CONST Name="Tryin to rebuild this" Layer="OnUpdate" Type="String">
+            <POSITION x="1085.02185" y="997.5824" />
+            <SIZE width="506.2256" height="10.7563477" />
+            <VALUE><![CDATA["http://blog.zuehlke.com/en/gesture-recognition-with-leap-motion-controller-and-reactive-extensions/"]]></VALUE>
+          </CONST>
+          <CONST Name="Count#1" Layer="SetupObservable">
+            <POSITION x="628.854248" y="1346.53723" />
+            <SIZE width="40" height="15.50846" />
+            <VALUE><![CDATA[2]]></VALUE>
+          </CONST>
+          <CONST Name="Skip#1" Layer="SetupObservable">
+            <POSITION x="626.992432" y="1371.559" />
+            <VALUE><![CDATA[1]]></VALUE>
+          </CONST>
+          <CONST Name="Skip" Layer="SetupObservable">
+            <POSITION x="608.425232" y="214.300827" />
+            <SIZE width="40" height="15.50846" />
+            <VALUE><![CDATA[1]]></VALUE>
+          </CONST>
+          <CONST Name="Count" Layer="SetupObservable">
+            <POSITION x="607.4022" y="191.925873" />
+            <VALUE><![CDATA[2]]></VALUE>
+          </CONST>
+          <CONST Name="Count#2" Layer="SetupObservable">
+            <POSITION x="611.7879" y="801.9102" />
+            <VALUE><![CDATA[2]]></VALUE>
+          </CONST>
+          <CONST Name="Skip#2" Layer="SetupObservable">
+            <POSITION x="616.081848" y="831.4429" />
+            <VALUE><![CDATA[1]]></VALUE>
+          </CONST>
+        </CONSTS>
+        <REGIONS>
+          <REGION Name="Scan" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="568.3505" y="461.251923" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <OPERATIONNODE Name="Scan" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Seed" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="ScanBody">
+              <LAYERS>
+                <LAYER Name="Accumulator" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Accumulate" Layer="Accumulator">
+                  <POSITION x="582.908569" y="460.4721" />
+                </INLET>
+                <INLET Name="Source" Layer="Accumulator">
+                  <POSITION x="693.338745" y="460.4721" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Accumulate" Layer="Accumulator">
+                  <POSITION x="573.3505" y="641.53125" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS />
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="+" Layer="Accumulator">
+                  <POSITION x="697.0599" y="546.0341" />
+                  <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
+                    <OPERATIONNODE Name="+" />
+                    <CATEGORY Name="Adaptive" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Input 2" />
+                    <INPUT Name="Input 3" />
+                    <INPUT Name="Enabled" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Output" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="SwitchInput" Layer="Accumulator">
+                  <POSITION x="623.2101" y="589.8131" />
+                  <NODEREF LastCat="Control" LastFile="Basics.vl">
+                    <OPERATIONNODE Name="SwitchInput" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Condition" />
+                    <INPUT Name="False" />
+                    <INPUT Name="True" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Output" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Join" Layer="Accumulator">
+                  <POSITION x="575.9794" y="613.6819" />
+                  <NODEREF LastCat="Primitive.Tuple (2 Items)" LastFile="CommonLanguageRuntimeLibrary">
+                    <CATEGORY Name="Tuple (2 Items)" />
+                    <OPERATIONNODE Name="Join" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Item 1" />
+                    <INPUT Name="Item 2" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Output" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Split" Layer="Accumulator">
+                  <POSITION x="585.7659" y="482.9673" />
+                  <NODEREF LastCat="Primitive.Tuple (2 Items)" LastFile="VL.Lib.Basics.dll">
+                    <CATEGORY Name="Tuple (2 Items)" />
+                    <OPERATIONNODE Name="Split" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Item 1" />
+                    <OUPUT Name="Item 2" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="=" Layer="Accumulator">
+                  <POSITION x="622.9367" y="563.7666" />
+                  <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
+                    <OPERATIONNODE Name="=" />
+                    <CATEGORY Name="Adaptive" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Input 2" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Sign#1" Layer="Accumulator">
+                  <POSITION x="573.3505" y="536.9896" />
+                  <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
+                    <OPERATIONNODE Name="Sign" />
+                    <CATEGORY Name="Adaptive" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Outbox" Layer="Accumulator">
+                  <POSITION x="715.898254" y="601.3266" />
+                  <NODEREF LastCat="IO" LastFile="VL.Lib.Basics.dll">
+                    <ANYNODE Name="Outbox" />
+                    <CATEGORY Name="IO" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Enabled" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Output" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Inlets/Source" sink="Nodes/+/Inputs/Input 2" />
+                <Link source="Nodes/+/Outputs/Output" sink="Nodes/SwitchInput/Inputs/True" />
+                <Link source="Nodes/SwitchInput/Outputs/Output" sink="Nodes/Join/Inputs/Item 2" />
+                <Link source="Nodes/Join/Outputs/Output" sink="Outlets/Accumulate" />
+                <Link source="Inlets/Accumulate" sink="Nodes/Split/Inputs/Input" />
+                <Link source="Inlets/Source" sink="Nodes/Sign#1/Inputs/Input" />
+                <Link source="Nodes/Split/Outputs/Item 2" sink="Nodes/+/Inputs/Input" />
+                <Link source="Nodes/Sign#1/Outputs/Result" sink="Nodes/Join/Inputs/Item 1" />
+                <Link source="Nodes/=/Outputs/Result" sink="Nodes/SwitchInput/Inputs/Condition" />
+                <Link source="Nodes/Split/Outputs/Item 1" sink="Nodes/=/Inputs/Input 2" />
+                <Link source="Nodes/Sign#1/Outputs/Result" sink="Nodes/=/Inputs/Input" />
+                <Link source="Nodes/Split/Outputs/Item 2" sink="Nodes/Outbox/Inputs/Input" />
+              </LINKS>
+            </BODY>
+          </REGION>
+          <REGION Name="Project#4" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="569.086243" y="671.767151" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <OPERATIONNODE Name="Project" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="ProjectBody">
+              <LAYERS>
+                <LAYER Name="Selector" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Source" Layer="Selector">
+                  <POSITION x="572.220154" y="672.1453" />
+                </INLET>
+                <INLET Name="Index" Layer="Selector">
+                  <POSITION x="658.3277" y="672.1453" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result" Layer="Selector">
+                  <POSITION x="571.586243" y="755.0304" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS />
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="Split" Layer="Selector">
+                  <POSITION x="572.8093" y="696.3825" />
+                  <NODEREF LastCat="Primitive.Tuple (2 Items)" LastFile="VL.Lib.Basics.dll">
+                    <OPERATIONNODE Name="Split" />
+                    <CATEGORY Name="Tuple (2 Items)" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Item 1" />
+                    <OUPUT Name="Item 2" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Inlets/Source" sink="Nodes/Split/Inputs/Input" />
+                <Link source="Nodes/Split/Outputs/Item 2" sink="Outlets/Result" />
+              </LINKS>
+            </BODY>
+          </REGION>
+          <REGION Name="Where#1" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="583.0192" y="1561.43445" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <OPERATIONNODE Name="Where" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Enabled" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="WhereBody">
+              <LAYERS>
+                <LAYER Name="Predicate" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Source" Layer="Predicate">
+                  <POSITION x="585.5192" y="1561.81262" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result" Layer="Predicate">
+                  <POSITION x="588.3509" y="1723.31274" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS>
+                <CONST Name="Index" Layer="Predicate">
+                  <POSITION x="672.8932" y="1566.48" />
+                  <VALUE><![CDATA[1]]></VALUE>
+                </CONST>
+              </CONSTS>
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="&lt;=" Layer="Predicate">
+                  <POSITION x="588.3509" y="1696.52332" />
+                  <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
+                    <OPERATIONNODE Name="&lt;=" />
+                    <CATEGORY Name="Adaptive" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Input 2" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Timestamp#1" Layer="Predicate">
+                  <POSITION x="661.466" y="1634.07886" />
+                  <NODEREF LastCat="Reactive.Timestamped" LastFile="System.Reactive.Linq.dll">
+                    <OPERATIONNODE Name="Timestamp" />
+                    <CATEGORY Name="Timestamped" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Timestamp" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Timestamp" Layer="Predicate">
+                  <POSITION x="588.3509" y="1634.99219" />
+                  <NODEREF LastCat="Reactive.Timestamped" LastFile="System.Reactive.Linq.dll">
+                    <OPERATIONNODE Name="Timestamp" />
+                    <CATEGORY Name="Timestamped" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Timestamp" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="GetItem" Layer="Predicate">
+                  <POSITION x="661.422852" y="1591.76147" />
+                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
+                    <OPERATIONNODE Name="GetItem" />
+                    <CATEGORY Name="Spread" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Index" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Item" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="GetItem#1" Layer="Predicate">
+                  <POSITION x="588.3509" y="1594.95361" />
+                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
+                    <OPERATIONNODE Name="GetItem" />
+                    <CATEGORY Name="Spread" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Index" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Item" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="-" Layer="Predicate">
+                  <POSITION x="588.3509" y="1673.14038" />
+                  <NODEREF LastCat="System.DateTime (UTC)" LastFile="CommonLanguageRuntimeLibrary">
+                    <CATEGORY Name="DateTime (UTC)" />
+                    <OPERATIONNODE Name="-" Version="DateTimeOffset DateTimeOffset" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Input 2" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Nodes/&lt;=/Outputs/Result" sink="Outlets/Result" />
+                <Link source="Nodes/Timestamp#1/Outputs/Timestamp" sink="Nodes/-/Inputs/Input 2" />
+                <Link source="Nodes/Timestamp/Outputs/Timestamp" sink="Nodes/-/Inputs/Input" />
+                <Link source="Nodes/GetItem/Outputs/Item" sink="Nodes/Timestamp#1/Inputs/Input" />
+                <Link source="Nodes/-/Outputs/Result" sink="Nodes/&lt;=/Inputs/Input" />
+                <Link source="Constants/Index" sink="Nodes/GetItem/Inputs/Index" />
+                <Link source="Nodes/GetItem#1/Outputs/Item" sink="Nodes/Timestamp/Inputs/Input" />
+                <Link source="Inlets/Source" sink="Nodes/GetItem#1/Inputs/Input" />
+                <Link source="Inlets/Source" sink="Nodes/GetItem/Inputs/Input" />
+              </LINKS>
+            </BODY>
+          </REGION>
+          <REGION Name="Project#5" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="581.6526" y="1760.30969" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <OPERATIONNODE Name="Project" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="ProjectBody">
+              <LAYERS>
+                <LAYER Name="Selector" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Source" Layer="Selector">
+                  <POSITION x="585.6973" y="1760.68787" />
+                </INLET>
+                <INLET Name="Index" Layer="Selector">
+                  <POSITION x="677.63385" y="1760.68787" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result" Layer="Selector">
+                  <POSITION x="584.1526" y="1962.76147" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS>
+                <CONST Name="Index" Layer="Selector">
+                  <POSITION x="661.2777" y="1781.4176" />
+                  <VALUE><![CDATA[1]]></VALUE>
+                </CONST>
+              </CONSTS>
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="Create" Layer="Selector">
+                  <POSITION x="588.4937" y="1929.95129" />
+                  <NODEREF LastCat="KnockGestureSample.KnockGesture" LastFile="VL.Devices.Leap.KnockGestureSample.vl">
+                    <OPERATIONNODE Name="Create" />
+                    <CATEGORY Name="KnockGesture" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Duration" />
+                    <INPUT Name="Scale" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Output" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Timestamp#1" Layer="Selector">
+                  <POSITION x="661.2777" y="1853.81812" />
+                  <NODEREF LastCat="Reactive.Timestamped" LastFile="System.Reactive.Linq.dll">
+                    <OPERATIONNODE Name="Timestamp" />
+                    <CATEGORY Name="Timestamped" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Timestamp" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Timestamp" Layer="Selector">
+                  <POSITION x="588.20575" y="1854.73169" />
+                  <NODEREF LastCat="Reactive.Timestamped" LastFile="System.Reactive.Linq.dll">
+                    <OPERATIONNODE Name="Timestamp" />
+                    <CATEGORY Name="Timestamped" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Timestamp" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="GetItem" Layer="Selector">
+                  <POSITION x="661.2777" y="1811.50012" />
+                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
+                    <OPERATIONNODE Name="GetItem" />
+                    <CATEGORY Name="Spread" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Index" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Item" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="GetItem#1" Layer="Selector">
+                  <POSITION x="588.20575" y="1811.50012" />
+                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
+                    <OPERATIONNODE Name="GetItem" />
+                    <CATEGORY Name="Spread" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Index" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Item" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="-" Layer="Selector">
+                  <POSITION x="588.843" y="1903.68237" />
+                  <NODEREF LastCat="System.DateTime (UTC)" LastFile="CommonLanguageRuntimeLibrary">
+                    <CATEGORY Name="DateTime (UTC)" />
+                    <OPERATIONNODE Name="-" Version="DateTimeOffset DateTimeOffset" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Input 2" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Value" Layer="Selector">
+                  <POSITION x="749.0546" y="1855.9447" />
+                  <NODEREF LastCat="Reactive.Timestamped" LastFile="System.Reactive.Linq.dll">
+                    <OPERATIONNODE Name="Value" />
+                    <CATEGORY Name="Timestamped" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Value" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Value#1" Layer="Selector">
+                  <POSITION x="818.3354" y="1854.824" />
+                  <NODEREF LastCat="Reactive.Timestamped" LastFile="System.Reactive.Linq.dll">
+                    <OPERATIONNODE Name="Value" />
+                    <CATEGORY Name="Timestamped" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Value" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Max" Layer="Selector">
+                  <POSITION x="748.732544" y="1903.88733" />
+                  <NODEREF LastCat="Math.Ranges" LastFile="Basics.vl">
+                    <OPERATIONNODE Name="Max" />
+                    <CATEGORY Name="Ranges" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Input 2" />
+                    <INPUT Name="Input 3" />
+                    <INPUT Name="Enabled" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Output" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Constants/Index" sink="Nodes/GetItem/Inputs/Index" />
+                <Link source="Nodes/GetItem/Outputs/Item" sink="Nodes/Timestamp#1/Inputs/Input" />
+                <Link source="Nodes/GetItem#1/Outputs/Item" sink="Nodes/Timestamp/Inputs/Input" />
+                <Link source="Nodes/Timestamp/Outputs/Timestamp" sink="Nodes/-/Inputs/Input" />
+                <Link source="Nodes/Timestamp#1/Outputs/Timestamp" sink="Nodes/-/Inputs/Input 2" />
+                <Link source="Nodes/Create/Outputs/Output" sink="Outlets/Result" />
+                <Link source="Nodes/-/Outputs/Result" sink="Nodes/Create/Inputs/Duration" />
+                <Link source="Nodes/GetItem#1/Outputs/Item" sink="Nodes/Value/Inputs/Input" />
+                <Link source="Nodes/GetItem/Outputs/Item" sink="Nodes/Value#1/Inputs/Input" />
+                <Link source="Nodes/Value/Outputs/Value" sink="Nodes/Max/Inputs/Input" />
+                <Link source="Nodes/Value#1/Outputs/Value" sink="Nodes/Max/Inputs/Input 2" />
+                <Link source="Nodes/Max/Outputs/Output" sink="Nodes/Create/Inputs/Scale" />
+                <Link source="Inlets/Source" sink="Nodes/GetItem/Inputs/Input" />
+                <Link source="Inlets/Source" sink="Nodes/GetItem#1/Inputs/Input" />
+              </LINKS>
+            </BODY>
+          </REGION>
+          <REGION Name="Where" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="578.0831" y="1415.95947" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <OPERATIONNODE Name="Where" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Enabled" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="WhereBody">
+              <LAYERS>
+                <LAYER Name="Predicate" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Source" Layer="Predicate">
+                  <POSITION x="585.0558" y="1416.33765" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result" Layer="Predicate">
+                  <POSITION x="588.7428" y="1534.88721" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS />
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="Value" Layer="Predicate">
+                  <POSITION x="587.973145" y="1471.1449" />
+                  <NODEREF LastCat="Reactive.Timestamped" LastFile="System.Reactive.Linq.dll">
+                    <CATEGORY Name="Timestamped" IsDirectParent="true" />
+                    <OPERATIONNODE Name="Value" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Value" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="GetItem#1" Layer="Predicate">
+                  <POSITION x="588.7428" y="1437.93335" />
+                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
+                    <OPERATIONNODE Name="GetItem" />
+                    <CATEGORY Name="Spread" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Index" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Item" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="&gt;" Layer="Predicate">
+                  <POSITION x="586.770142" y="1508.54761" />
+                  <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
+                    <OPERATIONNODE Name="&gt;" />
+                    <CATEGORY Name="Adaptive" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Input 2" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Nodes/GetItem#1/Outputs/Item" sink="Nodes/Value/Inputs/Input" />
+                <Link source="Nodes/&gt;/Outputs/Result" sink="Outlets/Result" />
+                <Link source="Nodes/Value/Outputs/Value" sink="Nodes/&gt;/Inputs/Input" />
+                <Link source="Inlets/Source" sink="Nodes/GetItem#1/Inputs/Input" />
+              </LINKS>
+            </BODY>
+          </REGION>
+          <REGION Name="Project" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="568.1693" y="251.674164" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <OPERATIONNODE Name="Project" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="ProjectBody">
+              <LAYERS>
+                <LAYER Name="Selector" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Source" Layer="Selector">
+                  <POSITION x="569.5701" y="252.952148" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result" Layer="Selector">
+                  <POSITION x="570.1394" y="416.194031" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS>
+                <CONST Name="Index" Layer="Selector">
+                  <POSITION x="584.7363" y="321.601349" />
+                  <SIZE width="40" height="15.50846" />
+                  <VALUE><![CDATA[1]]></VALUE>
+                </CONST>
+                <CONST Name="Index#1" Layer="Selector">
+                  <POSITION x="684.943237" y="327.212616" />
+                  <SIZE width="40" height="15.50846" />
+                  <VALUE><![CDATA[0]]></VALUE>
+                </CONST>
+              </CONSTS>
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="-" Layer="Selector">
+                  <POSITION x="573.1693" y="390.290131" />
+                  <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
+                    <OPERATIONNODE Name="-" />
+                    <CATEGORY Name="Adaptive" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Input 2" />
+                    <INPUT Name="Input 3" />
+                    <INPUT Name="Enabled" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Output" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="GetItem" Layer="Selector">
+                  <POSITION x="573.1693" y="350.801056" />
+                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
+                    <OPERATIONNODE Name="GetItem" />
+                    <CATEGORY Name="Spread" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Index" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Item" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="GetItem#1" Layer="Selector">
+                  <POSITION x="675.2705" y="352.51004" />
+                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
+                    <OPERATIONNODE Name="GetItem" />
+                    <CATEGORY Name="Spread" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Index" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Item" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Constants/Index" sink="Nodes/GetItem/Inputs/Index" />
+                <Link source="Constants/Index#1" sink="Nodes/GetItem#1/Inputs/Index" />
+                <Link source="Nodes/GetItem/Outputs/Item" sink="Nodes/-/Inputs/Input" />
+                <Link source="Nodes/GetItem#1/Outputs/Item" sink="Nodes/-/Inputs/Input 2" />
+                <Link source="Nodes/-/Outputs/Output" sink="Outlets/Result" />
+                <Link source="Inlets/Source" sink="Nodes/GetItem/Inputs/Input" />
+                <Link source="Inlets/Source" sink="Nodes/GetItem#1/Inputs/Input" />
+              </LINKS>
+            </BODY>
+          </REGION>
+          <REGION Name="Project#1" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="569.075562" y="1055.10669" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <OPERATIONNODE Name="Project" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="ProjectBody">
+              <LAYERS>
+                <LAYER Name="Selector" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Source" Layer="Selector">
+                  <POSITION x="571.999939" y="1056.574" />
+                </INLET>
+                <INLET Name="Index" Layer="Selector">
+                  <POSITION x="651.999939" y="1056.574" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result" Layer="Selector">
+                  <POSITION x="574.457458" y="1135.48486" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS />
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="GetItem" Layer="Selector">
+                  <POSITION x="574.075562" y="1082.3208" />
+                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
+                    <OPERATIONNODE Name="GetItem" />
+                    <CATEGORY Name="Spread" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Index" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Item" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Inlets/Source" sink="Nodes/GetItem/Inputs/Input" />
+                <Link source="Nodes/GetItem/Outputs/Item" sink="Outlets/Result" />
+              </LINKS>
+            </BODY>
+          </REGION>
+          <REGION Name="SkipWhile#1" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="574.455444" y="1181.754" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+              <OPERATIONNODE Name="Where" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Enabled" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="SkipWhileBody">
+              <LAYERS>
+                <LAYER Name="Predicate" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Source" Layer="Predicate">
+                  <POSITION x="578.4264" y="1184.15454" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result" Layer="Predicate">
+                  <POSITION x="581.4137" y="1277.38867" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS />
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="&gt;=" Layer="Predicate">
+                  <POSITION x="581.374756" y="1231.226" />
+                  <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
+                    <CATEGORY Name="Adaptive" IsDirectParent="true" />
+                    <OPERATIONNODE Name="&gt;=" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Input 2" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Abs" Layer="Predicate">
+                  <POSITION x="581.627258" y="1204.754" />
+                  <NODEREF LastCat="Math" LastFile="Basics.vl">
+                    <OPERATIONNODE Name="Abs" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Enabled" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Output" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Outbox" Layer="Predicate">
+                  <POSITION x="635.283447" y="1217.13635" />
+                  <NODEREF LastCat="IO" LastFile="VL.Lib.Basics.dll">
+                    <ANYNODE Name="Outbox" />
+                    <CATEGORY Name="IO" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Enabled" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Output" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Outbox#1" Layer="Predicate">
+                  <POSITION x="632.1879" y="1246.02808" />
+                  <NODEREF LastCat="IO" LastFile="VL.Lib.Basics.dll">
+                    <ANYNODE Name="Outbox" />
+                    <CATEGORY Name="IO" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Enabled" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Output" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Nodes/&gt;=/Outputs/Result" sink="Outlets/Result" />
+                <Link source="Inlets/Source" sink="Nodes/Abs/Inputs/Input" />
+                <Link source="Nodes/Abs/Outputs/Output" sink="Nodes/&gt;=/Inputs/Input" />
+                <Link source="Nodes/Abs/Outputs/Output" sink="Nodes/Outbox/Inputs/Input" />
+                <Link source="Nodes/&gt;=/Outputs/Result" sink="Nodes/Outbox#1/Inputs/Input" />
+              </LINKS>
+            </BODY>
+          </REGION>
+          <REGION Name="Where#2" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="566.8669" y="874.5234" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <OPERATIONNODE Name="Where" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Enabled" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="WhereBody">
+              <LAYERS>
+                <LAYER Name="Predicate" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Source" Layer="Predicate">
+                  <POSITION x="572.1508" y="874.90155" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result" Layer="Predicate">
+                  <POSITION x="577.8111" y="1026.75378" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS>
+                <CONST Name="Index" Layer="Predicate">
+                  <POSITION x="631.9761" y="896.0596" />
+                  <VALUE><![CDATA[1]]></VALUE>
+                </CONST>
+              </CONSTS>
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="Sign#2" Layer="Predicate">
+                  <POSITION x="631.353149" y="964.32135" />
+                  <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
+                    <OPERATIONNODE Name="Sign" />
+                    <CATEGORY Name="Adaptive" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="GetItem#1" Layer="Predicate">
+                  <POSITION x="631.3529" y="926.670654" />
+                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
+                    <OPERATIONNODE Name="GetItem" />
+                    <CATEGORY Name="Spread" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Index" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Item" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="GetItem" Layer="Predicate">
+                  <POSITION x="577.545654" y="926.2635" />
+                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
+                    <OPERATIONNODE Name="GetItem" />
+                    <CATEGORY Name="Spread" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Index" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Item" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Sign#3" Layer="Predicate">
+                  <POSITION x="577.5459" y="962.3775" />
+                  <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
+                    <OPERATIONNODE Name="Sign" />
+                    <CATEGORY Name="Adaptive" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="!=" Layer="Predicate">
+                  <POSITION x="577.161865" y="989.269653" />
+                  <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
+                    <OPERATIONNODE Name="!=" />
+                    <CATEGORY Name="Adaptive" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Input 2" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Constants/Index" sink="Nodes/GetItem#1/Inputs/Index" />
+                <Link source="Nodes/Sign#2/Outputs/Result" sink="Nodes/!=/Inputs/Input 2" />
+                <Link source="Nodes/GetItem#1/Outputs/Item" sink="Nodes/Sign#2/Inputs/Input" />
+                <Link source="Nodes/GetItem/Outputs/Item" sink="Nodes/Sign#3/Inputs/Input" />
+                <Link source="Nodes/Sign#3/Outputs/Result" sink="Nodes/!=/Inputs/Input" />
+                <Link source="Inlets/Source" sink="Nodes/GetItem/Inputs/Input" />
+                <Link source="Inlets/Source" sink="Nodes/GetItem#1/Inputs/Input" />
+                <Link source="Nodes/!=/Outputs/Result" sink="Outlets/Result" />
+              </LINKS>
+            </BODY>
+          </REGION>
+        </REGIONS>
+        <NODES>
+          <PROCESS Name="Counter">
+            <POSITION x="1323.00342" y="1262.602" />
+            <NODEREF LastCat="Animation.FrameBased" LastFile="Basics.vl">
+              <PROCESSNODE Name="Counter" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Minimum" FragmentId="SetParams" />
+              <INPUT Name="Maximum" FragmentId="SetParams" />
+              <INPUT Name="Increment" FragmentId="SetParams" />
+              <INPUT Name="Default" FragmentId="SetParams" />
+              <INPUT Name="Mode" FragmentId="SetParams" />
+              <INPUT Name="SetParams Enabled" FragmentId="SetParams" IsEnabled="true" />
+              <INPUT Name="Up Enabled" FragmentId="Up" IsEnabled="true" />
+              <INPUT Name="Down Enabled" FragmentId="Down" IsEnabled="true" />
+              <INPUT Name="Reset Enabled" FragmentId="Reset" IsEnabled="true" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Value" FragmentId="GetValue" />
+              <OUPUT Name="Underflow" FragmentId="GetValue" />
+              <OUPUT Name="Overflow" FragmentId="GetValue" />
+            </OUTPUTS>
+            <FRAGMENTS>
+              <FRAGMENT Name="Create" />
+              <FRAGMENT Name="SetParams" />
+              <FRAGMENT Name="Up" />
+              <FRAGMENT Name="Down" />
+              <FRAGMENT Name="Reset" />
+              <FRAGMENT Name="GetValue" />
+            </FRAGMENTS>
+          </PROCESS>
+          <OPERATION Name="Count" Layer="OnUpdate">
+            <POSITION x="1322.32483" y="1196.595" />
+            <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
+              <OPERATIONNODE Name="Count" />
+              <CATEGORY Name="Spread" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Count" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="Outbox" Layer="OnUpdate">
+            <POSITION x="1322.32483" y="1231.48682" />
+            <NODEREF LastCat="IO" LastFile="VL.Lib.Basics.dll">
+              <ANYNODE Name="Outbox" />
+              <CATEGORY Name="IO" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Enabled" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="Outbox#3" Layer="OnUpdate">
+            <POSITION x="1321.64075" y="1288.18335" />
+            <NODEREF LastCat="IO" LastFile="VL.Lib.Basics.dll">
+              <ANYNODE Name="Outbox" />
+              <CATEGORY Name="IO" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Enabled" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+          </OPERATION>
+          <PROCESS Name="Sampler#1">
+            <POSITION x="1322.3092" y="1169.48682" />
+            <NODEREF LastCat="Reactive" LastFile="VL.Lib.Basics.dll">
+              <PROCESSNODE Name="Sampler" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Async Notifications" FragmentId="Sample" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" FragmentId="Sample" />
+              <OUPUT Name="Notifications" FragmentId="Sample" />
+            </OUTPUTS>
+            <FRAGMENTS>
+              <FRAGMENT Name="Sample" Layer="OnFrame" />
+            </FRAGMENTS>
+          </PROCESS>
+          <PROCESS Name="Counter#1">
+            <POSITION x="1099.22278" y="1269.92407" />
+            <NODEREF LastCat="Animation.FrameBased" LastFile="Basics.vl">
+              <PROCESSNODE Name="Counter" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Minimum" FragmentId="SetParams" />
+              <INPUT Name="Maximum" FragmentId="SetParams" />
+              <INPUT Name="Increment" FragmentId="SetParams" />
+              <INPUT Name="Default" FragmentId="SetParams" />
+              <INPUT Name="Mode" FragmentId="SetParams" />
+              <INPUT Name="SetParams Enabled" FragmentId="SetParams" IsEnabled="true" />
+              <INPUT Name="Up Enabled" FragmentId="Up" IsEnabled="true" />
+              <INPUT Name="Down Enabled" FragmentId="Down" IsEnabled="true" />
+              <INPUT Name="Reset Enabled" FragmentId="Reset" IsEnabled="true" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Value" FragmentId="GetValue" />
+              <OUPUT Name="Underflow" FragmentId="GetValue" />
+              <OUPUT Name="Overflow" FragmentId="GetValue" />
+            </OUTPUTS>
+            <FRAGMENTS>
+              <FRAGMENT Name="Create" />
+              <FRAGMENT Name="SetParams" />
+              <FRAGMENT Name="Up" />
+              <FRAGMENT Name="Down" />
+              <FRAGMENT Name="Reset" />
+              <FRAGMENT Name="GetValue" />
+            </FRAGMENTS>
+          </PROCESS>
+          <OPERATION Name="Outbox#4" Layer="OnUpdate">
+            <POSITION x="1138.68872" y="1169.03137" />
+            <NODEREF LastCat="IO" LastFile="VL.Lib.Basics.dll">
+              <ANYNODE Name="Outbox" />
+              <CATEGORY Name="IO" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Enabled" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="Count#1" Layer="OnUpdate">
+            <POSITION x="1075.17542" y="1165.55908" />
+            <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
+              <OPERATIONNODE Name="Count" />
+              <CATEGORY Name="Spread" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Count" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="Outbox#1" Layer="OnUpdate">
+            <POSITION x="1075.17542" y="1200.45117" />
+            <NODEREF LastCat="IO" LastFile="VL.Lib.Basics.dll">
+              <ANYNODE Name="Outbox" />
+              <CATEGORY Name="IO" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Enabled" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+          </OPERATION>
+          <PROCESS Name="Sampler#2">
+            <POSITION x="1075.17542" y="1140.52783" />
+            <NODEREF LastCat="Reactive" LastFile="VL.Lib.Basics.dll">
+              <PROCESSNODE Name="Sampler" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Async Notifications" FragmentId="Sample" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" FragmentId="Sample" />
+              <OUPUT Name="Notifications" FragmentId="Sample" />
+            </OUTPUTS>
+            <FRAGMENTS>
+              <FRAGMENT Name="Sample" Layer="OnFrame" />
+            </FRAGMENTS>
+          </PROCESS>
+          <OPERATION Name="Outbox#2" Layer="OnUpdate">
+            <POSITION x="1101.907" y="1303.5415" />
+            <NODEREF LastCat="IO" LastFile="VL.Lib.Basics.dll">
+              <ANYNODE Name="Outbox" />
+              <CATEGORY Name="IO" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Enabled" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="Timestamp#2" Layer="SetupObservable">
+            <POSITION x="575.2351" y="1314.07666" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <OPERATIONNODE Name="Timestamp" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="Buffer#1" Layer="SetupObservable">
+            <POSITION x="577.229858" y="1376.54822" />
+            <NODEREF LastCat="KnockGestureSampleWrapper.KnockGestureSampleHelper" LastFile="KnockGestureSampleWrapper.dll">
+              <OPERATIONNODE Name="Buffer" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Source" />
+              <INPUT Name="Count" />
+              <INPUT Name="Skip" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Result" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="Buffer" Layer="SetupObservable">
+            <POSITION x="568.482361" y="222.241882" />
+            <NODEREF LastCat="KnockGestureSampleWrapper.KnockGestureSampleHelper" LastFile="KnockGestureSampleWrapper.dll">
+              <OPERATIONNODE Name="Buffer" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Source" />
+              <INPUT Name="Count" />
+              <INPUT Name="Skip" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Result" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="Buffer#2" Layer="SetupObservable">
+            <POSITION x="572.34375" y="828.907349" />
+            <NODEREF LastCat="KnockGestureSampleWrapper.KnockGestureSampleHelper" LastFile="KnockGestureSampleWrapper.dll">
+              <OPERATIONNODE Name="Buffer" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Source" />
+              <INPUT Name="Count" />
+              <INPUT Name="Skip" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Result" />
+            </OUTPUTS>
+          </OPERATION>
+        </NODES>
+        <LINKS>
+          <Link source="Constants/Up Enabled" sink="Nodes/Counter#1/Inputs/Up Enabled" />
+          <Link source="Constants/Up Enabled" sink="Nodes/Counter/Inputs/Up Enabled" />
+          <Link source="Constants/Mode" sink="Nodes/Counter#1/Inputs/Mode" />
+          <Link source="Constants/Mode" sink="Nodes/Counter/Inputs/Mode" />
+          <Link source="Constants/Count#1" sink="Nodes/Buffer#1/Inputs/Count" />
+          <Link source="Regions/Project#5/Outputs/Output" sink="Outlets/KnockGesture" />
+          <Link source="Constants/Skip#1" sink="Nodes/Buffer#1/Inputs/Skip" />
+          <Link source="Constants/Skip" sink="Nodes/Buffer/Inputs/Skip" />
+          <Link source="Constants/Count" sink="Nodes/Buffer/Inputs/Count" />
+          <Link source="Inlets/Values" sink="Nodes/Buffer/Inputs/Source" />
+          <Link source="Nodes/Counter/Outputs/Value" sink="Nodes/Outbox#3/Inputs/Input" />
+          <Link source="Nodes/Count/Outputs/Count" sink="Nodes/Outbox/Inputs/Input" />
+          <Link source="Nodes/Outbox/Outputs/Output" sink="Nodes/Counter/Inputs/Increment" />
+          <Link source="Nodes/Sampler#1/Outputs/Notifications" sink="Nodes/Count/Inputs/Input" />
+          <Link source="Nodes/Counter#1/Outputs/Value" sink="Nodes/Outbox#2/Inputs/Input" />
+          <Link source="Nodes/Count#1/Outputs/Count" sink="Nodes/Outbox#1/Inputs/Input" />
+          <Link source="Nodes/Outbox#1/Outputs/Output" sink="Nodes/Counter#1/Inputs/Increment" />
+          <Link source="Nodes/Sampler#2/Outputs/Notifications" sink="Nodes/Count#1/Inputs/Input" />
+          <Link source="Nodes/Sampler#2/Outputs/Notifications" sink="Nodes/Outbox#4/Inputs/Input" />
+          <Link source="Nodes/Timestamp#2/Outputs/Output" sink="Nodes/Buffer#1/Inputs/Source" />
+          <Link source="Nodes/Buffer#1/Outputs/Result" sink="Regions/Where/Inputs/Input" />
+          <Link source="Regions/Scan/Outputs/Output" sink="Regions/Project#4/Inputs/Input" />
+          <Link source="Regions/Where#1/Outputs/Output" sink="Regions/Project#5/Inputs/Input" />
+          <Link source="Regions/Where/Outputs/Output" sink="Regions/Where#1/Inputs/Input" />
+          <Link source="Regions/Project/Outputs/Output" sink="Regions/Scan/Inputs/Input" />
+          <Link source="Nodes/Buffer/Outputs/Result" sink="Regions/Project/Inputs/Input" />
+          <Link source="Regions/Project#4/Outputs/Output" sink="Nodes/Buffer#2/Inputs/Source" />
+          <Link source="Constants/Count#2" sink="Nodes/Buffer#2/Inputs/Count" />
+          <Link source="Constants/Skip#2" sink="Nodes/Buffer#2/Inputs/Skip" />
+          <Link source="Regions/Project#1/Outputs/Output" sink="Regions/SkipWhile#1/Inputs/Input" />
+          <Link source="Regions/SkipWhile#1/Outputs/Output" sink="Nodes/Timestamp#2/Inputs/Input" />
+          <Link source="Inlets/MinScale" sink="Regions/SkipWhile#1/SkipWhileBody/Nodes/&gt;=/Inputs/Input 2">
+            <SEGMENTS>
+              <Point x="-15.10199" y="1061.31226" />
+            </SEGMENTS>
+          </Link>
+          <Link source="Nodes/Buffer#2/Outputs/Result" sink="Regions/Where#2/Inputs/Input" />
+          <Link source="Regions/Where#2/Outputs/Output" sink="Regions/Project#1/Inputs/Input" />
+          <Link source="Inlets/MaxTimespan" sink="Regions/Where#1/WhereBody/Nodes/&lt;=/Inputs/Input 2">
+            <SEGMENTS>
+              <Point x="7.08612061" y="1495.5686" />
+            </SEGMENTS>
+          </Link>
+        </LINKS>
+      </BODY>
+    </PATCH>
+    <PATCH Name="KnockGesture" Category="KnockGestureSample" IsDatatype="true">
+      <BODY Name="UtilsBody">
+        <LAYERS>
+          <LAYER Name="Create" />
+          <LAYER Name="Update" />
+          <LAYER Name="GetData" />
+        </LAYERS>
+        <INLETS>
+          <INLET Name="Duration" Layer="Create">
+            <POSITION x="811.5475" y="251.758179" />
+          </INLET>
+          <INLET Name="Duration#1" Layer="GetData" PadType="Field" Type="TimeSpan">
+            <POSITION x="816.590332" y="325.28186" />
+          </INLET>
+          <INLET Name="Scale#1" Layer="GetData" PadType="Field" Type="Float32">
+            <POSITION x="895.8573" y="329.2434" />
+          </INLET>
+          <INLET Name="Scale" Layer="Create">
+            <POSITION x="903.005249" y="251.758179" />
+          </INLET>
+        </INLETS>
+        <OUTLETS>
+          <OUTLET Name="Duration" Layer="Create" PadType="Field">
+            <POSITION x="811.542236" y="275.742432" />
+          </OUTLET>
+          <OUTLET Name="TimeSpan#1" Layer="GetData">
+            <POSITION x="816.5902" y="347.75293" />
+          </OUTLET>
+          <OUTLET Name="Scale#1" Layer="GetData">
+            <POSITION x="896.1426" y="347.75293" />
+          </OUTLET>
+          <OUTLET Name="Scale" Layer="Create" PadType="Field">
+            <POSITION x="903.005249" y="278.994751" />
+          </OUTLET>
+        </OUTLETS>
+        <CONSTS />
+        <REGIONS />
+        <NODES />
+        <LINKS>
+          <Link source="Inlets/Scale#1" sink="Outlets/Scale#1" />
+          <Link source="Inlets/Duration#1" sink="Outlets/TimeSpan#1" />
+          <Link source="Inlets/Scale" sink="Outlets/Scale" />
+          <Link source="Inlets/Duration" sink="Outlets/Duration" />
+        </LINKS>
+      </BODY>
+    </PATCH>
+    <PATCH Name="DetectKnock#1" Category="Main" Version="Leap" IsDatatype="true" IsMutable="true">
+      <BODY Name="UtilsBody">
+        <LAYERS>
+          <LAYER Name="OnUpdate" />
+          <LAYER Name="SetupObservable" />
+          <LAYER Name="Create" />
+        </LAYERS>
+        <INLETS>
+          <INLET Name="Frames" Layer="SetupObservable">
+            <POSITION x="604.866455" y="178.8278" />
+          </INLET>
+          <INLET Name="MinScale" Layer="SetupObservable">
+            <POSITION x="724.098267" y="178.8278" />
+          </INLET>
+          <INLET Name="MaxTimespan" Layer="SetupObservable">
+            <POSITION x="786.935547" y="178.8278" />
+          </INLET>
+        </INLETS>
+        <OUTLETS>
+          <OUTLET Name="KnockGestures" Layer="OnUpdate">
+            <POSITION x="599.213867" y="596.370544" />
+          </OUTLET>
+        </OUTLETS>
+        <CONSTS>
+          <CONST Name="SetupObservable Enabled" Layer="SetupObservable">
+            <POSITION x="677.085632" y="557.716064" />
+            <VALUE><![CDATA[true]]></VALUE>
+          </CONST>
+        </CONSTS>
+        <REGIONS>
+          <REGION Name="Project#2" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="606.058533" y="339.914642" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <OPERATIONNODE Name="Project" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="ProjectBody">
+              <LAYERS>
+                <LAYER Name="Selector" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Source" Layer="Selector">
+                  <POSITION x="609.006531" y="340.792145" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result" Layer="Selector">
+                  <POSITION x="610.699951" y="434.369751" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS />
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="PalmPosition" Layer="Selector">
+                  <POSITION x="611.058533" y="362.914642" />
+                  <NODEREF LastCat="Devices.Leap.Hand" LastFile="VL.Devices.Leap.vl">
+                    <OPERATIONNODE Name="PalmPosition" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Hand" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="PalmPosition" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Y" Layer="Selector">
+                  <POSITION x="611.058533" y="391.975433" />
+                  <NODEREF LastCat="3D.Vector3" LastFile="SharpDX.dll">
+                    <OPERATIONNODE Name="Y" />
+                    <CATEGORY Name="Vector3" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Y" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Nodes/Y/Outputs/Y" sink="Outlets/Result" />
+                <Link source="Inlets/Source" sink="Nodes/PalmPosition/Inputs/Hand" />
+                <Link source="Nodes/PalmPosition/Outputs/PalmPosition" sink="Nodes/Y/Inputs/Input" />
+              </LINKS>
+            </BODY>
+          </REGION>
+          <REGION Name="Project#1" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="605.3088" y="213.848572" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+              <OPERATIONNODE Name="Project" Version="Many" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="ProjectBody">
+              <LAYERS>
+                <LAYER Name="Selector" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Source" Layer="Selector">
+                  <POSITION x="609.756165" y="214.226746" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result" Layer="Selector">
+                  <POSITION x="610.3088" y="311.116852" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS />
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="Hands" Layer="Selector">
+                  <POSITION x="612.5579" y="243.63501" />
+                  <NODEREF LastCat="Devices.Leap.Frame" LastFile="VL.Devices.Leap.vl">
+                    <OPERATIONNODE Name="Hands" />
+                    <CATEGORY Name="Frame" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Frame" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Hands" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="FromSequence" Layer="Selector">
+                  <POSITION x="612.5579" y="272.929" />
+                  <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+                    <CATEGORY Name="Observable" />
+                    <OPERATIONNODE Name="FromSequence" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Nodes/Hands/Outputs/Hands" sink="Nodes/FromSequence/Inputs/Input" />
+                <Link source="Nodes/FromSequence/Outputs/Result" sink="Outlets/Result" />
+                <Link source="Inlets/Source" sink="Nodes/Hands/Inputs/Frame" />
+              </LINKS>
+            </BODY>
+          </REGION>
+        </REGIONS>
+        <NODES>
+          <PROCESS Name="DetectKnock">
+            <POSITION x="600.7837" y="561.136" />
+            <NODEREF LastCat="KnockGestureSample" LastFile="VL.Devices.Leap.KnockGestureSample.vl">
+              <PROCESSNODE Name="DetectKnock" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Values" FragmentId="SetupObservable" />
+              <INPUT Name="MinScale" FragmentId="SetupObservable" />
+              <INPUT Name="MaxTimespan" FragmentId="SetupObservable" />
+              <INPUT Name="SetupObservable Enabled" FragmentId="SetupObservable" IsEnabled="true" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="KnockGesture" FragmentId="OnUpdate" />
+            </OUTPUTS>
+            <FRAGMENTS>
+              <FRAGMENT Name="Create" />
+              <FRAGMENT Name="SetupObservable" Layer="SetupObservable" />
+              <FRAGMENT Name="OnUpdate" Layer="SetupObservable" />
+            </FRAGMENTS>
+          </PROCESS>
+        </NODES>
+        <LINKS>
+          <Link source="Inlets/Frames" sink="Regions/Project#1/Inputs/Input" />
+          <Link source="Regions/Project#1/Outputs/Output" sink="Regions/Project#2/Inputs/Input" />
+          <Link source="Nodes/DetectKnock/Outputs/KnockGesture" sink="Outlets/KnockGestures" />
+          <Link source="Regions/Project#2/Outputs/Output" sink="Nodes/DetectKnock/Inputs/Values" />
+          <Link source="Constants/SetupObservable Enabled" sink="Nodes/DetectKnock/Inputs/SetupObservable Enabled" />
+          <Link source="Inlets/MinScale" sink="Nodes/DetectKnock/Inputs/MinScale">
+            <SEGMENTS>
+              <Point x="1.36602783" y="201.488968" />
+            </SEGMENTS>
+          </Link>
+          <Link source="Inlets/MaxTimespan" sink="Nodes/DetectKnock/Inputs/MaxTimespan">
+            <SEGMENTS>
+              <Point x="0" y="86.74271" />
+            </SEGMENTS>
+          </Link>
+        </LINKS>
+      </BODY>
+    </PATCH>
+  </PATCHES>
+</VLDOCUMENT>
