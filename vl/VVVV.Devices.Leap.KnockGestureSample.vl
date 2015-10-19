@@ -202,7 +202,7 @@
           <OUTLET Name="Speed" Layer="KnockGesture (Leap)">
             <POSITION x="807.5842" y="406.301331" />
           </OUTLET>
-          <OUTLET Name="Scale" Layer="KnockGesture (Leap)">
+          <OUTLET Name="Scale" Layer="KnockGesture (Leap)" Type="Float32">
             <POSITION x="912.017151" y="404.301331" />
           </OUTLET>
         </OUTLETS>
@@ -210,7 +210,7 @@
         <REGIONS />
         <NODES>
           <OPERATION Name="GetData" Layer="KnockGesture (Leap)">
-            <POSITION x="854" y="294" />
+            <POSITION x="847.169861" y="292.633972" />
             <NODEREF LastCat="KnockGestureSample.KnockGesture" LastFile="VL.Devices.Leap.KnockGestureSample.vl">
               <CATEGORY Name="KnockGesture" />
               <OPERATIONNODE Name="GetData" />
