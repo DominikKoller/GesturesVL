@@ -56,6 +56,7 @@
             </INPUTS>
             <OUTPUTS>
               <OUPUT Name="KnockGestures" FragmentId="OnUpdate" />
+              <OUPUT Name="Old" FragmentId="OnUpdate" />
             </OUTPUTS>
             <FRAGMENTS>
               <FRAGMENT Name="Create" />
@@ -198,29 +199,47 @@
           <INLET Name="TouchDevice" Layer="Update">
             <POSITION x="479" y="71" />
           </INLET>
+          <INLET Name="Tolerance" Layer="Update" Type="Float32">
+            <POSITION x="567.6536" y="71" />
+          </INLET>
+          <INLET Name="last" Layer="Update" PadType="Field">
+            <POSITION x="653.0304" y="267.024872" />
+          </INLET>
+          <INLET Name="MinLength" Layer="Update">
+            <POSITION x="639.968933" y="71" />
+          </INLET>
         </INLETS>
         <OUTLETS>
           <OUTLET Name="Notifications" Layer="Update">
-            <POSITION x="482.9457" y="296.786163" />
+            <POSITION x="484.311737" y="352.793243" />
+          </OUTLET>
+          <OUTLET Name="last" Layer="Update" PadType="Field">
+            <POSITION x="654.3964" y="311.812439" />
+          </OUTLET>
+          <OUTLET Name="Last Gesture" Layer="Update">
+            <POSITION x="640.0531" y="352.793243" />
           </OUTLET>
         </OUTLETS>
         <CONSTS />
         <REGIONS />
         <NODES>
           <PROCESS Name="DetectSwipe">
-            <POSITION x="478" y="178" />
+            <POSITION x="482.5646" y="187.513153" />
             <NODEREF LastCat="Devices.Touch" LastFile="VL.Devices.Leap.GesturesVL.vl">
-              <PROCESSNODE Name="DetectSwipe" Version="Touch" />
               <CATEGORY Name="Touch" IsDirectParent="true">
                 <CATEGORY Name="Devices" IsDirectParent="true" IsGlobal="true" />
               </CATEGORY>
+              <PROCESSNODE Name="DetectSwipe" Version="Touch" />
             </NODEREF>
             <INPUTS>
               <INPUT Name="Nofications#1" FragmentId="SetupObservable" />
+              <INPUT Name="Tolerance" FragmentId="SetupObservable" />
+              <INPUT Name="MinLength" FragmentId="SetupObservable" />
               <INPUT Name="SetupObservable Enabled" FragmentId="SetupObservable" IsEnabled="true" />
             </INPUTS>
             <OUTPUTS>
               <OUPUT Name="SwipeGesture" FragmentId="OnUpdate" />
+              <OUPUT Name="old" FragmentId="OnUpdate" />
             </OUTPUTS>
             <FRAGMENTS>
               <FRAGMENT Name="Create" />
@@ -229,7 +248,7 @@
             </FRAGMENTS>
           </PROCESS>
           <PROCESS Name="Changed">
-            <POSITION x="557" y="133" />
+            <POSITION x="627.350342" y="133" />
             <NODEREF LastCat="Control" LastFile="VL.Lib.Basics.dll">
               <PROCESSNODE Name="Changed" />
             </NODEREF>
@@ -245,7 +264,7 @@
             </FRAGMENTS>
           </PROCESS>
           <OPERATION Name="Notifications" Layer="Update">
-            <POSITION x="478" y="128" />
+            <POSITION x="480.948547" y="132.665085" />
             <NODEREF LastCat="IO.Touch.TouchDevice" LastFile="VVVV.Utils.dll">
               <CATEGORY Name="TouchDevice" />
               <OPERATIONNODE Name="Notifications" />
@@ -258,7 +277,7 @@
             </OUTPUTS>
           </OPERATION>
           <PROCESS Name="Sampler">
-            <POSITION x="480" y="235" />
+            <POSITION x="484.781067" y="234.316986" />
             <NODEREF LastCat="Reactive" LastFile="VL.Lib.Basics.dll">
               <PROCESSNODE Name="Sampler" />
             </NODEREF>
@@ -273,14 +292,169 @@
               <FRAGMENT Name="Sample" />
             </FRAGMENTS>
           </PROCESS>
+          <OPERATION Name="LastOrDefault" Layer="Update">
+            <POSITION x="577.215942" y="288.74295" />
+            <NODEREF LastCat="Collections.Sequence" LastFile="VL.Lib.Basics.dll">
+              <OPERATIONNODE Name="LastOrDefault" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Default Value" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+              <OUPUT Name="Result" />
+            </OUTPUTS>
+          </OPERATION>
         </NODES>
         <LINKS>
           <Link source="Inlets/TouchDevice" sink="Nodes/Notifications/Inputs/Input" />
           <Link source="Inlets/TouchDevice" sink="Nodes/Changed/Inputs/Value" />
-          <Link source="Nodes/Changed/Outputs/Result" sink="Nodes/DetectSwipe/Inputs/SetupObservable Enabled" />
-          <Link source="Nodes/Notifications/Outputs/Notifications" sink="Nodes/DetectSwipe/Inputs/Nofications#1" />
           <Link source="Nodes/DetectSwipe/Outputs/SwipeGesture" sink="Nodes/Sampler/Inputs/Async Notifications" />
           <Link source="Nodes/Sampler/Outputs/Notifications" sink="Outlets/Notifications" />
+          <Link source="Nodes/Changed/Outputs/Result" sink="Nodes/DetectSwipe/Inputs/SetupObservable Enabled" />
+          <Link source="Inlets/Tolerance" sink="Nodes/DetectSwipe/Inputs/Tolerance" />
+          <Link source="Nodes/Sampler/Outputs/Notifications" sink="Nodes/LastOrDefault/Inputs/Input" />
+          <Link source="Inlets/last" sink="Nodes/LastOrDefault/Inputs/Default Value" />
+          <Link source="Nodes/LastOrDefault/Outputs/Result" sink="Outlets/last" />
+          <Link source="Nodes/LastOrDefault/Outputs/Result" sink="Outlets/Last Gesture" />
+          <Link source="Inlets/MinLength" sink="Nodes/DetectSwipe/Inputs/MinLength" />
+          <Link source="Nodes/Notifications/Outputs/Notifications" sink="Nodes/DetectSwipe/Inputs/Nofications#1" />
+        </LINKS>
+      </BODY>
+    </PATCH>
+    <PATCH Name="SwipeGesture" Category="VVVV.Main" IsClosed="true" IsMutable="true">
+      <BODY Name="UtilsBody">
+        <LAYERS>
+          <LAYER Name="SwipeGesture" />
+          <LAYER Name="TEMPdistancePointLine" />
+        </LAYERS>
+        <INLETS>
+          <INLET Name="SwipeGesture" Layer="SwipeGesture">
+            <POSITION x="509" y="234" />
+          </INLET>
+          <INLET Name="LineA" Layer="TEMPdistancePointLine">
+            <POSITION x="1065.13013" y="232.137222" />
+          </INLET>
+          <INLET Name="LineB" Layer="TEMPdistancePointLine">
+            <POSITION x="1134.67334" y="232.137222" />
+          </INLET>
+          <INLET Name="Point" Layer="TEMPdistancePointLine">
+            <POSITION x="1201.73279" y="232.137222" />
+          </INLET>
+        </INLETS>
+        <OUTLETS>
+          <OUTLET Name="StartPosition" Layer="SwipeGesture" Type="Vector2">
+            <POSITION x="512" y="429.790771" />
+          </OUTLET>
+          <OUTLET Name="EndPosition" Layer="SwipeGesture" Type="Vector2">
+            <POSITION x="624" y="429.790771" />
+          </OUTLET>
+          <OUTLET Name="Duration" Layer="SwipeGesture">
+            <POSITION x="722" y="429.790771" />
+          </OUTLET>
+          <OUTLET Name="Valid" Layer="SwipeGesture">
+            <POSITION x="821.137268" y="429.790771" />
+          </OUTLET>
+          <OUTLET Name="Distance" Layer="TEMPdistancePointLine">
+            <POSITION x="1065.751" y="326.581635" />
+          </OUTLET>
+        </OUTLETS>
+        <CONSTS />
+        <REGIONS />
+        <NODES>
+          <OPERATION Name="GetStartPosition" Layer="SwipeGesture">
+            <POSITION x="511" y="314" />
+            <NODEREF LastCat="Main.SwipeGesture" LastFile="VL.Devices.Leap.GesturesVL.vl">
+              <OPERATIONNODE Name="GetStartPosition" />
+              <CATEGORY Name="SwipeGesture" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="StartPosition" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="GetEndPosition" Layer="SwipeGesture">
+            <POSITION x="621" y="314" />
+            <NODEREF LastFile="VL.Devices.Leap.GesturesVL.vl">
+              <OPERATIONNODE Name="GetEndPosition" />
+              <CATEGORYPATH Name="Main.SwipeGesture" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="EndPosition" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="GetDuration" Layer="SwipeGesture">
+            <POSITION x="727" y="317" />
+            <NODEREF LastCat="Main.SwipeGesture" LastFile="VL.Devices.Leap.GesturesVL.vl">
+              <OPERATIONNODE Name="GetDuration" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Duration" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="IsValid" Layer="SwipeGesture">
+            <POSITION x="820" y="316" />
+            <NODEREF LastCat="Main.SwipeGesture" LastFile="VL.Devices.Leap.GesturesVL.vl">
+              <OPERATIONNODE Name="IsValid" />
+              <CATEGORY Name="SwipeGesture" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Valid" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="TotalSeconds" Layer="SwipeGesture">
+            <POSITION x="726.1684" y="357.632538" />
+            <NODEREF LastCat="System.TimeSpan" LastFile="CommonLanguageRuntimeLibrary">
+              <OPERATIONNODE Name="TotalSeconds" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Total Seconds" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="DistancePointLine" Layer="TEMPdistancePointLine">
+            <POSITION x="1062.02551" y="284.979919" />
+            <NODEREF LastCat="Main" LastFile="VL.Devices.Leap.GesturesVL.vl">
+              <OPERATIONNODE Name="DistancePointLine" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="LineA" />
+              <INPUT Name="LineB" />
+              <INPUT Name="Point" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Distance" />
+            </OUTPUTS>
+          </OPERATION>
+        </NODES>
+        <LINKS>
+          <Link source="Inlets/SwipeGesture" sink="Nodes/GetStartPosition/Inputs/Input" />
+          <Link source="Inlets/SwipeGesture" sink="Nodes/GetEndPosition/Inputs/Input" />
+          <Link source="Inlets/SwipeGesture" sink="Nodes/GetDuration/Inputs/Input" />
+          <Link source="Inlets/SwipeGesture" sink="Nodes/IsValid/Inputs/Input" />
+          <Link source="Nodes/GetStartPosition/Outputs/StartPosition" sink="Outlets/StartPosition" />
+          <Link source="Nodes/GetEndPosition/Outputs/EndPosition" sink="Outlets/EndPosition" />
+          <Link source="Nodes/IsValid/Outputs/Valid" sink="Outlets/Valid" />
+          <Link source="Nodes/GetDuration/Outputs/Duration" sink="Nodes/TotalSeconds/Inputs/Input" />
+          <Link source="Nodes/TotalSeconds/Outputs/Total Seconds" sink="Outlets/Duration" />
+          <Link source="Inlets/LineA" sink="Nodes/DistancePointLine/Inputs/LineA" />
+          <Link source="Inlets/LineB" sink="Nodes/DistancePointLine/Inputs/LineB" />
+          <Link source="Inlets/Point" sink="Nodes/DistancePointLine/Inputs/Point" />
+          <Link source="Nodes/DistancePointLine/Outputs/Distance" sink="Outlets/Distance" />
         </LINKS>
       </BODY>
     </PATCH>

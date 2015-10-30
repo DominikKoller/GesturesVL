@@ -1,6 +1,6 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv50alpha34.100.dtd" >
    <PATCH nodename="C:\Users\vvvv_2\Documents\DOMINIK\GesturesVL\vl\DetectKnock (Devices.Leap Leap) help.v4p">
-   <BOUNDS type="Window" left="19140" top="5895" width="9000" height="6000">
+   <BOUNDS type="Window" left="19140" top="5895" width="9000" height="6585">
    </BOUNDS>
    <NODE nodename="IOBox (String)" componentmode="InABox" id="3" systemname="IOBox (String)">
    <BOUNDS type="Node" left="225" top="225" width="5100" height="450">
@@ -39,7 +39,7 @@
    <LINK srcnodeid="16" srcpinname="Output String" dstnodeid="-13" dstpinname="Search Paths">
    </LINK>
    <NODE systemname="GT (Value)" nodename="GT (Value)" componentmode="Hidden" id="15">
-   <BOUNDS type="Node" left="1380" top="3585" width="300" height="270">
+   <BOUNDS type="Node" left="1455" top="3555" width="300" height="270">
    </BOUNDS>
    <PIN pinname="Input 1" visible="1" slicecount="1" values="1">
    </PIN>
@@ -69,7 +69,7 @@
    </BOUNDS>
    <BOUNDS type="Node" left="3045" top="2055" width="0" height="0">
    </BOUNDS>
-   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="0.1">
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="0.06">
    </PIN>
    <PIN pinname="Units" slicecount="1" values="||">
    </PIN>
@@ -95,7 +95,7 @@
    </BOUNDS>
    <BOUNDS type="Node" left="3000" top="2370" width="0" height="0">
    </BOUNDS>
-   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="0.2">
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="1.36">
    </PIN>
    <PIN pinname="Units" slicecount="1" values="||">
    </PIN>
@@ -117,7 +117,7 @@
    </PIN>
    </NODE>
    <NODE systemname="Counter (Animation)" nodename="Counter (Animation)" componentmode="Hidden" id="9">
-   <BOUNDS type="Node" left="1380" top="4050" width="100" height="100">
+   <BOUNDS type="Node" left="1455" top="4020" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Up" visible="1">
    </PIN>
@@ -143,9 +143,9 @@
    <LINK srcnodeid="8" srcpinname="Count" dstnodeid="9" dstpinname="Increment">
    </LINK>
    <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="7" systemname="IOBox (Value Advanced)">
-   <BOUNDS type="Box" left="1380" top="4440" width="795" height="240">
+   <BOUNDS type="Box" left="1455" top="4410" width="1095" height="600">
    </BOUNDS>
-   <BOUNDS type="Node" left="1380" top="4440" width="0" height="0">
+   <BOUNDS type="Node" left="1455" top="4410" width="0" height="0">
    </BOUNDS>
    <PIN pinname="Units" slicecount="1" values="||">
    </PIN>
@@ -157,9 +157,9 @@
    <LINK srcnodeid="9" srcpinname="Output" dstnodeid="7" dstpinname="Y Input Value">
    </LINK>
    <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="4" systemname="IOBox (Enumerations)">
-   <BOUNDS type="Box" left="2640" top="4050" width="930" height="240">
+   <BOUNDS type="Box" left="2715" top="4020" width="930" height="240">
    </BOUNDS>
-   <BOUNDS type="Node" left="2640" top="4050" width="0" height="0">
+   <BOUNDS type="Node" left="2715" top="4020" width="0" height="0">
    </BOUNDS>
    <PIN pinname="Input Enum" slicecount="1" visible="1" values="Unlimited">
    </PIN>
@@ -174,20 +174,34 @@
    </NODE>
    <LINK srcnodeid="14" srcpinname="Y Output Value" dstnodeid="17" dstpinname="Enabled">
    </LINK>
-   <NODE systemname="DetectKnock (Devices.Leap Leap)" filename="VVVV.Devices.Leap.KnockGestureSample.vl" nodename="KnockGesture (Devices.Leap Leap)" componentmode="Hidden" id="20">
-   <BOUNDS type="Node" left="1455" top="2595" width="100" height="100">
-   </BOUNDS>
-   <PIN pinname="Frames" visible="1">
-   </PIN>
-   </NODE>
-   <LINK srcnodeid="13" srcpinname="Y Output Value" dstnodeid="20" dstpinname="MinScale">
-   </LINK>
-   <LINK srcnodeid="11" srcpinname="Y Output Value" dstnodeid="20" dstpinname="MaxTimespan">
-   </LINK>
-   <LINK srcnodeid="20" srcpinname="KnockGestures" dstnodeid="8" dstpinname="Input">
-   </LINK>
-   <LINK srcnodeid="17" srcpinname="Frame" dstnodeid="20" dstpinname="Frames">
-   </LINK>
    <PACK Name="addonpack" Version="34.100.0">
    </PACK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="22" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="3645" top="2850" width="2040" height="1125">
+   </BOUNDS>
+   <BOUNDS type="Node" left="3645" top="2850" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Y Input Value">
+   </PIN>
+   </NODE>
+   <NODE systemname="DetectKnock (Devices.Leap Leap)" filename="VVVV.Devices.Leap.KnockGestureSample.vl" nodename="KnockGesture (Devices.Leap Leap)" componentmode="Hidden" id="24">
+   <BOUNDS type="Node" left="1455" top="2595" width="100" height="100">
+   </BOUNDS>
+   </NODE>
+   <LINK srcnodeid="13" srcpinname="Y Output Value" dstnodeid="24" dstpinname="MinScale">
+   </LINK>
+   <LINK srcnodeid="11" srcpinname="Y Output Value" dstnodeid="24" dstpinname="MaxTimespan">
+   </LINK>
+   <LINK srcnodeid="17" srcpinname="Frame" dstnodeid="24" dstpinname="Frames">
+   </LINK>
+   <LINK srcnodeid="24" srcpinname="Notifications" dstnodeid="22" dstpinname="Y Input Value">
+   </LINK>
+   <LINK srcnodeid="24" srcpinname="KnockGestures" dstnodeid="8" dstpinname="Input">
+   </LINK>
    </PATCH>
