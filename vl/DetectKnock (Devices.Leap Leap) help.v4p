@@ -190,18 +190,24 @@
    </NODE>
    <LINK srcnodeid="14" srcpinname="Y Output Value" dstnodeid="26" dstpinname="Enabled">
    </LINK>
-   <NODE systemname="DetectKnock (Devices.Leap Leap)" filename="VVVV.Devices.Leap.KnockGestureSample.vl" nodename="KnockGesture (Devices.Leap Leap)" componentmode="Hidden" id="28">
-   <BOUNDS type="Node" left="1455" top="2595" width="100" height="100">
+   <NODE systemname="MessageBeep (Windows)" nodename="MessageBeep (Windows)" componentmode="Hidden" id="30">
+   <BOUNDS type="Node" left="2955" top="4710" width="100" height="100">
    </BOUNDS>
-   <PIN pinname="Frames" visible="1">
+   <PIN pinname="DoBeep" slicecount="1" visible="1" values="0">
    </PIN>
    </NODE>
-   <LINK srcnodeid="13" srcpinname="Y Output Value" dstnodeid="28" dstpinname="MinScale">
+   <LINK srcnodeid="15" srcpinname="Output" dstnodeid="30" dstpinname="DoBeep">
    </LINK>
-   <LINK srcnodeid="11" srcpinname="Y Output Value" dstnodeid="28" dstpinname="MaxTimespan">
+   <NODE systemname="DetectKnock (Devices.Leap Leap)" filename="VVVV.Devices.Leap.KnockGestureSample.vl" nodename="KnockGesture (Devices.Leap Leap)" componentmode="Hidden" id="31">
+   <BOUNDS type="Node" left="1455" top="2595" width="100" height="100">
+   </BOUNDS>
+   </NODE>
+   <LINK srcnodeid="13" srcpinname="Y Output Value" dstnodeid="31" dstpinname="MinScale">
    </LINK>
-   <LINK srcnodeid="28" srcpinname="KnockGestures" dstnodeid="8" dstpinname="Input">
+   <LINK srcnodeid="11" srcpinname="Y Output Value" dstnodeid="31" dstpinname="MaxTimespan">
    </LINK>
-   <LINK srcnodeid="26" srcpinname="Frame" dstnodeid="28" dstpinname="Frames">
+   <LINK srcnodeid="31" srcpinname="KnockGestures" dstnodeid="8" dstpinname="Input">
+   </LINK>
+   <LINK srcnodeid="26" srcpinname="Frame" dstnodeid="31" dstpinname="Frames">
    </LINK>
    </PATCH>

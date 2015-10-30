@@ -231,17 +231,17 @@
               <PROCESSNODE Name="DetectSwipe" Version="Touch" />
             </NODEREF>
             <INPUTS>
-              <INPUT Name="Nofications#1" FragmentId="SetupObservable" />
-              <INPUT Name="Tolerance" FragmentId="SetupObservable" />
               <INPUT Name="MinLength" FragmentId="SetupObservable" />
               <INPUT Name="SetupObservable Enabled" FragmentId="SetupObservable" IsEnabled="true" />
+              <INPUT Name="Nofications#1" FragmentId="SetupObservable" />
+              <INPUT Name="Tolerance" FragmentId="SetupObservable" />
             </INPUTS>
             <OUTPUTS>
               <OUPUT Name="SwipeGesture" FragmentId="OnUpdate" />
             </OUTPUTS>
             <FRAGMENTS>
-              <FRAGMENT Name="SetupObservable" />
               <FRAGMENT Name="OnUpdate" />
+              <FRAGMENT Name="SetupObservable" />
               <FRAGMENT Name="Create" />
             </FRAGMENTS>
           </PROCESS>
