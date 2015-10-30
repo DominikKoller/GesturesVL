@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<VLDOCUMENT Version="0.31.1299.0">
+<VLDOCUMENT Version="0.32.0.0">
   <DEPENDENCIES>
     <DEPENDENCY Name="mscorlib.dll.vlimport" Location="mscorlib.dll.vlimport" />
     <DEPENDENCY Name="SharpDX.dll.vlimport" Location="SharpDX.dll.vlimport" />
@@ -16,6 +16,7 @@
     <DEPENDENCY Name="Integration.vl" Location="Integration.vl" />
     <DEPENDENCY Name="KnockGestureSampleWrapper.dll" Location="..\vlimport\KnockGestureSampleWrapper.dll" />
     <DEPENDENCY Name="VL.Devices.Leap.vl" Location="..\..\LEAP_VL\vl\VL.Devices.Leap.vl" />
+    <DEPENDENCY Name="LeapVLWrapper.dll" Location="..\..\LEAP_VL\vlimport\LeapVLWrapper.dll" />
   </DEPENDENCIES>
   <PATCHES>
     <PATCH Name="DetectKnockObservable" Category="Gestures" IsMutable="true">
@@ -677,8 +678,9 @@
                 </OPERATION>
                 <OPERATION Name="Abs" Layer="Predicate">
                   <POSITION x="574.974" y="811.8634" />
-                  <NODEREF LastCat="Math" LastFile="Basics.vl">
+                  <NODEREF LastFile="Basics.vl">
                     <OPERATIONNODE Name="Abs" />
+                    <CATEGORYPATH Name="Math" />
                   </NODEREF>
                   <INPUTS>
                     <INPUT Name="Input" />
@@ -831,37 +833,28 @@
         </LAYERS>
         <INLETS>
           <INLET Name="Frames" Layer="SetupObservable">
-            <POSITION x="457.094574" y="128.865326" />
+            <POSITION x="1121.6366" y="-73.50493" />
           </INLET>
           <INLET Name="MinScale" Layer="SetupObservable">
-            <POSITION x="724.098267" y="128.865326" />
+            <POSITION x="1795.87329" y="-73.50493" />
           </INLET>
           <INLET Name="MaxTimespan" Layer="SetupObservable">
-            <POSITION x="786.935547" y="128.865326" />
+            <POSITION x="1858.71057" y="-73.50493" />
           </INLET>
         </INLETS>
         <OUTLETS>
           <OUTLET Name="KnockGestures" Layer="OnUpdate">
-            <POSITION x="161.801086" y="1062.11157" />
+            <POSITION x="1021.348" y="775.982544" />
           </OUTLET>
         </OUTLETS>
-        <CONSTS>
-          <CONST Name="Skip" Layer="SetupObservable">
-            <POSITION x="505.708435" y="206.8249" />
-            <VALUE><![CDATA[1]]></VALUE>
-          </CONST>
-          <CONST Name="Count" Layer="SetupObservable">
-            <POSITION x="505.7085" y="182.070023" />
-            <VALUE><![CDATA[2]]></VALUE>
-          </CONST>
-        </CONSTS>
+        <CONSTS />
         <REGIONS>
-          <REGION Name="Project#1" Layer="SetupObservable" Kind="HigherOrderFunction">
-            <POSITION x="247.9288" y="295.2582" />
+          <REGION Name="Project#4" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="924.353" y="109.234436" />
             <SIZE x="100" y="100" />
             <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-              <CATEGORY Name="Observable" IsDirectParent="true" />
               <OPERATIONNODE Name="Project" Version="Many" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
             </NODEREF>
             <INPUTS>
               <INPUT Name="Input" />
@@ -875,34 +868,20 @@
               </LAYERS>
               <INLETS>
                 <INLET Name="Source" Layer="Selector">
-                  <POSITION x="252.178925" y="295.636383" />
+                  <POSITION x="928.0288" y="109.61261" />
                 </INLET>
               </INLETS>
               <OUTLETS>
                 <OUTLET Name="Result" Layer="Selector">
-                  <POSITION x="250.4288" y="399.4793" />
+                  <POSITION x="928.0288" y="209.61261" />
                 </OUTLET>
               </OUTLETS>
               <CONSTS />
               <REGIONS />
               <NODES>
-                <OPERATION Name="Hands" Layer="Selector">
-                  <POSITION x="253.829254" y="320.459473" />
-                  <NODEREF LastCat="Devices.Leap.Frame" LastFile="VL.Devices.Leap.vl">
-                    <OPERATIONNODE Name="Hands" />
-                    <CATEGORY Name="Frame" IsDirectParent="true" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Frame" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Hands" />
-                  </OUTPUTS>
-                </OPERATION>
                 <OPERATION Name="FromSequence" Layer="Selector">
-                  <POSITION x="252.989349" y="355.583862" />
+                  <POSITION x="929.353" y="169.691162" />
                   <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-                    <CATEGORY Name="Observable" />
                     <OPERATIONNODE Name="FromSequence" />
                   </NODEREF>
                   <INPUTS>
@@ -914,46 +893,46 @@
                 </OPERATION>
               </NODES>
               <LINKS>
-                <Link source="Nodes/Hands/Outputs/Hands" sink="Nodes/FromSequence/Inputs/Input" />
                 <Link source="Nodes/FromSequence/Outputs/Result" sink="Outlets/Result" />
-                <Link source="Inlets/Source" sink="Nodes/Hands/Inputs/Frame" />
+                <Link source="Inlets/Source" sink="Nodes/FromSequence/Inputs/Input" />
               </LINKS>
             </BODY>
           </REGION>
-          <REGION Name="Project" Layer="SetupObservable" Kind="HigherOrderFunction">
-            <POSITION x="165.24295" y="640.7985" />
+          <REGION Name="ObservableLifetimeManager" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="1024.98413" y="334.97226" />
             <SIZE x="100" y="100" />
-            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-              <OPERATIONNODE Name="Project" Version="Many" />
-              <CATEGORY Name="Observable" IsDirectParent="true" />
+            <NODEREF LastCat="Main" LastFile="VL.Devices.Leap.GesturesVL.vl">
+              <OPERATIONNODE Name="ObservableLifetimeManager" />
             </NODEREF>
             <INPUTS>
               <INPUT Name="Input" />
+              <INPUT Name="Start" />
+              <INPUT Name="End" />
             </INPUTS>
             <OUTPUTS>
               <OUPUT Name="Output" />
             </OUTPUTS>
-            <BODY Name="ProjectBody">
+            <BODY Name="ObservableLifetimeManagerBody">
               <LAYERS>
-                <LAYER Name="Selector" />
+                <LAYER Name="Update" />
               </LAYERS>
               <INLETS>
-                <INLET Name="Source" Layer="Selector">
-                  <POSITION x="167.74295" y="641.1767" />
+                <INLET Name="Initial Hand" Layer="Update">
+                  <POSITION x="1032.23877" y="335.350433" />
                 </INLET>
-                <INLET Name="Index" Layer="Selector">
-                  <POSITION x="294.983429" y="641.1767" />
+                <INLET Name="Input" Layer="Update">
+                  <POSITION x="1118.67188" y="335.350433" />
                 </INLET>
               </INLETS>
               <OUTLETS>
-                <OUTLET Name="Result" Layer="Selector">
-                  <POSITION x="257.522461" y="1019.24127" />
+                <OUTLET Name="Result" Layer="Update">
+                  <POSITION x="1061.73315" y="743.7744" />
                 </OUTLET>
               </OUTLETS>
               <CONSTS />
               <REGIONS>
-                <REGION Name="Project#1" Layer="Selector" Kind="HigherOrderFunction">
-                  <POSITION x="261.406128" y="818.145569" />
+                <REGION Name="Project#1" Layer="Update" Kind="HigherOrderFunction">
+                  <POSITION x="1062.54639" y="360.764618" />
                   <SIZE x="100" y="100" />
                   <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
                     <OPERATIONNODE Name="Project" />
@@ -971,31 +950,28 @@
                     </LAYERS>
                     <INLETS>
                       <INLET Name="Source" Layer="Selector">
-                        <POSITION x="263.906128" y="818.523743" />
+                        <POSITION x="1067.658" y="361.1428" />
                       </INLET>
                     </INLETS>
                     <OUTLETS>
                       <OUTLET Name="Result" Layer="Selector">
-                        <POSITION x="264.115051" y="914.60376" />
+                        <POSITION x="1065.04639" y="682.4492" />
                       </OUTLET>
                     </OUTLETS>
-                    <CONSTS />
+                    <CONSTS>
+                      <CONST Name="Type" Layer="Selector" Type="FingerType">
+                        <POSITION x="1135.32349" y="402.6766" />
+                        <VALUE><![CDATA[{"type":"FingerType [LeapVLWrapper]","value":2}]]></VALUE>
+                      </CONST>
+                      <CONST Name="Type#1" Layer="Selector">
+                        <POSITION x="1126.78564" y="524.5934" />
+                        <VALUE><![CDATA[{"type":"BoneType [LeapVLWrapper]","value":2}]]></VALUE>
+                      </CONST>
+                    </CONSTS>
                     <REGIONS />
                     <NODES>
-                      <OPERATION Name="PalmPosition" Layer="Selector">
-                        <POSITION x="266.709167" y="850.279663" />
-                        <NODEREF LastCat="Devices.Leap.Hand" LastFile="VL.Devices.Leap.vl">
-                          <OPERATIONNODE Name="PalmPosition" />
-                        </NODEREF>
-                        <INPUTS>
-                          <INPUT Name="Hand" />
-                        </INPUTS>
-                        <OUTPUTS>
-                          <OUPUT Name="PalmPosition" />
-                        </OUTPUTS>
-                      </OPERATION>
                       <OPERATION Name="Y" Layer="Selector">
-                        <POSITION x="266.860535" y="877.813232" />
+                        <POSITION x="1067.79175" y="645.6583" />
                         <NODEREF LastCat="3D.Vector3" LastFile="SharpDX.dll">
                           <OPERATIONNODE Name="Y" />
                           <CATEGORY Name="Vector3" IsDirectParent="true" />
@@ -1007,136 +983,135 @@
                           <OUPUT Name="Y" />
                         </OUTPUTS>
                       </OPERATION>
-                    </NODES>
-                    <LINKS>
-                      <Link source="Nodes/PalmPosition/Outputs/PalmPosition" sink="Nodes/Y/Inputs/Input" />
-                      <Link source="Nodes/Y/Outputs/Y" sink="Outlets/Result" />
-                      <Link source="Inlets/Source" sink="Nodes/PalmPosition/Inputs/Hand" />
-                    </LINKS>
-                  </BODY>
-                </REGION>
-                <REGION Name="Where" Layer="Selector" Kind="HigherOrderFunction">
-                  <POSITION x="262.091858" y="681.0045" />
-                  <SIZE x="100" y="100" />
-                  <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-                    <OPERATIONNODE Name="Where" />
-                    <CATEGORY Name="Observable" IsDirectParent="true" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Input" />
-                    <INPUT Name="Enabled" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Output" />
-                  </OUTPUTS>
-                  <BODY Name="WhereBody">
-                    <LAYERS>
-                      <LAYER Name="Predicate" />
-                    </LAYERS>
-                    <INLETS>
-                      <INLET Name="Source" Layer="Predicate">
-                        <POSITION x="264.591858" y="681.3827" />
-                      </INLET>
-                    </INLETS>
-                    <OUTLETS>
-                      <OUTLET Name="Result" Layer="Predicate">
-                        <POSITION x="264.591858" y="781.3827" />
-                      </OUTLET>
-                    </OUTLETS>
-                    <CONSTS />
-                    <REGIONS />
-                    <NODES>
-                      <OPERATION Name="Id" Layer="Predicate">
-                        <POSITION x="268.297" y="714.728943" />
+                      <OPERATION Name="Fingers" Layer="Selector">
+                        <POSITION x="1069.89307" y="384.946655" />
                         <NODEREF LastCat="Devices.Leap.Hand" LastFile="VL.Devices.Leap.vl">
-                          <OPERATIONNODE Name="Id" />
-                          <CATEGORY Name="Hand" IsDirectParent="true" />
+                          <CATEGORY Name="Hand" />
+                          <OPERATIONNODE Name="Fingers" />
                         </NODEREF>
                         <INPUTS>
                           <INPUT Name="Hand" />
                         </INPUTS>
                         <OUTPUTS>
+                          <OUPUT Name="Fingers" />
+                        </OUTPUTS>
+                      </OPERATION>
+                      <OPERATION Name="Finger" Layer="Selector">
+                        <POSITION x="1069.00757" y="494.921753" />
+                        <NODEREF LastCat="Devices.Leap" LastFile="VL.Devices.Leap.vl">
+                          <OPERATIONNODE Name="Finger" />
+                        </NODEREF>
+                        <INPUTS>
+                          <INPUT Name="Finger" />
+                        </INPUTS>
+                        <OUTPUTS>
+                          <OUPUT Name="Bones" />
+                          <OUPUT Name="FingerType" />
+                          <OUPUT Name="TipPosition" />
+                          <OUPUT Name="StabilizedTipPosition" />
+                          <OUPUT Name="Direction" />
+                          <OUPUT Name="TipVelocity" />
+                          <OUPUT Name="Width" />
+                          <OUPUT Name="Length" />
+                          <OUPUT Name="Is Extended" />
+                          <OUPUT Name="Time Visible" />
                           <OUPUT Name="Id" />
                         </OUTPUTS>
                       </OPERATION>
-                      <OPERATION Name="=" Layer="Predicate">
-                        <POSITION x="267.370728" y="750.9326" />
-                        <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
-                          <OPERATIONNODE Name="=" />
-                          <CATEGORY Name="Adaptive" IsDirectParent="true" />
+                      <OPERATION Name="SelectFingers" Layer="Selector">
+                        <POSITION x="1069.47729" y="431.114471" />
+                        <NODEREF LastCat="Devices.Leap" LastFile="VL.Devices.Leap.vl">
+                          <OPERATIONNODE Name="SelectFingers" />
+                        </NODEREF>
+                        <INPUTS>
+                          <INPUT Name="Fingers" />
+                          <INPUT Name="Type" />
+                        </INPUTS>
+                        <OUTPUTS>
+                          <OUPUT Name="Fingers" />
+                        </OUTPUTS>
+                      </OPERATION>
+                      <OPERATION Name="GetItem" Layer="Selector">
+                        <POSITION x="1069.094" y="462.676727" />
+                        <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
+                          <OPERATIONNODE Name="GetItem" />
+                          <CATEGORY Name="Spread" IsDirectParent="true" />
                         </NODEREF>
                         <INPUTS>
                           <INPUT Name="Input" />
-                          <INPUT Name="Input 2" />
+                          <INPUT Name="Index" />
                         </INPUTS>
                         <OUTPUTS>
-                          <OUPUT Name="Result" />
+                          <OUPUT Name="Item" />
+                        </OUTPUTS>
+                      </OPERATION>
+                      <OPERATION Name="SelectBones" Layer="Selector">
+                        <POSITION x="1068.93066" y="550.853638" />
+                        <NODEREF LastCat="Devices.Leap" LastFile="VL.Devices.Leap.vl">
+                          <OPERATIONNODE Name="SelectBones" />
+                        </NODEREF>
+                        <INPUTS>
+                          <INPUT Name="Bones" />
+                          <INPUT Name="Type" />
+                        </INPUTS>
+                        <OUTPUTS>
+                          <OUPUT Name="Bones" />
+                        </OUTPUTS>
+                      </OPERATION>
+                      <OPERATION Name="GetItem#1" Layer="Selector">
+                        <POSITION x="1069.752" y="577.114" />
+                        <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
+                          <OPERATIONNODE Name="GetItem" />
+                          <CATEGORY Name="Spread" IsDirectParent="true" />
+                        </NODEREF>
+                        <INPUTS>
+                          <INPUT Name="Input" />
+                          <INPUT Name="Index" />
+                        </INPUTS>
+                        <OUTPUTS>
+                          <OUPUT Name="Item" />
+                        </OUTPUTS>
+                      </OPERATION>
+                      <OPERATION Name="Bone" Layer="Selector">
+                        <POSITION x="1068.93115" y="613.6323" />
+                        <NODEREF LastCat="Devices.Leap" LastFile="VL.Devices.Leap.vl">
+                          <OPERATIONNODE Name="Bone" />
+                        </NODEREF>
+                        <INPUTS>
+                          <INPUT Name="Bone" />
+                        </INPUTS>
+                        <OUTPUTS>
+                          <OUPUT Name="Type" />
+                          <OUPUT Name="Basis" />
+                          <OUPUT Name="Start" />
+                          <OUPUT Name="Center" />
+                          <OUPUT Name="End" />
+                          <OUPUT Name="Direction" />
+                          <OUPUT Name="Length" />
+                          <OUPUT Name="Width" />
+                          <OUPUT Name="Is Valid" />
                         </OUTPUTS>
                       </OPERATION>
                     </NODES>
                     <LINKS>
-                      <Link source="Inlets/Source" sink="Nodes/Id/Inputs/Hand" />
-                      <Link source="Nodes/Id/Outputs/Id" sink="Nodes/=/Inputs/Input 2" />
-                      <Link source="Nodes/=/Outputs/Result" sink="Outlets/Result" />
-                    </LINKS>
-                  </BODY>
-                </REGION>
-                <REGION Name="Where#1" Layer="Selector" Kind="HigherOrderFunction">
-                  <POSITION x="385.887054" y="686.167358" />
-                  <SIZE x="100" y="100" />
-                  <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-                    <OPERATIONNODE Name="Where" />
-                    <CATEGORY Name="Observable" IsDirectParent="true" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Input" />
-                    <INPUT Name="Enabled" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Output" />
-                  </OUTPUTS>
-                  <BODY Name="WhereBody">
-                    <LAYERS>
-                      <LAYER Name="Predicate" />
-                    </LAYERS>
-                    <INLETS>
-                      <INLET Name="Source" Layer="Predicate">
-                        <POSITION x="400.8776" y="686.545532" />
-                      </INLET>
-                    </INLETS>
-                    <OUTLETS>
-                      <OUTLET Name="Result" Layer="Predicate">
-                        <POSITION x="390.092865" y="778.7021" />
-                      </OUTLET>
-                    </OUTLETS>
-                    <CONSTS />
-                    <REGIONS />
-                    <NODES>
-                      <OPERATION Name="=" Layer="Predicate">
-                        <POSITION x="390.887054" y="743.8223" />
-                        <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
-                          <OPERATIONNODE Name="=" />
-                          <CATEGORY Name="Adaptive" IsDirectParent="true" />
-                        </NODEREF>
-                        <INPUTS>
-                          <INPUT Name="Input" />
-                          <INPUT Name="Input 2" />
-                        </INPUTS>
-                        <OUTPUTS>
-                          <OUPUT Name="Result" />
-                        </OUTPUTS>
-                      </OPERATION>
-                    </NODES>
-                    <LINKS>
-                      <Link source="Inlets/Source" sink="Nodes/=/Inputs/Input 2" />
-                      <Link source="Nodes/=/Outputs/Result" sink="Outlets/Result" />
+                      <Link source="Nodes/Y/Outputs/Y" sink="Outlets/Result" />
+                      <Link source="Inlets/Source" sink="Nodes/Fingers/Inputs/Hand" />
+                      <Link source="Constants/Type" sink="Nodes/SelectFingers/Inputs/Type" />
+                      <Link source="Nodes/Fingers/Outputs/Fingers" sink="Nodes/SelectFingers/Inputs/Fingers" />
+                      <Link source="Nodes/SelectFingers/Outputs/Fingers" sink="Nodes/GetItem/Inputs/Input" />
+                      <Link source="Nodes/GetItem/Outputs/Item" sink="Nodes/Finger/Inputs/Finger" />
+                      <Link source="Nodes/Finger/Outputs/Bones" sink="Nodes/SelectBones/Inputs/Bones" />
+                      <Link source="Constants/Type#1" sink="Nodes/SelectBones/Inputs/Type" />
+                      <Link source="Nodes/SelectBones/Outputs/Bones" sink="Nodes/GetItem#1/Inputs/Input" />
+                      <Link source="Nodes/GetItem#1/Outputs/Item" sink="Nodes/Bone/Inputs/Bone" />
+                      <Link source="Nodes/Bone/Outputs/Start" sink="Nodes/Y/Inputs/Input" />
                     </LINKS>
                   </BODY>
                 </REGION>
               </REGIONS>
               <NODES>
-                <OPERATION Name="DetectKnockObservable" Layer="Selector">
-                  <POSITION x="262.335815" y="948.2525" />
+                <OPERATION Name="DetectKnockObservable" Layer="Update">
+                  <POSITION x="1062.66675" y="708.896" />
                   <NODEREF LastCat="Gestures" LastFile="VL.Devices.Leap.GesturesVL.vl">
                     <OPERATIONNODE Name="DetectKnockObservable" />
                   </NODEREF>
@@ -1149,52 +1124,19 @@
                     <OUPUT Name="KnockGesture" />
                   </OUTPUTS>
                 </OPERATION>
-                <OPERATION Name="Id" Layer="Selector">
-                  <POSITION x="171.0373" y="722.13916" />
-                  <NODEREF LastCat="Devices.Leap.Hand" LastFile="VL.Devices.Leap.vl">
-                    <OPERATIONNODE Name="Id" />
-                    <CATEGORY Name="Hand" IsDirectParent="true" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Hand" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Id" />
-                  </OUTPUTS>
-                </OPERATION>
-                <OPERATION Name="TakeUntil" Layer="Selector">
-                  <POSITION x="261.490631" y="983.78064" />
-                  <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-                    <OPERATIONNODE Name="TakeUntil" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Input" />
-                    <INPUT Name="Other" />
-                    <INPUT Name="Enabled" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Output" />
-                  </OUTPUTS>
-                </OPERATION>
               </NODES>
               <LINKS>
+                <Link source="Nodes/DetectKnockObservable/Outputs/KnockGesture" sink="Outlets/Result" />
+                <Link source="Inlets/Input" sink="Regions/Project#1/Inputs/Input" />
                 <Link source="Regions/Project#1/Outputs/Output" sink="Nodes/DetectKnockObservable/Inputs/Values" />
-                <Link source="Regions/Where/Outputs/Output" sink="Regions/Project#1/Inputs/Input" />
-                <Link source="Inlets/Source" sink="Nodes/Id/Inputs/Hand" />
-                <Link source="Nodes/Id/Outputs/Id" sink="Regions/Where/WhereBody/Nodes/=/Inputs/Input" />
-                <Link source="Nodes/DetectKnockObservable/Outputs/KnockGesture" sink="Nodes/TakeUntil/Inputs/Input" />
-                <Link source="Nodes/TakeUntil/Outputs/Output" sink="Outlets/Result" />
-                <Link source="Nodes/Id/Outputs/Id" sink="Regions/Where#1/WhereBody/Nodes/=/Inputs/Input" />
-                <Link source="Regions/Where#1/Outputs/Output" sink="Nodes/TakeUntil/Inputs/Other" />
               </LINKS>
             </BODY>
           </REGION>
-          <REGION Name="Project#3" Layer="SetupObservable" Kind="HigherOrderFunction">
-            <POSITION x="461.330383" y="243.604752" />
+          <REGION Name="ProjectMany" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="1469.41418" y="106.101135" />
             <SIZE x="100" y="100" />
-            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-              <OPERATIONNODE Name="Project" Version="Many" />
-              <CATEGORY Name="Observable" IsDirectParent="true" />
+            <NODEREF LastCat="Main" LastFile="VL.Devices.Leap.GesturesVL.vl">
+              <OPERATIONNODE Name="ProjectMany" Version="Pairwise" />
             </NODEREF>
             <INPUTS>
               <INPUT Name="Input" />
@@ -1202,194 +1144,80 @@
             <OUTPUTS>
               <OUPUT Name="Output" />
             </OUTPUTS>
-            <BODY Name="ProjectBody">
+            <BODY Name="PairwiseBody">
               <LAYERS>
-                <LAYER Name="Selector" />
+                <LAYER Name="Delegate" />
               </LAYERS>
               <INLETS>
-                <INLET Name="Source" Layer="Selector">
-                  <POSITION x="435.330383" y="248.104752" />
+                <INLET Name="Source 1" Layer="Delegate">
+                  <POSITION x="1549.89343" y="106.479309" />
                 </INLET>
-                <INLET Name="Index" Layer="Selector">
-                  <POSITION x="544.3304" y="248.104752" />
+                <INLET Name="Source 2" Layer="Delegate">
+                  <POSITION x="1633.05115" y="106.479309" />
                 </INLET>
               </INLETS>
               <OUTLETS>
-                <OUTLET Name="Result" Layer="Selector">
-                  <POSITION x="434.928833" y="539.309" />
+                <OUTLET Name="Result" Layer="Delegate">
+                  <POSITION x="1549.3136" y="280.4442" />
                 </OUTLET>
               </OUTLETS>
-              <CONSTS>
-                <CONST Name="Index" Layer="Selector">
-                  <POSITION x="573.7138" y="284.334" />
-                  <VALUE><![CDATA[1]]></VALUE>
-                </CONST>
-              </CONSTS>
+              <CONSTS />
               <REGIONS>
-                <REGION Name="ForEachLoop" Layer="Selector" Kind="ForEachLoop">
-                  <POSITION x="432.876221" y="358.1203" />
-                  <SIZE x="63.03955" y="23.15738" />
-                  <INPUTS>
-                    <INPUT Name="Hands" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Ids" />
-                  </OUTPUTS>
-                  <BODY Name="ForEachLoopBody">
-                    <LAYERS>
-                      <LAYER Name="Update" />
-                    </LAYERS>
-                    <INLETS>
-                      <INLET Name="Hand" Layer="Update">
-                        <POSITION x="436.027039" y="359.248474" />
-                      </INLET>
-                    </INLETS>
-                    <OUTLETS>
-                      <OUTLET Name="Id" Layer="Update">
-                        <POSITION x="437.313538" y="440.2993" />
-                      </OUTLET>
-                    </OUTLETS>
-                    <CONSTS />
-                    <REGIONS />
-                    <NODES>
-                      <OPERATION Name="Id" Layer="Update">
-                        <POSITION x="437.898926" y="387.6387" />
-                        <NODEREF LastCat="Devices.Leap.Hand" LastFile="VL.Devices.Leap.vl">
-                          <OPERATIONNODE Name="Id" />
-                          <CATEGORY Name="Hand" IsDirectParent="true" />
-                        </NODEREF>
-                        <INPUTS>
-                          <INPUT Name="Hand" />
-                        </INPUTS>
-                        <OUTPUTS>
-                          <OUPUT Name="Id" />
-                        </OUTPUTS>
-                      </OPERATION>
-                    </NODES>
-                    <LINKS>
-                      <Link source="Inlets/Hand" sink="Nodes/Id/Inputs/Hand" />
-                      <Link source="Nodes/Id/Outputs/Id" sink="Outlets/Id" />
-                    </LINKS>
-                  </BODY>
-                </REGION>
-                <REGION Name="ForEachLoop#1" Layer="Selector" Kind="ForEachLoop">
-                  <POSITION x="566.0901" y="356.24942" />
-                  <SIZE x="63.03955" y="23.15738" />
-                  <INPUTS>
-                    <INPUT Name="Hands" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Ids" />
-                  </OUTPUTS>
-                  <BODY Name="ForEachLoopBody">
-                    <LAYERS>
-                      <LAYER Name="Update" />
-                    </LAYERS>
-                    <INLETS>
-                      <INLET Name="Hand" Layer="Update">
-                        <POSITION x="569.2409" y="357.3776" />
-                      </INLET>
-                    </INLETS>
-                    <OUTLETS>
-                      <OUTLET Name="Id" Layer="Update">
-                        <POSITION x="570.5274" y="438.4284" />
-                      </OUTLET>
-                    </OUTLETS>
-                    <CONSTS />
-                    <REGIONS />
-                    <NODES>
-                      <OPERATION Name="Id" Layer="Update">
-                        <POSITION x="572.457153" y="383.751251" />
-                        <NODEREF LastCat="Devices.Leap.Hand" LastFile="VL.Devices.Leap.vl">
-                          <OPERATIONNODE Name="Id" />
-                          <CATEGORY Name="Hand" IsDirectParent="true" />
-                        </NODEREF>
-                        <INPUTS>
-                          <INPUT Name="Hand" />
-                        </INPUTS>
-                        <OUTPUTS>
-                          <OUPUT Name="Id" />
-                        </OUTPUTS>
-                      </OPERATION>
-                    </NODES>
-                    <LINKS>
-                      <Link source="Inlets/Hand" sink="Nodes/Id/Inputs/Hand" />
-                      <Link source="Nodes/Id/Outputs/Id" sink="Outlets/Id" />
-                    </LINKS>
-                  </BODY>
-                </REGION>
-              </REGIONS>
-              <NODES>
-                <OPERATION Name="GetItem" Layer="Selector">
-                  <POSITION x="437.313538" y="286.559967" />
-                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
-                    <OPERATIONNODE Name="GetItem" />
-                    <CATEGORY Name="Spread" IsDirectParent="true" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Input" />
-                    <INPUT Name="Index" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Item" />
-                  </OUTPUTS>
-                </OPERATION>
-                <OPERATION Name="GetItem#1" Layer="Selector">
-                  <POSITION x="523.5983" y="283.106384" />
-                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
-                    <OPERATIONNODE Name="GetItem" />
-                    <CATEGORY Name="Spread" IsDirectParent="true" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Input" />
-                    <INPUT Name="Index" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Item" />
-                  </OUTPUTS>
-                </OPERATION>
-                <OPERATION Name="Except" Layer="Selector">
-                  <POSITION x="438.482361" y="469.044342" />
-                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Lib.Basics.dll">
-                    <OPERATIONNODE Name="Except" />
-                    <CATEGORY Name="Spread" IsDirectParent="true" />
+                <REGION Name="Except" Layer="Delegate" Kind="HigherOrderFunction">
+                  <POSITION x="1552.37158" y="131.305069" />
+                  <SIZE x="100" y="100" />
+                  <NODEREF LastCat="Main" LastFile="VL.Devices.Leap.GesturesVL.vl">
+                    <OPERATIONNODE Name="Except" Version="Selector" />
                   </NODEREF>
                   <INPUTS>
                     <INPUT Name="Input" />
                     <INPUT Name="Input 2" />
-                    <INPUT Name="Input 3" />
                     <INPUT Name="Enabled" />
                   </INPUTS>
                   <OUTPUTS>
                     <OUPUT Name="Output" />
                   </OUTPUTS>
-                </OPERATION>
-                <OPERATION Name="Hands" Layer="Selector">
-                  <POSITION x="437.9568" y="320.009552" />
-                  <NODEREF LastCat="Devices.Leap.Frame" LastFile="VL.Devices.Leap.vl">
-                    <OPERATIONNODE Name="Hands" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Frame" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Hands" />
-                  </OUTPUTS>
-                </OPERATION>
-                <OPERATION Name="Hands#1" Layer="Selector">
-                  <POSITION x="524.2415" y="324.918335" />
-                  <NODEREF LastCat="Devices.Leap.Frame" LastFile="VL.Devices.Leap.vl">
-                    <OPERATIONNODE Name="Hands" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Frame" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Hands" />
-                  </OUTPUTS>
-                </OPERATION>
-                <OPERATION Name="FromSequence" Layer="Selector">
-                  <POSITION x="437.692017" y="509.359436" />
+                  <BODY Name="ExceptBody">
+                    <LAYERS>
+                      <LAYER Name="Selector" />
+                    </LAYERS>
+                    <INLETS>
+                      <INLET Name="Source" Layer="Selector">
+                        <POSITION x="1555.75623" y="131.683243" />
+                      </INLET>
+                    </INLETS>
+                    <OUTLETS>
+                      <OUTLET Name="Result" Layer="Selector">
+                        <POSITION x="1554.94849" y="212.297623" />
+                      </OUTLET>
+                    </OUTLETS>
+                    <CONSTS />
+                    <REGIONS />
+                    <NODES>
+                      <OPERATION Name="Id" Layer="Selector">
+                        <POSITION x="1557.37158" y="155.914841" />
+                        <NODEREF LastCat="Devices.Leap.Hand" LastFile="VL.Devices.Leap.vl">
+                          <OPERATIONNODE Name="Id" />
+                          <CATEGORY Name="Hand" IsDirectParent="true" />
+                        </NODEREF>
+                        <INPUTS>
+                          <INPUT Name="Hand" />
+                        </INPUTS>
+                        <OUTPUTS>
+                          <OUPUT Name="Id" />
+                        </OUTPUTS>
+                      </OPERATION>
+                    </NODES>
+                    <LINKS>
+                      <Link source="Inlets/Source" sink="Nodes/Id/Inputs/Hand" />
+                      <Link source="Nodes/Id/Outputs/Id" sink="Outlets/Result" />
+                    </LINKS>
+                  </BODY>
+                </REGION>
+              </REGIONS>
+              <NODES>
+                <OPERATION Name="FromSequence" Layer="Delegate">
+                  <POSITION x="1551.45032" y="245.893066" />
                   <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
                     <OPERATIONNODE Name="FromSequence" />
                   </NODEREF>
@@ -1402,141 +1230,123 @@
                 </OPERATION>
               </NODES>
               <LINKS>
-                <Link source="Inlets/Source" sink="Nodes/GetItem/Inputs/Input" />
-                <Link source="Constants/Index" sink="Nodes/GetItem#1/Inputs/Index" />
-                <Link source="Inlets/Source" sink="Nodes/GetItem#1/Inputs/Input" />
-                <Link source="Nodes/GetItem#1/Outputs/Item" sink="Nodes/Hands#1/Inputs/Frame" />
-                <Link source="Nodes/GetItem/Outputs/Item" sink="Nodes/Hands/Inputs/Frame" />
-                <Link source="Nodes/Hands/Outputs/Hands" sink="Regions/ForEachLoop/Inputs/Hands" />
-                <Link source="Regions/ForEachLoop/Outputs/Ids" sink="Nodes/Except/Inputs/Input" />
-                <Link source="Nodes/Hands#1/Outputs/Hands" sink="Regions/ForEachLoop#1/Inputs/Hands" />
-                <Link source="Regions/ForEachLoop#1/Outputs/Ids" sink="Nodes/Except/Inputs/Input 2" />
-                <Link source="Nodes/Except/Outputs/Output" sink="Nodes/FromSequence/Inputs/Input" />
                 <Link source="Nodes/FromSequence/Outputs/Result" sink="Outlets/Result" />
+                <Link source="Regions/Except/Outputs/Output" sink="Nodes/FromSequence/Inputs/Input" />
+                <Link source="Inlets/Source 1" sink="Regions/Except/Inputs/Input" />
+                <Link source="Inlets/Source 2" sink="Regions/Except/Inputs/Input 2" />
               </LINKS>
             </BODY>
           </REGION>
-          <REGION Name="Distinct" Layer="SetupObservable" Kind="HigherOrderFunction">
-            <POSITION x="130.902039" y="475.34433" />
+          <REGION Name="ProjectMany#1" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="1130.60474" y="110.24469" />
             <SIZE x="100" y="100" />
-            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-              <OPERATIONNODE Name="Distinct" Version="Selector" />
-              <CATEGORY Name="Observable" IsDirectParent="true" />
+            <NODEREF LastCat="Main" LastFile="VL.Devices.Leap.GesturesVL.vl">
+              <OPERATIONNODE Name="ProjectMany" Version="Pairwise" />
             </NODEREF>
             <INPUTS>
               <INPUT Name="Input" />
-              <INPUT Name="Enabled" />
             </INPUTS>
             <OUTPUTS>
               <OUPUT Name="Output" />
             </OUTPUTS>
-            <BODY Name="DistinctBody">
+            <BODY Name="PairwiseBody">
               <LAYERS>
-                <LAYER Name="Key Selector" />
+                <LAYER Name="Delegate" />
               </LAYERS>
               <INLETS>
-                <INLET Name="Source" Layer="Key Selector">
-                  <POSITION x="133.402039" y="475.7225" />
+                <INLET Name="Source 1" Layer="Delegate">
+                  <POSITION x="1210.0387" y="110.622864" />
+                </INLET>
+                <INLET Name="Source 2" Layer="Delegate">
+                  <POSITION x="1294.24158" y="110.622864" />
                 </INLET>
               </INLETS>
               <OUTLETS>
-                <OUTLET Name="Key" Layer="Key Selector">
-                  <POSITION x="133.402039" y="575.722656" />
+                <OUTLET Name="Result" Layer="Delegate">
+                  <POSITION x="1209.748" y="285.5392" />
                 </OUTLET>
               </OUTLETS>
               <CONSTS />
-              <REGIONS />
-              <NODES>
-                <OPERATION Name="Id" Layer="Key Selector">
-                  <POSITION x="135.096436" y="512.495239" />
-                  <NODEREF LastCat="Devices.Leap.Hand" LastFile="VL.Devices.Leap.vl">
-                    <OPERATIONNODE Name="Id" />
-                    <CATEGORY Name="Hand" IsDirectParent="true" />
+              <REGIONS>
+                <REGION Name="Except" Layer="Delegate" Kind="HigherOrderFunction">
+                  <POSITION x="1211.29407" y="140.18103" />
+                  <SIZE x="100" y="100" />
+                  <NODEREF LastCat="Main" LastFile="VL.Devices.Leap.GesturesVL.vl">
+                    <OPERATIONNODE Name="Except" Version="Selector" />
                   </NODEREF>
                   <INPUTS>
-                    <INPUT Name="Hand" />
+                    <INPUT Name="Input" />
+                    <INPUT Name="Input 2" />
+                    <INPUT Name="Enabled" />
                   </INPUTS>
                   <OUTPUTS>
-                    <OUPUT Name="Id" />
+                    <OUPUT Name="Output" />
+                  </OUTPUTS>
+                  <BODY Name="ExceptBody">
+                    <LAYERS>
+                      <LAYER Name="Selector" />
+                    </LAYERS>
+                    <INLETS>
+                      <INLET Name="Source" Layer="Selector">
+                        <POSITION x="1214.67859" y="140.5592" />
+                      </INLET>
+                    </INLETS>
+                    <OUTLETS>
+                      <OUTLET Name="Result" Layer="Selector">
+                        <POSITION x="1213.871" y="221.173126" />
+                      </OUTLET>
+                    </OUTLETS>
+                    <CONSTS />
+                    <REGIONS />
+                    <NODES>
+                      <OPERATION Name="Id" Layer="Selector">
+                        <POSITION x="1216.29407" y="164.79071" />
+                        <NODEREF LastCat="Devices.Leap.Hand" LastFile="VL.Devices.Leap.vl">
+                          <OPERATIONNODE Name="Id" />
+                          <CATEGORY Name="Hand" IsDirectParent="true" />
+                        </NODEREF>
+                        <INPUTS>
+                          <INPUT Name="Hand" />
+                        </INPUTS>
+                        <OUTPUTS>
+                          <OUPUT Name="Id" />
+                        </OUTPUTS>
+                      </OPERATION>
+                    </NODES>
+                    <LINKS>
+                      <Link source="Inlets/Source" sink="Nodes/Id/Inputs/Hand" />
+                      <Link source="Nodes/Id/Outputs/Id" sink="Outlets/Result" />
+                    </LINKS>
+                  </BODY>
+                </REGION>
+              </REGIONS>
+              <NODES>
+                <OPERATION Name="FromSequence" Layer="Delegate">
+                  <POSITION x="1211.88477" y="250.988312" />
+                  <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+                    <OPERATIONNODE Name="FromSequence" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
                   </OUTPUTS>
                 </OPERATION>
               </NODES>
               <LINKS>
-                <Link source="Inlets/Source" sink="Nodes/Id/Inputs/Hand" />
-                <Link source="Nodes/Id/Outputs/Id" sink="Outlets/Key" />
+                <Link source="Nodes/FromSequence/Outputs/Result" sink="Outlets/Result" />
+                <Link source="Regions/Except/Outputs/Output" sink="Nodes/FromSequence/Inputs/Input" />
+                <Link source="Inlets/Source 2" sink="Regions/Except/Inputs/Input" />
+                <Link source="Inlets/Source 1" sink="Regions/Except/Inputs/Input 2" />
               </LINKS>
             </BODY>
           </REGION>
-        </REGIONS>
-        <NODES>
-          <OPERATION Name="Buffer" Layer="SetupObservable">
-            <POSITION x="461.4439" y="210.5921" />
-            <NODEREF LastCat="KnockGestureSampleWrapper.KnockGestureSampleHelper" LastFile="KnockGestureSampleWrapper.dll">
-              <OPERATIONNODE Name="Buffer" />
-            </NODEREF>
-            <INPUTS>
-              <INPUT Name="Source" />
-              <INPUT Name="Count" />
-              <INPUT Name="Skip" />
-            </INPUTS>
-            <OUTPUTS>
-              <OUPUT Name="Result" />
-            </OUTPUTS>
-          </OPERATION>
-        </NODES>
-        <LINKS>
-          <Link source="Regions/Project/Outputs/Output" sink="Outlets/KnockGestures" />
-          <Link source="Inlets/Frames" sink="Regions/Project#1/Inputs/Input" />
-          <Link source="Regions/Project#1/Outputs/Output" sink="Regions/Project/ProjectBody/Regions/Where/Inputs/Input" />
-          <Link source="Inlets/Frames" sink="Nodes/Buffer/Inputs/Source" />
-          <Link source="Constants/Skip" sink="Nodes/Buffer/Inputs/Skip" />
-          <Link source="Constants/Count" sink="Nodes/Buffer/Inputs/Count" />
-          <Link source="Nodes/Buffer/Outputs/Result" sink="Regions/Project#3/Inputs/Input" />
-          <Link source="Regions/Project#3/Outputs/Output" sink="Regions/Project/ProjectBody/Regions/Where#1/Inputs/Input" />
-          <Link source="Regions/Project#1/Outputs/Output" sink="Regions/Distinct/Inputs/Input" />
-          <Link source="Regions/Distinct/Outputs/Output" sink="Regions/Project/Inputs/Input" />
-          <Link source="Inlets/MinScale" sink="Regions/Project/ProjectBody/Nodes/DetectKnockObservable/Inputs/MinScale">
-            <SEGMENTS>
-              <Point x="-45.074646" y="700.279053" />
-            </SEGMENTS>
-          </Link>
-          <Link source="Inlets/MaxTimespan" sink="Regions/Project/ProjectBody/Nodes/DetectKnockObservable/Inputs/MaxTimespan">
-            <SEGMENTS>
-              <Point x="-50.6340942" y="723.864" />
-            </SEGMENTS>
-          </Link>
-        </LINKS>
-      </BODY>
-    </PATCH>
-    <PATCH Name="DetectSwipe" Category="Devices.Touch" Version="Touch" IsDatatype="true" IsMutable="true">
-      <BODY Name="UtilsBody">
-        <LAYERS>
-          <LAYER Name="SetupObservable" />
-          <LAYER Name="OnUpdate" />
-        </LAYERS>
-        <INLETS>
-          <INLET Name="Nofications" Layer="SetupObservable">
-            <POSITION x="531.010132" y="129.571655" />
-          </INLET>
-          <INLET Name="Tolerance" Layer="SetupObservable">
-            <POSITION x="739.3461" y="129.571655" />
-          </INLET>
-          <INLET Name="MinLength" Layer="SetupObservable">
-            <POSITION x="931.301453" y="129.571655" />
-          </INLET>
-        </INLETS>
-        <OUTLETS>
-          <OUTLET Name="SwipeGesture" Layer="OnUpdate">
-            <POSITION x="202.637146" y="794.0227" />
-          </OUTLET>
-        </OUTLETS>
-        <CONSTS />
-        <REGIONS>
           <REGION Name="Project#2" Layer="SetupObservable" Kind="HigherOrderFunction">
-            <POSITION x="349.889679" y="337.269836" />
+            <POSITION x="1125.73352" y="-34.5093231" />
             <SIZE x="100" y="100" />
             <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-              <OPERATIONNODE Name="Project" Version="Many" />
+              <OPERATIONNODE Name="Project" />
               <CATEGORY Name="Observable" IsDirectParent="true" />
             </NODEREF>
             <INPUTS>
@@ -1551,170 +1361,126 @@
               </LAYERS>
               <INLETS>
                 <INLET Name="Source" Layer="Selector">
-                  <POSITION x="323.444672" y="333.262421" />
+                  <POSITION x="1128.23352" y="-32.20732" />
                 </INLET>
               </INLETS>
               <OUTLETS>
                 <OUTLET Name="Result" Layer="Selector">
-                  <POSITION x="384.366943" y="754.8692" />
+                  <POSITION x="1130.50146" y="45.86885" />
                 </OUTLET>
               </OUTLETS>
               <CONSTS />
-              <REGIONS>
-                <REGION Name="Where" Layer="Selector" Kind="HigherOrderFunction">
-                  <POSITION x="405.9313" y="394.272278" />
-                  <SIZE x="100" y="100" />
-                  <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-                    <OPERATIONNODE Name="Where" />
-                    <CATEGORY Name="Observable" IsDirectParent="true" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Input" />
-                    <INPUT Name="Enabled" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Output" />
-                  </OUTPUTS>
-                  <BODY Name="WhereBody">
-                    <LAYERS>
-                      <LAYER Name="Predicate" />
-                    </LAYERS>
-                    <INLETS>
-                      <INLET Name="Source" Layer="Predicate">
-                        <POSITION x="414.6683" y="394.650452" />
-                      </INLET>
-                    </INLETS>
-                    <OUTLETS>
-                      <OUTLET Name="Result" Layer="Predicate">
-                        <POSITION x="408.528473" y="517.4556" />
-                      </OUTLET>
-                    </OUTLETS>
-                    <CONSTS />
-                    <REGIONS />
-                    <NODES>
-                      <OPERATION Name="Id" Layer="Predicate">
-                        <POSITION x="415.900635" y="422.488" />
-                        <NODEREF LastCat="IO.Touch.TouchNotification" LastFile="VVVV.Utils.dll">
-                          <OPERATIONNODE Name="Id" />
-                          <CATEGORY Name="TouchNotification" IsDirectParent="true" />
-                        </NODEREF>
-                        <INPUTS>
-                          <INPUT Name="Input" />
-                        </INPUTS>
-                        <OUTPUTS>
-                          <OUPUT Name="Id" />
-                        </OUTPUTS>
-                      </OPERATION>
-                      <OPERATION Name="=" Layer="Predicate">
-                        <POSITION x="410.9313" y="490.147552" />
-                        <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
-                          <OPERATIONNODE Name="=" />
-                          <CATEGORY Name="Adaptive" IsDirectParent="true" />
-                        </NODEREF>
-                        <INPUTS>
-                          <INPUT Name="Input" />
-                          <INPUT Name="Input 2" />
-                        </INPUTS>
-                        <OUTPUTS>
-                          <OUPUT Name="Result" />
-                        </OUTPUTS>
-                      </OPERATION>
-                      <OPERATION Name="Outbox" Layer="Predicate">
-                        <POSITION x="452.812836" y="485.370453" />
-                        <NODEREF LastCat="IO" LastFile="VL.Lib.Basics.dll">
-                          <ANYNODE Name="Outbox" />
-                          <CATEGORY Name="IO" />
-                        </NODEREF>
-                        <INPUTS>
-                          <INPUT Name="Input" />
-                          <INPUT Name="Enabled" />
-                        </INPUTS>
-                        <OUTPUTS>
-                          <OUPUT Name="Output" />
-                        </OUTPUTS>
-                      </OPERATION>
-                    </NODES>
-                    <LINKS>
-                      <Link source="Inlets/Source" sink="Nodes/Id/Inputs/Input" />
-                      <Link source="Nodes/Id/Outputs/Id" sink="Nodes/=/Inputs/Input 2" />
-                      <Link source="Nodes/=/Outputs/Result" sink="Outlets/Result" />
-                      <Link source="Nodes/=/Outputs/Result" sink="Nodes/Outbox/Inputs/Input" />
-                    </LINKS>
-                  </BODY>
-                </REGION>
-                <REGION Name="Where#1" Layer="Selector" Kind="HigherOrderFunction">
-                  <POSITION x="240.954529" y="553.647949" />
-                  <SIZE x="100" y="100" />
-                  <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-                    <OPERATIONNODE Name="Where" />
-                    <CATEGORY Name="Observable" IsDirectParent="true" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Input" />
-                    <INPUT Name="Enabled" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Output" />
-                  </OUTPUTS>
-                  <BODY Name="WhereBody">
-                    <LAYERS>
-                      <LAYER Name="Predicate" />
-                    </LAYERS>
-                    <INLETS>
-                      <INLET Name="Source" Layer="Predicate">
-                        <POSITION x="243.454529" y="554.0261" />
-                      </INLET>
-                    </INLETS>
-                    <OUTLETS>
-                      <OUTLET Name="Result" Layer="Predicate">
-                        <POSITION x="244.331665" y="691.4649" />
-                      </OUTLET>
-                    </OUTLETS>
-                    <CONSTS />
-                    <REGIONS />
-                    <NODES>
-                      <OPERATION Name="IsTouchUp" Layer="Predicate">
-                        <POSITION x="247.161377" y="628.13916" />
-                        <NODEREF LastCat="IO.Touch.TouchNotification" LastFile="VVVV.Utils.dll">
-                          <OPERATIONNODE Name="IsTouchUp" />
-                        </NODEREF>
-                        <INPUTS>
-                          <INPUT Name="Input" />
-                        </INPUTS>
-                        <OUTPUTS>
-                          <OUPUT Name="Is Touch Up" />
-                        </OUTPUTS>
-                      </OPERATION>
-                      <OPERATION Name="Outbox" Layer="Predicate">
-                        <POSITION x="287.7373" y="665.6589" />
-                        <NODEREF LastCat="IO" LastFile="VL.Lib.Basics.dll">
-                          <ANYNODE Name="Outbox" />
-                          <CATEGORY Name="IO" />
-                        </NODEREF>
-                        <INPUTS>
-                          <INPUT Name="Input" />
-                          <INPUT Name="Enabled" />
-                        </INPUTS>
-                        <OUTPUTS>
-                          <OUPUT Name="Output" />
-                        </OUTPUTS>
-                      </OPERATION>
-                    </NODES>
-                    <LINKS>
-                      <Link source="Inlets/Source" sink="Nodes/IsTouchUp/Inputs/Input" />
-                      <Link source="Nodes/IsTouchUp/Outputs/Is Touch Up" sink="Outlets/Result" />
-                      <Link source="Nodes/IsTouchUp/Outputs/Is Touch Up" sink="Nodes/Outbox/Inputs/Input" />
-                    </LINKS>
-                  </BODY>
-                </REGION>
-              </REGIONS>
+              <REGIONS />
               <NODES>
-                <OPERATION Name="DetectSwipeObservable" Layer="Selector">
-                  <POSITION x="391.1305" y="625.9769" />
+                <OPERATION Name="Hands" Layer="Selector">
+                  <POSITION x="1135.79358" y="4.08039856" />
+                  <NODEREF LastCat="Devices.Leap.Frame" LastFile="VL.Devices.Leap.vl">
+                    <OPERATIONNODE Name="Hands" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Frame" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Hands" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Inlets/Source" sink="Nodes/Hands/Inputs/Frame" />
+                <Link source="Nodes/Hands/Outputs/Hands" sink="Outlets/Result" />
+              </LINKS>
+            </BODY>
+          </REGION>
+        </REGIONS>
+        <NODES />
+        <LINKS>
+          <Link source="Regions/Project#4/Outputs/Output" sink="Regions/ObservableLifetimeManager/Inputs/Input" />
+          <Link source="Regions/ObservableLifetimeManager/Outputs/Output" sink="Outlets/KnockGestures" />
+          <Link source="Regions/ProjectMany/Outputs/Output" sink="Regions/ObservableLifetimeManager/Inputs/End" />
+          <Link source="Regions/ProjectMany#1/Outputs/Output" sink="Regions/ObservableLifetimeManager/Inputs/Start" />
+          <Link source="Inlets/MinScale" sink="Regions/ObservableLifetimeManager/ObservableLifetimeManagerBody/Nodes/DetectKnockObservable/Inputs/MinScale">
+            <SEGMENTS>
+              <Point x="-30.64038" y="524.5808" />
+            </SEGMENTS>
+          </Link>
+          <Link source="Inlets/MaxTimespan" sink="Regions/ObservableLifetimeManager/ObservableLifetimeManagerBody/Nodes/DetectKnockObservable/Inputs/MaxTimespan">
+            <SEGMENTS>
+              <Point x="-20.5450439" y="526.3383" />
+            </SEGMENTS>
+          </Link>
+          <Link source="Inlets/Frames" sink="Regions/Project#2/Inputs/Input" />
+          <Link source="Regions/Project#2/Outputs/Output" sink="Regions/ProjectMany#1/Inputs/Input" />
+          <Link source="Regions/Project#2/Outputs/Output" sink="Regions/ProjectMany/Inputs/Input" />
+          <Link source="Regions/Project#2/Outputs/Output" sink="Regions/Project#4/Inputs/Input" />
+        </LINKS>
+      </BODY>
+    </PATCH>
+    <PATCH Name="DetectSwipe" Category="Devices.Touch" Version="Touch" IsDatatype="true" IsMutable="true">
+      <BODY Name="UtilsBody">
+        <LAYERS>
+          <LAYER Name="SetupObservable" />
+          <LAYER Name="OnUpdate" />
+          <LAYER Name="Update" />
+        </LAYERS>
+        <INLETS>
+          <INLET Name="Nofications" Layer="SetupObservable">
+            <POSITION x="724.568542" y="208.715683" />
+          </INLET>
+          <INLET Name="Tolerance" Layer="SetupObservable">
+            <POSITION x="1019.57086" y="208.715683" />
+          </INLET>
+          <INLET Name="MinLength" Layer="SetupObservable">
+            <POSITION x="1084.70361" y="208.715683" />
+          </INLET>
+        </INLETS>
+        <OUTLETS>
+          <OUTLET Name="Result" Layer="OnUpdate">
+            <POSITION x="723.993835" y="558.4388" />
+          </OUTLET>
+        </OUTLETS>
+        <CONSTS />
+        <REGIONS>
+          <REGION Name="ObservableLifetimeManager" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="727.4743" y="423.947235" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Main" LastFile="VL.Devices.Leap.GesturesVL.vl">
+              <OPERATIONNODE Name="ObservableLifetimeManager" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Start" />
+              <INPUT Name="End" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="ObservableLifetimeManagerBody">
+              <LAYERS>
+                <LAYER Name="Update" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Source 1" Layer="Update">
+                  <POSITION x="730.4743" y="424.447235" />
+                </INLET>
+                <INLET Name="Source 2" Layer="Update">
+                  <POSITION x="810.4743" y="424.447235" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result" Layer="Update">
+                  <POSITION x="730.4743" y="524.4474" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS />
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="DetectSwipeObservable" Layer="Update">
+                  <POSITION x="732.510864" y="474.058624" />
                   <NODEREF LastCat="Main" LastFile="VL.Devices.Leap.GesturesVL.vl">
                     <OPERATIONNODE Name="DetectSwipeObservable" />
                   </NODEREF>
                   <INPUTS>
+                    <INPUT Name="Initial Touchdown" />
                     <INPUT Name="TouchNotifications" />
                     <INPUT Name="Tolerance" />
                     <INPUT Name="Input 2" />
@@ -1723,47 +1489,16 @@
                     <OUPUT Name="SwipeGesture" />
                   </OUTPUTS>
                 </OPERATION>
-                <OPERATION Name="TakeUntil" Layer="Selector">
-                  <POSITION x="386.989075" y="722.3278" />
-                  <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-                    <OPERATIONNODE Name="TakeUntil" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Input" />
-                    <INPUT Name="Other" />
-                    <INPUT Name="Enabled" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Output" />
-                  </OUTPUTS>
-                </OPERATION>
-                <OPERATION Name="Id" Layer="Selector">
-                  <POSITION x="325.25882" y="434.358643" />
-                  <NODEREF LastCat="IO.Touch.TouchNotification" LastFile="VVVV.Utils.dll">
-                    <OPERATIONNODE Name="Id" />
-                    <CATEGORY Name="TouchNotification" IsDirectParent="true" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Input" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Id" />
-                  </OUTPUTS>
-                </OPERATION>
               </NODES>
               <LINKS>
-                <Link source="Nodes/DetectSwipeObservable/Outputs/SwipeGesture" sink="Nodes/TakeUntil/Inputs/Input" />
-                <Link source="Nodes/TakeUntil/Outputs/Output" sink="Outlets/Result" />
-                <Link source="Inlets/Source" sink="Nodes/Id/Inputs/Input" />
-                <Link source="Nodes/Id/Outputs/Id" sink="Regions/Where/WhereBody/Nodes/=/Inputs/Input" />
-                <Link source="Regions/Where/Outputs/Output" sink="Nodes/DetectSwipeObservable/Inputs/TouchNotifications" />
-                <Link source="Regions/Where/Outputs/Output" sink="Regions/Where#1/Inputs/Input" />
-                <Link source="Regions/Where#1/Outputs/Output" sink="Nodes/TakeUntil/Inputs/Other" />
+                <Link source="Nodes/DetectSwipeObservable/Outputs/SwipeGesture" sink="Outlets/Result" />
+                <Link source="Inlets/Source 2" sink="Nodes/DetectSwipeObservable/Inputs/TouchNotifications" />
+                <Link source="Inlets/Source 1" sink="Nodes/DetectSwipeObservable/Inputs/Initial Touchdown" />
               </LINKS>
             </BODY>
           </REGION>
-          <REGION Name="Where" Layer="SetupObservable" Kind="HigherOrderFunction">
-            <POSITION x="206.2792" y="174.786057" />
+          <REGION Name="Where#2" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="908.17926" y="269.360077" />
             <SIZE x="100" y="100" />
             <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
               <OPERATIONNODE Name="Where" />
@@ -1782,19 +1517,69 @@
               </LAYERS>
               <INLETS>
                 <INLET Name="Source" Layer="Predicate">
-                  <POSITION x="208.7792" y="175.16423" />
+                  <POSITION x="911.363342" y="269.738251" />
                 </INLET>
               </INLETS>
               <OUTLETS>
                 <OUTLET Name="Result" Layer="Predicate">
-                  <POSITION x="208.7792" y="275.1645" />
+                  <POSITION x="910.67926" y="356.844116" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS />
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="IsTouchUp" Layer="Predicate">
+                  <POSITION x="913.9642" y="294.692261" />
+                  <NODEREF LastCat="IO.Touch.TouchNotification" LastFile="VVVV.Utils.dll">
+                    <OPERATIONNODE Name="IsTouchUp" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Is Touch Up" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Nodes/IsTouchUp/Outputs/Is Touch Up" sink="Outlets/Result" />
+                <Link source="Inlets/Source" sink="Nodes/IsTouchUp/Inputs/Input" />
+              </LINKS>
+            </BODY>
+          </REGION>
+          <REGION Name="Where#1" Layer="SetupObservable" Kind="HigherOrderFunction">
+            <POSITION x="765.9803" y="266.344452" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <OPERATIONNODE Name="Where" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Enabled" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="WhereBody">
+              <LAYERS>
+                <LAYER Name="Predicate" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Source" Layer="Predicate">
+                  <POSITION x="768.4803" y="268.356934" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result" Layer="Predicate">
+                  <POSITION x="768.9954" y="346.722626" />
                 </OUTLET>
               </OUTLETS>
               <CONSTS />
               <REGIONS />
               <NODES>
                 <OPERATION Name="IsTouchDown" Layer="Predicate">
-                  <POSITION x="203.383" y="220.063187" />
+                  <POSITION x="771.387756" y="289.835144" />
                   <NODEREF LastCat="IO.Touch.TouchNotification" LastFile="VVVV.Utils.dll">
                     <OPERATIONNODE Name="IsTouchDown" />
                   </NODEREF>
@@ -1807,26 +1592,28 @@
                 </OPERATION>
               </NODES>
               <LINKS>
-                <Link source="Inlets/Source" sink="Nodes/IsTouchDown/Inputs/Input" />
                 <Link source="Nodes/IsTouchDown/Outputs/Is Touch Down" sink="Outlets/Result" />
+                <Link source="Inlets/Source" sink="Nodes/IsTouchDown/Inputs/Input" />
               </LINKS>
             </BODY>
           </REGION>
         </REGIONS>
         <NODES />
         <LINKS>
-          <Link source="Inlets/Nofications" sink="Regions/Where/Inputs/Input" />
-          <Link source="Regions/Where/Outputs/Output" sink="Regions/Project#2/Inputs/Input" />
-          <Link source="Regions/Project#2/Outputs/Output" sink="Outlets/SwipeGesture" />
-          <Link source="Inlets/Nofications" sink="Regions/Project#2/ProjectBody/Regions/Where/Inputs/Input" />
-          <Link source="Inlets/Tolerance" sink="Regions/Project#2/ProjectBody/Nodes/DetectSwipeObservable/Inputs/Tolerance">
+          <Link source="Inlets/Nofications" sink="Regions/ObservableLifetimeManager/Inputs/Input" />
+          <Link source="Regions/Where#2/Outputs/Output" sink="Regions/ObservableLifetimeManager/Inputs/End" />
+          <Link source="Inlets/Nofications" sink="Regions/Where#2/Inputs/Input" />
+          <Link source="Regions/Where#1/Outputs/Output" sink="Regions/ObservableLifetimeManager/Inputs/Start" />
+          <Link source="Inlets/Nofications" sink="Regions/Where#1/Inputs/Input" />
+          <Link source="Regions/ObservableLifetimeManager/Outputs/Output" sink="Outlets/Result" />
+          <Link source="Inlets/Tolerance" sink="Regions/ObservableLifetimeManager/ObservableLifetimeManagerBody/Nodes/DetectSwipeObservable/Inputs/Tolerance">
             <SEGMENTS>
-              <Point x="-47.22223" y="453.2201" />
+              <Point x="-24.829834" y="208.883774" />
             </SEGMENTS>
           </Link>
-          <Link source="Inlets/MinLength" sink="Regions/Project#2/ProjectBody/Nodes/DetectSwipeObservable/Inputs/Input 2">
+          <Link source="Inlets/MinLength" sink="Regions/ObservableLifetimeManager/ObservableLifetimeManagerBody/Nodes/DetectSwipeObservable/Inputs/Input 2">
             <SEGMENTS>
-              <Point x="-12.003479" y="447.080261" />
+              <Point x="-59.58606" y="213.440292" />
             </SEGMENTS>
           </Link>
         </LINKS>
@@ -1844,6 +1631,8 @@
           <LAYER Name="NextPosition" />
           <LAYER Name="IsFinished" />
           <LAYER Name="SetFinished" />
+          <LAYER Name="GetTolerance" />
+          <LAYER Name="GetCreatedDEBUG" />
         </LAYERS>
         <INLETS>
           <INLET Name="StartPosition" Layer="Create">
@@ -1854,6 +1643,9 @@
           </INLET>
           <INLET Name="Tolerance" Layer="Create">
             <POSITION x="446.901031" y="283.906433" />
+          </INLET>
+          <INLET Name="Tolerance#1" Layer="GetTolerance" PadType="Field">
+            <POSITION x="447.151184" y="438.993134" />
           </INLET>
           <INLET Name="Finished" Layer="IsFinished" PadType="Field">
             <POSITION x="584.8703" y="474.4161" />
@@ -1885,13 +1677,16 @@
             <POSITION x="198.433563" y="348.243774" />
           </OUTLET>
           <OUTLET Name="Finished" Layer="SetFinished" PadType="Field">
-            <POSITION x="407.6074" y="547.406067" />
+            <POSITION x="409.318176" y="543.984436" />
           </OUTLET>
           <OUTLET Name="Tolerance" Layer="Create" PadType="Field">
             <POSITION x="446.976654" y="356.325317" />
           </OUTLET>
+          <OUTLET Name="Tolerance#1" Layer="GetTolerance">
+            <POSITION x="452.453" y="460.690369" />
+          </OUTLET>
           <OUTLET Name="Valid" Layer="Create" PadType="Field">
-            <POSITION x="575.002258" y="366.183838" />
+            <POSITION x="569.0018" y="352.336578" />
           </OUTLET>
           <OUTLET Name="Finished#1" Layer="IsFinished">
             <POSITION x="578.1364" y="578.7101" />
@@ -1917,7 +1712,7 @@
         </OUTLETS>
         <CONSTS>
           <CONST Name="Valid" Layer="Create" Type="Boolean">
-            <POSITION x="563.249634" y="339.1529" />
+            <POSITION x="557.249146" y="325.305634" />
             <VALUE><![CDATA[true]]></VALUE>
           </CONST>
           <CONST Name="Index" Layer="NextPosition">
@@ -2195,20 +1990,6 @@
               <OUPUT Name="Result" />
             </OUTPUTS>
           </OPERATION>
-          <OPERATION Name="Outbox" Layer="NextPosition">
-            <POSITION x="1652.36121" y="335.119476" />
-            <NODEREF LastCat="IO" LastFile="VL.Lib.Basics.dll">
-              <ANYNODE Name="Outbox" />
-              <CATEGORY Name="IO" />
-            </NODEREF>
-            <INPUTS>
-              <INPUT Name="Input" />
-              <INPUT Name="Enabled" />
-            </INPUTS>
-            <OUTPUTS>
-              <OUPUT Name="Output" />
-            </OUTPUTS>
-          </OPERATION>
           <OPERATION Name="Outbox#1" Layer="NextPosition">
             <POSITION x="1459.79492" y="39.4176025" />
             <NODEREF LastCat="IO" LastFile="VL.Lib.Basics.dll">
@@ -2307,6 +2088,34 @@
               <OUPUT Name="Output" />
             </OUTPUTS>
           </OPERATION>
+          <OPERATION Name="Outbox" Layer="NextPosition">
+            <POSITION x="1655.56238" y="346.8422" />
+            <NODEREF LastCat="IO" LastFile="VL.Lib.Basics.dll">
+              <ANYNODE Name="Outbox" />
+              <CATEGORY Name="IO" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Enabled" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="Outbox#7" Layer="Create">
+            <POSITION x="465.886353" y="326.991638" />
+            <NODEREF LastCat="IO" LastFile="VL.Lib.Basics.dll">
+              <ANYNODE Name="Outbox" />
+              <CATEGORY Name="IO" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Enabled" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+          </OPERATION>
         </NODES>
         <LINKS>
           <Link source="Constants/Valid" sink="Outlets/Valid" />
@@ -2343,7 +2152,6 @@
           <Link source="Inlets/TouchPoints#3" sink="Nodes/GetSlice#5/Inputs/Input" />
           <Link source="Inlets/Finished" sink="Outlets/Finished#1" />
           <Link source="Inlets/Finished#1" sink="Outlets/Finished" />
-          <Link source="Inlets/Tolerance#2" sink="Nodes/Outbox/Inputs/Input" />
           <Link source="Inlets/Position#1" sink="Nodes/Outbox#1/Inputs/Input" />
           <Link source="Regions/All/Outputs/Result" sink="Nodes/Outbox#2/Inputs/Input" />
           <Link source="Regions/ForEachLoop/Outputs/Distances" sink="Nodes/Outbox#3/Inputs/Input" />
@@ -2352,6 +2160,9 @@
           <Link source="Constants/Index#6" sink="Nodes/GetSlice#6/Inputs/Index" />
           <Link source="Regions/ForEachLoop/Outputs/Distances" sink="Nodes/GetSlice#6/Inputs/Input" />
           <Link source="Nodes/GetSlice#6/Outputs/Result" sink="Nodes/Outbox#6/Inputs/Input" />
+          <Link source="Inlets/Tolerance#2" sink="Nodes/Outbox/Inputs/Input" />
+          <Link source="Inlets/Tolerance" sink="Nodes/Outbox#7/Inputs/Input" />
+          <Link source="Inlets/Tolerance#1" sink="Outlets/Tolerance#1" />
         </LINKS>
       </BODY>
     </PATCH>
@@ -2435,6 +2246,11 @@
       <BODY Name="UtilsBody">
         <LAYERS>
           <LAYER Name="DistancePointLine" />
+          <LAYER Name="Split" />
+          <LAYER Name="=" Version="TouchNotification" />
+          <LAYER Name="=#1" Version="Leap Hand" />
+          <LAYER Name="ProjectMany" Version="Pairwise" />
+          <LAYER Name="Except" Version="Selector" />
         </LAYERS>
         <INLETS>
           <INLET Name="LineA" Layer="DistancePointLine">
@@ -2446,14 +2262,301 @@
           <INLET Name="Point" Layer="DistancePointLine">
             <POSITION x="401" y="246.575775" />
           </INLET>
+          <INLET Name="Input" Layer="Split">
+            <POSITION x="921.3137" y="231.007523" />
+          </INLET>
+          <INLET Name="Delegate" Layer="Split">
+            <POSITION x="967.7586" y="231.007523" />
+          </INLET>
+          <INLET Name="Input 2" Layer="Split">
+            <POSITION x="1090.70117" y="231.007523" />
+          </INLET>
+          <INLET Name="Delegate 2" Layer="Split">
+            <POSITION x="1154.90442" y="231.007523" />
+          </INLET>
+          <INLET Name="Input#2" Layer="= (Leap Hand)">
+            <POSITION x="1339" y="445.620941" />
+          </INLET>
+          <INLET Name="Input#1" Layer="= (TouchNotification)">
+            <POSITION x="1342.7334" y="206.785049" />
+          </INLET>
+          <INLET Name="Input 2#2" Layer="= (Leap Hand)">
+            <POSITION x="1390.66052" y="445.620941" />
+          </INLET>
+          <INLET Name="Input 2#1" Layer="= (TouchNotification)">
+            <POSITION x="1446.55127" y="206.785049" />
+          </INLET>
+          <INLET Name="Input#3" Layer="ProjectMany (Pairwise)">
+            <POSITION x="1664.30273" y="212.388535" />
+          </INLET>
+          <INLET Name="Delegate#1" Layer="ProjectMany (Pairwise)">
+            <POSITION x="1867.62891" y="212.388535" />
+          </INLET>
+          <INLET Name="Input#4" Layer="Except (Selector)">
+            <POSITION x="2034.87415" y="109.795967" />
+          </INLET>
+          <INLET Name="Input 2#3" Layer="Except (Selector)">
+            <POSITION x="2108.89038" y="109.795967" />
+          </INLET>
+          <INLET Name="Selector" Layer="Except (Selector)">
+            <POSITION x="2187.12329" y="109.795967" />
+          </INLET>
         </INLETS>
         <OUTLETS>
           <OUTLET Name="Distance" Layer="DistancePointLine">
             <POSITION x="262.848633" y="743.9397" />
           </OUTLET>
+          <OUTLET Name="Result 2" Layer="Split">
+            <POSITION x="922.6798" y="324.5803" />
+          </OUTLET>
+          <OUTLET Name="Result" Layer="Split">
+            <POSITION x="1087.286" y="324.5803" />
+          </OUTLET>
+          <OUTLET Name="Result#2" Layer="= (Leap Hand)">
+            <POSITION x="1338.19263" y="536.7102" />
+          </OUTLET>
+          <OUTLET Name="Result#1" Layer="= (TouchNotification)">
+            <POSITION x="1347.5144" y="361.8291" />
+          </OUTLET>
+          <OUTLET Name="Output" Layer="ProjectMany (Pairwise)">
+            <POSITION x="1665.24353" y="453.748444" />
+          </OUTLET>
+          <OUTLET Name="Output#1" Layer="Except (Selector)">
+            <POSITION x="2037.802" y="449.524017" />
+          </OUTLET>
         </OUTLETS>
-        <CONSTS />
-        <REGIONS />
+        <CONSTS>
+          <CONST Name="Count" Layer="ProjectMany (Pairwise)">
+            <POSITION x="1698.112" y="231.640976" />
+            <VALUE><![CDATA[2]]></VALUE>
+          </CONST>
+          <CONST Name="Skip" Layer="ProjectMany (Pairwise)">
+            <POSITION x="1710.32068" y="271.085" />
+            <VALUE><![CDATA[1]]></VALUE>
+          </CONST>
+        </CONSTS>
+        <REGIONS>
+          <REGION Name="Project" Layer="ProjectMany (Pairwise)" Kind="HigherOrderFunction">
+            <POSITION x="1667.40869" y="317.5422" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <OPERATIONNODE Name="Project" Version="Many" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="ProjectBody">
+              <LAYERS>
+                <LAYER Name="Selector" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Source" Layer="Selector">
+                  <POSITION x="1670.40869" y="318.0422" />
+                </INLET>
+                <INLET Name="Index" Layer="Selector">
+                  <POSITION x="1750.40869" y="318.0422" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result" Layer="Selector">
+                  <POSITION x="1701.87" y="431.6598" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS>
+                <CONST Name="Index" Layer="Selector">
+                  <POSITION x="1785.45386" y="345.277374" />
+                  <VALUE><![CDATA[1]]></VALUE>
+                </CONST>
+              </CONSTS>
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="GetItem" Layer="Selector">
+                  <POSITION x="1674.63489" y="349.973083" />
+                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
+                    <OPERATIONNODE Name="GetItem" />
+                    <CATEGORY Name="Spread" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Index" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Item" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="GetItem#1" Layer="Selector">
+                  <POSITION x="1733.13977" y="350.251068" />
+                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
+                    <OPERATIONNODE Name="GetItem" />
+                    <CATEGORY Name="Spread" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Index" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Item" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Apply#2" Layer="Selector">
+                  <POSITION x="1704.21973" y="404.145" />
+                  <NODEREF LastCat="Control.Delegation" LastFile="VL.Lib.Basics.dll">
+                    <OPERATIONNODE Name="Apply" Version="2 =&gt; 1" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Input 2" />
+                    <INPUT Name="Delegate" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Inlets/Source" sink="Nodes/GetItem/Inputs/Input" />
+                <Link source="Inlets/Source" sink="Nodes/GetItem#1/Inputs/Input" />
+                <Link source="Constants/Index" sink="Nodes/GetItem#1/Inputs/Index" />
+                <Link source="Nodes/GetItem/Outputs/Item" sink="Nodes/Apply#2/Inputs/Input" />
+                <Link source="Nodes/GetItem#1/Outputs/Item" sink="Nodes/Apply#2/Inputs/Input 2" />
+                <Link source="Nodes/Apply#2/Outputs/Result" sink="Outlets/Result" />
+              </LINKS>
+            </BODY>
+          </REGION>
+          <REGION Name="Where" Layer="Except (Selector)" Kind="HigherOrderFunction">
+            <POSITION x="2034.03833" y="261.230438" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Collections.Spread" LastFile="VL.Lib.Basics.dll">
+              <OPERATIONNODE Name="Where" />
+              <CATEGORY Name="Spread" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Enabled" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="WhereBody">
+              <LAYERS>
+                <LAYER Name="Predicate" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Source" Layer="Predicate">
+                  <POSITION x="2037.03833" y="261.730438" />
+                </INLET>
+                <INLET Name="Index" Layer="Predicate">
+                  <POSITION x="2117.0376" y="261.730438" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result" Layer="Predicate">
+                  <POSITION x="2037.68237" y="402.954865" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS />
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="Contains" Layer="Predicate">
+                  <POSITION x="2059.5835" y="328.720062" />
+                  <NODEREF LastCat="Collections.Sequence" LastFile="Basics.vl">
+                    <OPERATIONNODE Name="Contains" />
+                    <CATEGORY Name="Sequence" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Value" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="NOT" Layer="Predicate">
+                  <POSITION x="2060.22949" y="355.7736" />
+                  <NODEREF LastCat="Control.Boolean" LastFile="VL.Lib.Basics.dll">
+                    <OPERATIONNODE Name="NOT" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Enabled" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Output" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Apply#3" Layer="Predicate">
+                  <POSITION x="2110.30737" y="303.957642" />
+                  <NODEREF LastCat="Control.Delegation" LastFile="VL.Lib.Basics.dll">
+                    <OPERATIONNODE Name="Apply" Version="1 =&gt; 1" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Delegate" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Nodes/Contains/Outputs/Result" sink="Nodes/NOT/Inputs/Input" />
+                <Link source="Nodes/NOT/Outputs/Output" sink="Outlets/Result" />
+                <Link source="Inlets/Source" sink="Nodes/Apply#3/Inputs/Input" />
+                <Link source="Nodes/Apply#3/Outputs/Result" sink="Nodes/Contains/Inputs/Value" />
+              </LINKS>
+            </BODY>
+          </REGION>
+          <REGION Name="ForEachLoop" Layer="Except (Selector)" Kind="ForEachLoop">
+            <POSITION x="2108.88965" y="144.851669" />
+            <SIZE x="76.7102051" y="32.2065735" />
+            <INPUTS>
+              <INPUT Name="Inputs" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Results" />
+            </OUTPUTS>
+            <BODY Name="ForEachLoopBody">
+              <LAYERS>
+                <LAYER Name="Update" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Input" Layer="Update">
+                  <POSITION x="2121.985" y="150.594009" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Result#1" Layer="Update">
+                  <POSITION x="2123.30737" y="226.949051" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS />
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="Apply#2" Layer="Update">
+                  <POSITION x="2123.88135" y="195.384933" />
+                  <NODEREF LastCat="Control.Delegation" LastFile="VL.Lib.Basics.dll">
+                    <OPERATIONNODE Name="Apply" Version="1 =&gt; 1" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Delegate" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Nodes/Apply#2/Outputs/Result" sink="Outlets/Result#1" />
+                <Link source="Inlets/Input" sink="Nodes/Apply#2/Inputs/Input" />
+              </LINKS>
+            </BODY>
+          </REGION>
+        </REGIONS>
         <NODES>
           <OPERATION Name="-" Layer="DistancePointLine">
             <POSITION x="365" y="473" />
@@ -2601,8 +2704,9 @@
           </OPERATION>
           <OPERATION Name="Abs" Layer="DistancePointLine">
             <POSITION x="266.636383" y="657.575745" />
-            <NODEREF LastCat="Math" LastFile="Basics.vl">
+            <NODEREF LastFile="Basics.vl">
               <OPERATIONNODE Name="Abs" />
+              <CATEGORYPATH Name="Math" />
             </NODEREF>
             <INPUTS>
               <INPUT Name="Input" />
@@ -2850,6 +2954,126 @@
               <OUPUT Name="X" />
             </OUTPUTS>
           </OPERATION>
+          <OPERATION Name="Apply" Layer="Split">
+            <POSITION x="924" y="288" />
+            <NODEREF LastCat="Control.Delegation" LastFile="VL.Lib.Basics.dll">
+              <OPERATIONNODE Name="Apply" Version="1 =&gt; 1" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Delegate" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Result" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="Apply#1" Layer="Split">
+            <POSITION x="1080.818" y="290.41507" />
+            <NODEREF LastCat="Control.Delegation" LastFile="VL.Lib.Basics.dll">
+              <OPERATIONNODE Name="Apply" Version="1 =&gt; 1" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Delegate" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Result" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="Id" Layer="= (TouchNotification)">
+            <POSITION x="1350.24646" y="272.671326" />
+            <NODEREF LastCat="IO.Touch.TouchNotification" LastFile="VVVV.Utils.dll">
+              <CATEGORY Name="TouchNotification" />
+              <OPERATIONNODE Name="Id" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Id" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="=" Layer="= (TouchNotification)">
+            <POSITION x="1346.8313" y="332.7765" />
+            <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
+              <OPERATIONNODE Name="=" />
+              <CATEGORY Name="Adaptive" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Input 2" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Result" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="Id#1" Layer="= (TouchNotification)">
+            <POSITION x="1438.54785" y="274.22995" />
+            <NODEREF LastCat="IO.Touch.TouchNotification" LastFile="VVVV.Utils.dll">
+              <CATEGORY Name="TouchNotification" />
+              <OPERATIONNODE Name="Id" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Id" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="=#1" Layer="= (Leap Hand)">
+            <POSITION x="1340.61414" y="512.2458" />
+            <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
+              <OPERATIONNODE Name="=" />
+              <CATEGORY Name="Adaptive" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Input 2" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Result" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="Id#4" Layer="= (Leap Hand)">
+            <POSITION x="1340.03906" y="477.038574" />
+            <NODEREF LastCat="Devices.Leap.Hand" LastFile="VL.Devices.Leap.vl">
+              <CATEGORY Name="Hand" />
+              <OPERATIONNODE Name="Id" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Hand" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Id" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="Id#2" Layer="= (Leap Hand)">
+            <POSITION x="1394.1897" y="474.6854" />
+            <NODEREF LastCat="Devices.Leap.Hand" LastFile="VL.Devices.Leap.vl">
+              <CATEGORY Name="Hand" />
+              <OPERATIONNODE Name="Id" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Hand" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Id" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="Buffer" Layer="ProjectMany (Pairwise)">
+            <POSITION x="1664.46582" y="278.1722" />
+            <NODEREF LastCat="KnockGestureSampleWrapper.KnockGestureSampleHelper" LastFile="KnockGestureSampleWrapper.dll">
+              <OPERATIONNODE Name="Buffer" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Source" />
+              <INPUT Name="Count" />
+              <INPUT Name="Skip" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Result" />
+            </OUTPUTS>
+          </OPERATION>
         </NODES>
         <LINKS>
           <Link source="Nodes/-/Outputs/Output" sink="Nodes/*/Inputs/Input" />
@@ -2893,6 +3117,38 @@
           <Link source="Nodes/X#1/Outputs/X" sink="Nodes/-/Inputs/Input" />
           <Link source="Nodes/X/Outputs/X" sink="Nodes/-/Inputs/Input 2" />
           <Link source="Nodes/Y#2/Outputs/Y" sink="Nodes/*/Inputs/Input 2" />
+          <Link source="Inlets/Input" sink="Nodes/Apply/Inputs/Input" />
+          <Link source="Inlets/Input 2" sink="Nodes/Apply#1/Inputs/Input" />
+          <Link source="Inlets/Delegate" sink="Nodes/Apply/Inputs/Delegate" />
+          <Link source="Inlets/Delegate 2" sink="Nodes/Apply#1/Inputs/Delegate" />
+          <Link source="Nodes/Apply#1/Outputs/Result" sink="Outlets/Result" />
+          <Link source="Nodes/Apply/Outputs/Result" sink="Outlets/Result 2" />
+          <Link source="Inlets/Input#1" sink="Nodes/Id/Inputs/Input" />
+          <Link source="Inlets/Input 2#1" sink="Nodes/Id#1/Inputs/Input" />
+          <Link source="Nodes/Id/Outputs/Id" sink="Nodes/=/Inputs/Input" />
+          <Link source="Nodes/Id#1/Outputs/Id" sink="Nodes/=/Inputs/Input 2" />
+          <Link source="Nodes/=/Outputs/Result" sink="Outlets/Result#1" />
+          <Link source="Nodes/=#1/Outputs/Result" sink="Outlets/Result#2" />
+          <Link source="Inlets/Input#2" sink="Nodes/Id#4/Inputs/Hand" />
+          <Link source="Nodes/Id#4/Outputs/Id" sink="Nodes/=#1/Inputs/Input" />
+          <Link source="Inlets/Input 2#2" sink="Nodes/Id#2/Inputs/Hand" />
+          <Link source="Nodes/Id#2/Outputs/Id" sink="Nodes/=#1/Inputs/Input 2" />
+          <Link source="Constants/Count" sink="Nodes/Buffer/Inputs/Count" />
+          <Link source="Constants/Skip" sink="Nodes/Buffer/Inputs/Skip" />
+          <Link source="Inlets/Input#3" sink="Nodes/Buffer/Inputs/Source" />
+          <Link source="Nodes/Buffer/Outputs/Result" sink="Regions/Project/Inputs/Input" />
+          <Link source="Inlets/Delegate#1" sink="Regions/Project/ProjectBody/Nodes/Apply#2/Inputs/Delegate">
+            <SEGMENTS>
+              <Point x="6.57397461" y="160.593552" />
+            </SEGMENTS>
+          </Link>
+          <Link source="Regions/Project/Outputs/Output" sink="Outlets/Output" />
+          <Link source="Regions/Where/Outputs/Output" sink="Outlets/Output#1" />
+          <Link source="Inlets/Input#4" sink="Regions/Where/Inputs/Input" />
+          <Link source="Inlets/Selector" sink="Regions/ForEachLoop/ForEachLoopBody/Nodes/Apply#2/Inputs/Delegate" />
+          <Link source="Inlets/Input 2#3" sink="Regions/ForEachLoop/Inputs/Inputs" />
+          <Link source="Regions/ForEachLoop/Outputs/Results" sink="Regions/Where/WhereBody/Nodes/Contains/Inputs/Input" />
+          <Link source="Inlets/Selector" sink="Regions/Where/WhereBody/Nodes/Apply#3/Inputs/Delegate" />
         </LINKS>
       </BODY>
     </PATCH>
@@ -2902,14 +3158,17 @@
           <LAYER Name="DetectSwipeObservable" />
         </LAYERS>
         <INLETS>
+          <INLET Name="Initial Touchdown" Layer="DetectSwipeObservable">
+            <POSITION x="401.8117" y="144.9364" />
+          </INLET>
           <INLET Name="TouchNotifications" Layer="DetectSwipeObservable">
-            <POSITION x="493.956329" y="132.261856" />
+            <POSITION x="522.2877" y="144.9364" />
           </INLET>
           <INLET Name="Tolerance" Layer="DetectSwipeObservable">
-            <POSITION x="810" y="132.261856" />
+            <POSITION x="810" y="144.9364" />
           </INLET>
           <INLET Name="Input 2" Layer="DetectSwipeObservable">
-            <POSITION x="986" y="132.261856" />
+            <POSITION x="986" y="144.9364" />
           </INLET>
         </INLETS>
         <OUTLETS>
@@ -2920,7 +3179,7 @@
         <CONSTS />
         <REGIONS>
           <REGION Name="Aggregate#1" Layer="DetectSwipeObservable" Kind="HigherOrderFunction">
-            <POSITION x="495.333679" y="156" />
+            <POSITION x="527.385742" y="180.721924" />
             <SIZE x="100" y="100" />
             <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
               <CATEGORY Name="Observable" IsDirectParent="true" />
@@ -2939,22 +3198,22 @@
               </LAYERS>
               <INLETS>
                 <INLET Name="Accumulate" Layer="Accumulator">
-                  <POSITION x="537.7295" y="167.795959" />
+                  <POSITION x="563.099" y="181.1001" />
                 </INLET>
                 <INLET Name="Source" Layer="Accumulator">
-                  <POSITION x="729.392151" y="167.795959" />
+                  <POSITION x="759.277466" y="181.1001" />
                 </INLET>
               </INLETS>
               <OUTLETS>
                 <OUTLET Name="Accumulate" Layer="Accumulator">
-                  <POSITION x="500.000427" y="504.4696" />
+                  <POSITION x="529.885742" y="503.6619" />
                 </OUTLET>
               </OUTLETS>
               <CONSTS />
               <REGIONS />
               <NODES>
                 <OPERATION Name="Position" Layer="Accumulator">
-                  <POSITION x="576.118835" y="216.879181" />
+                  <POSITION x="605.258545" y="229.4916" />
                   <NODEREF LastCat="IO.Touch.TouchNotification" LastFile="VVVV.Utils.dll">
                     <CATEGORY Name="TouchNotification" />
                     <OPERATIONNODE Name="Position" />
@@ -2967,7 +3226,7 @@
                   </OUTPUTS>
                 </OPERATION>
                 <OPERATION Name="IsTouchDown" Layer="Accumulator">
-                  <POSITION x="715.9194" y="333.03125" />
+                  <POSITION x="740.0456" y="325.25824" />
                   <NODEREF LastCat="IO.Touch.TouchNotification" LastFile="VVVV.Utils.dll">
                     <OPERATIONNODE Name="IsTouchDown" />
                   </NODEREF>
@@ -2979,7 +3238,7 @@
                   </OUTPUTS>
                 </OPERATION>
                 <OPERATION Name="SwitchInput" Layer="Accumulator">
-                  <POSITION x="502.733337" y="397.044556" />
+                  <POSITION x="541.399353" y="392.786224" />
                   <NODEREF LastCat="Control" LastFile="Basics.vl">
                     <OPERATIONNODE Name="SwitchInput" />
                   </NODEREF>
@@ -2993,7 +3252,7 @@
                   </OUTPUTS>
                 </OPERATION>
                 <OPERATION Name="Create" Layer="Accumulator">
-                  <POSITION x="636.033142" y="325.973816" />
+                  <POSITION x="665.918457" y="325.1661" />
                   <NODEREF LastCat="Main.SwipeState" LastFile="VL.Devices.Leap.GesturesVL.vl">
                     <OPERATIONNODE Name="Create" />
                     <CATEGORY Name="SwipeState" />
@@ -3007,7 +3266,7 @@
                   </OUTPUTS>
                 </OPERATION>
                 <OPERATION Name="ToVector2" Layer="Accumulator">
-                  <POSITION x="574.649231" y="275.467468" />
+                  <POSITION x="604.534546" y="274.65976" />
                   <NODEREF LastCat="Graphics.Forms.Point" LastFile="VL.Lib.Basics.dll">
                     <OPERATIONNODE Name="ToVector2" />
                     <CATEGORY Name="Point" IsDirectParent="true" />
@@ -3020,7 +3279,7 @@
                   </OUTPUTS>
                 </OPERATION>
                 <OPERATION Name="NextPosition" Layer="Accumulator">
-                  <POSITION x="535.5691" y="328.015" />
+                  <POSITION x="567.1825" y="324.069336" />
                   <NODEREF LastCat="Main.SwipeState" LastFile="VL.Devices.Leap.GesturesVL.vl">
                     <OPERATIONNODE Name="NextPosition" />
                   </NODEREF>
@@ -3034,7 +3293,7 @@
                   </OUTPUTS>
                 </OPERATION>
                 <OPERATION Name="IsTouchUp" Layer="Accumulator">
-                  <POSITION x="724.4366" y="427.091858" />
+                  <POSITION x="754.3219" y="426.284149" />
                   <NODEREF LastCat="IO.Touch.TouchNotification" LastFile="VVVV.Utils.dll">
                     <OPERATIONNODE Name="IsTouchUp" />
                   </NODEREF>
@@ -3046,27 +3305,13 @@
                   </OUTPUTS>
                 </OPERATION>
                 <OPERATION Name="SetFinished" Layer="Accumulator">
-                  <POSITION x="502.805054" y="458.139648" />
+                  <POSITION x="539.7508" y="452.625" />
                   <NODEREF LastCat="Main.SwipeState" LastFile="VL.Devices.Leap.GesturesVL.vl">
                     <OPERATIONNODE Name="SetFinished" />
                   </NODEREF>
                   <INPUTS>
                     <INPUT Name="Input" />
                     <INPUT Name="Finished" />
-                    <INPUT Name="Enabled" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Output" />
-                  </OUTPUTS>
-                </OPERATION>
-                <OPERATION Name="Outbox#1" Layer="Accumulator">
-                  <POSITION x="737.1843" y="469.100739" />
-                  <NODEREF LastCat="IO" LastFile="VL.Lib.Basics.dll">
-                    <ANYNODE Name="Outbox" />
-                    <CATEGORY Name="IO" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Input" />
                     <INPUT Name="Enabled" />
                   </INPUTS>
                   <OUTPUTS>
@@ -3082,13 +3327,12 @@
                 <Link source="Nodes/Position/Outputs/Position" sink="Nodes/ToVector2/Inputs/Input" />
                 <Link source="Nodes/ToVector2/Outputs/Result" sink="Nodes/Create/Inputs/StartPosition" />
                 <Link source="Inlets/Accumulate" sink="Nodes/NextPosition/Inputs/Input" />
-                <Link source="Nodes/NextPosition/Outputs/Output" sink="Nodes/SwitchInput/Inputs/False" />
                 <Link source="Nodes/ToVector2/Outputs/Result" sink="Nodes/NextPosition/Inputs/Position" />
                 <Link source="Inlets/Source" sink="Nodes/IsTouchUp/Inputs/Input" />
+                <Link source="Nodes/IsTouchUp/Outputs/Is Touch Up" sink="Nodes/SetFinished/Inputs/Finished" />
+                <Link source="Nodes/NextPosition/Outputs/Output" sink="Nodes/SwitchInput/Inputs/False" />
                 <Link source="Nodes/SwitchInput/Outputs/Output" sink="Nodes/SetFinished/Inputs/Input" />
                 <Link source="Nodes/SetFinished/Outputs/Output" sink="Outlets/Accumulate" />
-                <Link source="Nodes/IsTouchUp/Outputs/Is Touch Up" sink="Nodes/SetFinished/Inputs/Finished" />
-                <Link source="Nodes/IsTouchUp/Outputs/Is Touch Up" sink="Nodes/Outbox#1/Inputs/Input" />
               </LINKS>
             </BODY>
           </REGION>
@@ -3363,6 +3607,90 @@
               </LINKS>
             </BODY>
           </REGION>
+          <REGION Name="Scan" Layer="DetectSwipeObservable" Kind="HigherOrderFunction">
+            <POSITION x="339.540131" y="340.506256" />
+            <SIZE x="100" y="100" />
+            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
+              <OPERATIONNODE Name="Scan" />
+              <CATEGORY Name="Observable" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+              <INPUT Name="Seed" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+            <BODY Name="ScanBody">
+              <LAYERS>
+                <LAYER Name="Accumulator" />
+              </LAYERS>
+              <INLETS>
+                <INLET Name="Accumulate" Layer="Accumulator">
+                  <POSITION x="344.54007" y="340.88443" />
+                </INLET>
+                <INLET Name="Source" Layer="Accumulator">
+                  <POSITION x="419.699249" y="340.88443" />
+                </INLET>
+              </INLETS>
+              <OUTLETS>
+                <OUTLET Name="Accumulate" Layer="Accumulator">
+                  <POSITION x="343.156982" y="468.5463" />
+                </OUTLET>
+              </OUTLETS>
+              <CONSTS />
+              <REGIONS />
+              <NODES>
+                <OPERATION Name="NextPosition" Layer="Accumulator">
+                  <POSITION x="344.540131" y="432.8601" />
+                  <NODEREF LastCat="Main.SwipeState" LastFile="VL.Devices.Leap.GesturesVL.vl">
+                    <OPERATIONNODE Name="NextPosition" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                    <INPUT Name="Position" />
+                    <INPUT Name="Enabled" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Output" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="Position" Layer="Accumulator">
+                  <POSITION x="384.64978" y="365.088623" />
+                  <NODEREF LastCat="IO.Touch.TouchNotification" LastFile="VVVV.Utils.dll">
+                    <OPERATIONNODE Name="Position" />
+                    <CATEGORY Name="TouchNotification" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Position" />
+                  </OUTPUTS>
+                </OPERATION>
+                <OPERATION Name="ToVector2" Layer="Accumulator">
+                  <POSITION x="384.6498" y="398.2828" />
+                  <NODEREF LastCat="Graphics.Forms.Point" LastFile="VL.Lib.Basics.dll">
+                    <OPERATIONNODE Name="ToVector2" />
+                    <CATEGORY Name="Point" IsDirectParent="true" />
+                  </NODEREF>
+                  <INPUTS>
+                    <INPUT Name="Input" />
+                  </INPUTS>
+                  <OUTPUTS>
+                    <OUPUT Name="Result" />
+                  </OUTPUTS>
+                </OPERATION>
+              </NODES>
+              <LINKS>
+                <Link source="Nodes/Position/Outputs/Position" sink="Nodes/ToVector2/Inputs/Input" />
+                <Link source="Nodes/ToVector2/Outputs/Result" sink="Nodes/NextPosition/Inputs/Position" />
+                <Link source="Inlets/Source" sink="Nodes/Position/Inputs/Input" />
+                <Link source="Nodes/NextPosition/Outputs/Output" sink="Outlets/Accumulate" />
+                <Link source="Inlets/Accumulate" sink="Nodes/NextPosition/Inputs/Input" />
+              </LINKS>
+            </BODY>
+          </REGION>
         </REGIONS>
         <NODES>
           <OPERATION Name="Outbox" Layer="DetectSwipeObservable">
@@ -3379,127 +3707,98 @@
               <OUPUT Name="Output" />
             </OUTPUTS>
           </OPERATION>
+          <OPERATION Name="Create#1" Layer="DetectSwipeObservable">
+            <POSITION x="329.821228" y="272.1908" />
+            <NODEREF LastCat="Main.SwipeState" LastFile="VL.Devices.Leap.GesturesVL.vl">
+              <CATEGORY Name="SwipeState" />
+              <OPERATIONNODE Name="Create" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="StartPosition" />
+              <INPUT Name="Tolerance" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Output" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="Position" Layer="DetectSwipeObservable">
+            <POSITION x="329.12973" y="196.120773" />
+            <NODEREF LastCat="IO.Touch.TouchNotification" LastFile="VVVV.Utils.dll">
+              <OPERATIONNODE Name="Position" />
+              <CATEGORY Name="TouchNotification" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Position" />
+            </OUTPUTS>
+          </OPERATION>
+          <OPERATION Name="ToVector2" Layer="DetectSwipeObservable">
+            <POSITION x="329.12973" y="228.623444" />
+            <NODEREF LastCat="Graphics.Forms.Point" LastFile="VL.Lib.Basics.dll">
+              <OPERATIONNODE Name="ToVector2" />
+              <CATEGORY Name="Point" IsDirectParent="true" />
+            </NODEREF>
+            <INPUTS>
+              <INPUT Name="Input" />
+            </INPUTS>
+            <OUTPUTS>
+              <OUPUT Name="Result" />
+            </OUTPUTS>
+          </OPERATION>
         </NODES>
         <LINKS>
-          <Link source="Regions/Aggregate#1/Outputs/Output" sink="Regions/DistinctUntilChanged/Inputs/Input" />
           <Link source="Regions/DistinctUntilChanged/Outputs/Output" sink="Regions/Where#1/Inputs/Input" />
           <Link source="Regions/Where#1/Outputs/Output" sink="Regions/Project/Inputs/Input" />
           <Link source="Inlets/TouchNotifications" sink="Regions/Aggregate#1/Inputs/Input" />
-          <Link source="Regions/Project/Outputs/Output" sink="Outlets/SwipeGesture" />
           <Link source="Inlets/Tolerance" sink="Regions/Aggregate#1/AggregateBody/Nodes/Create/Inputs/Tolerance" />
           <Link source="Inlets/Input 2" sink="Regions/Where#1/WhereBody/Nodes/&gt;=/Inputs/Input 2">
             <SEGMENTS>
-              <Point x="-11" y="569.738159" />
+              <Point x="-11" y="557.0638" />
             </SEGMENTS>
           </Link>
           <Link source="Inlets/Tolerance" sink="Nodes/Outbox/Inputs/Input" />
+          <Link source="Regions/Project/Outputs/Output" sink="Outlets/SwipeGesture" />
+          <Link source="Regions/Aggregate#1/Outputs/Output" sink="Regions/DistinctUntilChanged/Inputs/Input" />
+          <Link source="Inlets/Initial Touchdown" sink="Nodes/Position/Inputs/Input" />
+          <Link source="Nodes/Position/Outputs/Position" sink="Nodes/ToVector2/Inputs/Input" />
+          <Link source="Nodes/ToVector2/Outputs/Result" sink="Nodes/Create#1/Inputs/StartPosition" />
+          <Link source="Inlets/Tolerance" sink="Nodes/Create#1/Inputs/Tolerance" />
+          <Link source="Inlets/TouchNotifications" sink="Regions/Scan/Inputs/Input" />
+          <Link source="Nodes/Create#1/Outputs/Output" sink="Regions/Scan/Inputs/Seed" />
         </LINKS>
       </BODY>
     </PATCH>
-    <PATCH Name="ObservablestreamLifetimeManager" Category="Main" IsDatatype="true" IsMutable="true">
+    <PATCH Name="ObservablestreamLifetimeManager" Category="Main" IsMutable="true">
       <BODY Name="Utils2Body">
         <LAYERS>
-          <LAYER Name="Create" />
-          <LAYER Name="Update" />
-          <LAYER Name="SetupObservable" />
+          <LAYER Name="ObservableLifetimeManager" />
           <LAYER Name="OnUpdate" />
         </LAYERS>
         <INLETS>
-          <INLET Name="Source" Layer="SetupObservable">
-            <POSITION x="917.729553" y="208.389236" />
+          <INLET Name="Input" Layer="ObservableLifetimeManager">
+            <POSITION x="694.9709" y="620.3227" />
           </INLET>
-          <INLET Name="Distinct Selector" Layer="SetupObservable">
-            <POSITION x="1328.17273" y="208.389236" />
+          <INLET Name="Start" Layer="ObservableLifetimeManager">
+            <POSITION x="809.825" y="620.3227" />
           </INLET>
-          <INLET Name="MinScale" Layer="SetupObservable">
-            <POSITION x="1475.95557" y="208.389236" />
+          <INLET Name="End" Layer="ObservableLifetimeManager">
+            <POSITION x="904.797058" y="620.3227" />
           </INLET>
-          <INLET Name="MaxTimespan" Layer="SetupObservable">
-            <POSITION x="1538.79272" y="208.389236" />
+          <INLET Name="Update" Layer="ObservableLifetimeManager">
+            <POSITION x="1114.99121" y="620.3227" />
           </INLET>
         </INLETS>
         <OUTLETS>
-          <OUTLET Name="KnockGestures" Layer="OnUpdate">
-            <POSITION x="695.899048" y="1095.24622" />
+          <OUTLET Name="Output" Layer="ObservableLifetimeManager">
+            <POSITION x="705.267151" y="970.08075" />
           </OUTLET>
         </OUTLETS>
-        <CONSTS>
-          <CONST Name="Skip" Layer="SetupObservable">
-            <POSITION x="966.4675" y="248.506912" />
-            <VALUE><![CDATA[1]]></VALUE>
-          </CONST>
-          <CONST Name="Count" Layer="SetupObservable">
-            <POSITION x="966.4675" y="223.752029" />
-            <VALUE><![CDATA[2]]></VALUE>
-          </CONST>
-        </CONSTS>
+        <CONSTS />
         <REGIONS>
-          <REGION Name="Project#1" Layer="SetupObservable" Kind="HigherOrderFunction">
-            <POSITION x="791.638733" y="334.572021" />
-            <SIZE x="100" y="100" />
-            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-              <CATEGORY Name="Observable" IsDirectParent="true" />
-              <OPERATIONNODE Name="Project" Version="Many" />
-            </NODEREF>
-            <INPUTS>
-              <INPUT Name="Input" />
-            </INPUTS>
-            <OUTPUTS>
-              <OUPUT Name="Output" />
-            </OUTPUTS>
-            <BODY Name="ProjectBody">
-              <LAYERS>
-                <LAYER Name="Selector" />
-              </LAYERS>
-              <INLETS>
-                <INLET Name="Source" Layer="Selector">
-                  <POSITION x="795.888855" y="334.9502" />
-                </INLET>
-              </INLETS>
-              <OUTLETS>
-                <OUTLET Name="Result" Layer="Selector">
-                  <POSITION x="794.138733" y="438.793121" />
-                </OUTLET>
-              </OUTLETS>
-              <CONSTS />
-              <REGIONS />
-              <NODES>
-                <OPERATION Name="Hands" Layer="Selector">
-                  <POSITION x="797.539246" y="359.7733" />
-                  <NODEREF LastCat="Devices.Leap.Frame" LastFile="VL.Devices.Leap.vl">
-                    <OPERATIONNODE Name="Hands" />
-                    <CATEGORY Name="Frame" IsDirectParent="true" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Frame" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Hands" />
-                  </OUTPUTS>
-                </OPERATION>
-                <OPERATION Name="FromSequence" Layer="Selector">
-                  <POSITION x="796.6993" y="394.897675" />
-                  <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-                    <CATEGORY Name="Observable" />
-                    <OPERATIONNODE Name="FromSequence" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Input" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Result" />
-                  </OUTPUTS>
-                </OPERATION>
-              </NODES>
-              <LINKS>
-                <Link source="Nodes/Hands/Outputs/Hands" sink="Nodes/FromSequence/Inputs/Input" />
-                <Link source="Nodes/FromSequence/Outputs/Result" sink="Outlets/Result" />
-                <Link source="Inlets/Source" sink="Nodes/Hands/Inputs/Frame" />
-              </LINKS>
-            </BODY>
-          </REGION>
-          <REGION Name="Project#3" Layer="SetupObservable" Kind="HigherOrderFunction">
-            <POSITION x="995.428345" y="276.739441" />
+          <REGION Name="Project" Layer="ObservableLifetimeManager" Kind="HigherOrderFunction">
+            <POSITION x="707.6842" y="722.3319" />
             <SIZE x="100" y="100" />
             <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
               <OPERATIONNODE Name="Project" Version="Many" />
@@ -3517,362 +3816,18 @@
               </LAYERS>
               <INLETS>
                 <INLET Name="Source" Layer="Selector">
-                  <POSITION x="969.428345" y="281.239441" />
-                </INLET>
-                <INLET Name="Index" Layer="Selector">
-                  <POSITION x="1078.42834" y="281.239441" />
+                  <POSITION x="710.6842" y="767.190369" />
                 </INLET>
               </INLETS>
               <OUTLETS>
                 <OUTLET Name="Result" Layer="Selector">
-                  <POSITION x="969.0268" y="572.4437" />
-                </OUTLET>
-              </OUTLETS>
-              <CONSTS>
-                <CONST Name="Index" Layer="Selector">
-                  <POSITION x="1107.81177" y="317.4687" />
-                  <VALUE><![CDATA[1]]></VALUE>
-                </CONST>
-              </CONSTS>
-              <REGIONS>
-                <REGION Name="ForEachLoop" Layer="Selector" Kind="ForEachLoop">
-                  <POSITION x="966.9742" y="391.254974" />
-                  <SIZE x="63.03955" y="23.15738" />
-                  <INPUTS>
-                    <INPUT Name="Hands" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Ids" />
-                  </OUTPUTS>
-                  <BODY Name="ForEachLoopBody">
-                    <LAYERS>
-                      <LAYER Name="Update" />
-                    </LAYERS>
-                    <INLETS>
-                      <INLET Name="Hand" Layer="Update">
-                        <POSITION x="970.125" y="392.383148" />
-                      </INLET>
-                    </INLETS>
-                    <OUTLETS>
-                      <OUTLET Name="Id" Layer="Update">
-                        <POSITION x="971.4115" y="473.43396" />
-                      </OUTLET>
-                    </OUTLETS>
-                    <CONSTS />
-                    <REGIONS />
-                    <NODES>
-                      <OPERATION Name="Id" Layer="Update">
-                        <POSITION x="971.9969" y="420.773376" />
-                        <NODEREF LastCat="Devices.Leap.Hand" LastFile="VL.Devices.Leap.vl">
-                          <OPERATIONNODE Name="Id" />
-                          <CATEGORY Name="Hand" IsDirectParent="true" />
-                        </NODEREF>
-                        <INPUTS>
-                          <INPUT Name="Hand" />
-                        </INPUTS>
-                        <OUTPUTS>
-                          <OUPUT Name="Id" />
-                        </OUTPUTS>
-                      </OPERATION>
-                    </NODES>
-                    <LINKS>
-                      <Link source="Inlets/Hand" sink="Nodes/Id/Inputs/Hand" />
-                      <Link source="Nodes/Id/Outputs/Id" sink="Outlets/Id" />
-                    </LINKS>
-                  </BODY>
-                </REGION>
-                <REGION Name="ForEachLoop#1" Layer="Selector" Kind="ForEachLoop">
-                  <POSITION x="1100.188" y="389.3841" />
-                  <SIZE x="63.03955" y="23.15738" />
-                  <INPUTS>
-                    <INPUT Name="Hands" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Ids" />
-                  </OUTPUTS>
-                  <BODY Name="ForEachLoopBody">
-                    <LAYERS>
-                      <LAYER Name="Update" />
-                    </LAYERS>
-                    <INLETS>
-                      <INLET Name="Hand" Layer="Update">
-                        <POSITION x="1103.33887" y="390.512268" />
-                      </INLET>
-                    </INLETS>
-                    <OUTLETS>
-                      <OUTLET Name="Id" Layer="Update">
-                        <POSITION x="1104.62537" y="471.56308" />
-                      </OUTLET>
-                    </OUTLETS>
-                    <CONSTS />
-                    <REGIONS />
-                    <NODES>
-                      <OPERATION Name="Id" Layer="Update">
-                        <POSITION x="1106.55518" y="416.885925" />
-                        <NODEREF LastCat="Devices.Leap.Hand" LastFile="VL.Devices.Leap.vl">
-                          <OPERATIONNODE Name="Id" />
-                          <CATEGORY Name="Hand" IsDirectParent="true" />
-                        </NODEREF>
-                        <INPUTS>
-                          <INPUT Name="Hand" />
-                        </INPUTS>
-                        <OUTPUTS>
-                          <OUPUT Name="Id" />
-                        </OUTPUTS>
-                      </OPERATION>
-                    </NODES>
-                    <LINKS>
-                      <Link source="Inlets/Hand" sink="Nodes/Id/Inputs/Hand" />
-                      <Link source="Nodes/Id/Outputs/Id" sink="Outlets/Id" />
-                    </LINKS>
-                  </BODY>
-                </REGION>
-              </REGIONS>
-              <NODES>
-                <OPERATION Name="GetItem" Layer="Selector">
-                  <POSITION x="971.4115" y="319.694641" />
-                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
-                    <OPERATIONNODE Name="GetItem" />
-                    <CATEGORY Name="Spread" IsDirectParent="true" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Input" />
-                    <INPUT Name="Index" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Item" />
-                  </OUTPUTS>
-                </OPERATION>
-                <OPERATION Name="GetItem#1" Layer="Selector">
-                  <POSITION x="1057.69629" y="316.241058" />
-                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Core.dll">
-                    <OPERATIONNODE Name="GetItem" />
-                    <CATEGORY Name="Spread" IsDirectParent="true" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Input" />
-                    <INPUT Name="Index" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Item" />
-                  </OUTPUTS>
-                </OPERATION>
-                <OPERATION Name="Except" Layer="Selector">
-                  <POSITION x="972.5803" y="502.179016" />
-                  <NODEREF LastCat="Collections.Spread" LastFile="VL.Lib.Basics.dll">
-                    <OPERATIONNODE Name="Except" />
-                    <CATEGORY Name="Spread" IsDirectParent="true" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Input" />
-                    <INPUT Name="Input 2" />
-                    <INPUT Name="Input 3" />
-                    <INPUT Name="Enabled" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Output" />
-                  </OUTPUTS>
-                </OPERATION>
-                <OPERATION Name="Hands" Layer="Selector">
-                  <POSITION x="972.054749" y="353.144226" />
-                  <NODEREF LastCat="Devices.Leap.Frame" LastFile="VL.Devices.Leap.vl">
-                    <OPERATIONNODE Name="Hands" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Frame" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Hands" />
-                  </OUTPUTS>
-                </OPERATION>
-                <OPERATION Name="Hands#1" Layer="Selector">
-                  <POSITION x="1058.33948" y="358.053" />
-                  <NODEREF LastCat="Devices.Leap.Frame" LastFile="VL.Devices.Leap.vl">
-                    <OPERATIONNODE Name="Hands" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Frame" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Hands" />
-                  </OUTPUTS>
-                </OPERATION>
-                <OPERATION Name="FromSequence" Layer="Selector">
-                  <POSITION x="971.79" y="542.494141" />
-                  <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-                    <OPERATIONNODE Name="FromSequence" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Input" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Result" />
-                  </OUTPUTS>
-                </OPERATION>
-              </NODES>
-              <LINKS>
-                <Link source="Inlets/Source" sink="Nodes/GetItem/Inputs/Input" />
-                <Link source="Constants/Index" sink="Nodes/GetItem#1/Inputs/Index" />
-                <Link source="Inlets/Source" sink="Nodes/GetItem#1/Inputs/Input" />
-                <Link source="Nodes/GetItem#1/Outputs/Item" sink="Nodes/Hands#1/Inputs/Frame" />
-                <Link source="Nodes/GetItem/Outputs/Item" sink="Nodes/Hands/Inputs/Frame" />
-                <Link source="Nodes/Hands/Outputs/Hands" sink="Regions/ForEachLoop/Inputs/Hands" />
-                <Link source="Regions/ForEachLoop/Outputs/Ids" sink="Nodes/Except/Inputs/Input" />
-                <Link source="Nodes/Hands#1/Outputs/Hands" sink="Regions/ForEachLoop#1/Inputs/Hands" />
-                <Link source="Regions/ForEachLoop#1/Outputs/Ids" sink="Nodes/Except/Inputs/Input 2" />
-                <Link source="Nodes/Except/Outputs/Output" sink="Nodes/FromSequence/Inputs/Input" />
-                <Link source="Nodes/FromSequence/Outputs/Result" sink="Outlets/Result" />
-              </LINKS>
-            </BODY>
-          </REGION>
-          <REGION Name="Distinct" Layer="SetupObservable" Kind="HigherOrderFunction">
-            <POSITION x="592.6523" y="528.631" />
-            <SIZE x="100" y="100" />
-            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-              <OPERATIONNODE Name="Distinct" Version="Selector" />
-              <CATEGORY Name="Observable" IsDirectParent="true" />
-            </NODEREF>
-            <INPUTS>
-              <INPUT Name="Input" />
-              <INPUT Name="Enabled" />
-            </INPUTS>
-            <OUTPUTS>
-              <OUPUT Name="Output" />
-            </OUTPUTS>
-            <BODY Name="DistinctBody">
-              <LAYERS>
-                <LAYER Name="Key Selector" />
-              </LAYERS>
-              <INLETS>
-                <INLET Name="Source" Layer="Key Selector">
-                  <POSITION x="595.1523" y="531.665833" />
-                </INLET>
-              </INLETS>
-              <OUTLETS>
-                <OUTLET Name="Key" Layer="Key Selector">
-                  <POSITION x="597.2121" y="609.009155" />
-                </OUTLET>
-              </OUTLETS>
-              <CONSTS />
-              <REGIONS />
-              <NODES>
-                <OPERATION Name="Id" Layer="Key Selector">
-                  <POSITION x="598.2199" y="573.2445" />
-                  <NODEREF LastCat="Devices.Leap.Hand" LastFile="VL.Devices.Leap.vl">
-                    <OPERATIONNODE Name="Id" />
-                    <CATEGORY Name="Hand" IsDirectParent="true" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Hand" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Id" />
-                  </OUTPUTS>
-                </OPERATION>
-              </NODES>
-              <LINKS>
-                <Link source="Inlets/Source" sink="Nodes/Id/Inputs/Hand" />
-                <Link source="Nodes/Id/Outputs/Id" sink="Outlets/Key" />
-              </LINKS>
-            </BODY>
-          </REGION>
-          <REGION Name="Project" Layer="SetupObservable" Kind="HigherOrderFunction">
-            <POSITION x="699.340942" y="673.9332" />
-            <SIZE x="100" y="100" />
-            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-              <OPERATIONNODE Name="Project" Version="Many" />
-              <CATEGORY Name="Observable" IsDirectParent="true" />
-            </NODEREF>
-            <INPUTS>
-              <INPUT Name="Input" />
-            </INPUTS>
-            <OUTPUTS>
-              <OUPUT Name="Output" />
-            </OUTPUTS>
-            <BODY Name="ProjectBody">
-              <LAYERS>
-                <LAYER Name="Selector" />
-              </LAYERS>
-              <INLETS>
-                <INLET Name="Source" Layer="Selector">
-                  <POSITION x="701.840942" y="674.3114" />
-                </INLET>
-                <INLET Name="Index" Layer="Selector">
-                  <POSITION x="829.0814" y="674.3114" />
-                </INLET>
-              </INLETS>
-              <OUTLETS>
-                <OUTLET Name="Result" Layer="Selector">
-                  <POSITION x="791.6204" y="1052.376" />
+                  <POSITION x="774.659546" y="938.246948" />
                 </OUTLET>
               </OUTLETS>
               <CONSTS />
               <REGIONS>
-                <REGION Name="Project#1" Layer="Selector" Kind="HigherOrderFunction">
-                  <POSITION x="795.5041" y="851.2803" />
-                  <SIZE x="100" y="100" />
-                  <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-                    <OPERATIONNODE Name="Project" />
-                    <CATEGORY Name="Observable" IsDirectParent="true" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Input" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="Output" />
-                  </OUTPUTS>
-                  <BODY Name="ProjectBody">
-                    <LAYERS>
-                      <LAYER Name="Selector" />
-                    </LAYERS>
-                    <INLETS>
-                      <INLET Name="Source" Layer="Selector">
-                        <POSITION x="798.0041" y="851.658447" />
-                      </INLET>
-                    </INLETS>
-                    <OUTLETS>
-                      <OUTLET Name="Result" Layer="Selector">
-                        <POSITION x="798.213" y="947.7384" />
-                      </OUTLET>
-                    </OUTLETS>
-                    <CONSTS />
-                    <REGIONS />
-                    <NODES>
-                      <OPERATION Name="PalmPosition" Layer="Selector">
-                        <POSITION x="800.8071" y="883.4143" />
-                        <NODEREF LastCat="Devices.Leap.Hand" LastFile="VL.Devices.Leap.vl">
-                          <OPERATIONNODE Name="PalmPosition" />
-                        </NODEREF>
-                        <INPUTS>
-                          <INPUT Name="Hand" />
-                        </INPUTS>
-                        <OUTPUTS>
-                          <OUPUT Name="PalmPosition" />
-                        </OUTPUTS>
-                      </OPERATION>
-                      <OPERATION Name="Y" Layer="Selector">
-                        <POSITION x="800.9585" y="910.9479" />
-                        <NODEREF LastCat="3D.Vector3" LastFile="SharpDX.dll">
-                          <OPERATIONNODE Name="Y" />
-                          <CATEGORY Name="Vector3" IsDirectParent="true" />
-                        </NODEREF>
-                        <INPUTS>
-                          <INPUT Name="Input" />
-                        </INPUTS>
-                        <OUTPUTS>
-                          <OUPUT Name="Y" />
-                        </OUTPUTS>
-                      </OPERATION>
-                    </NODES>
-                    <LINKS>
-                      <Link source="Nodes/PalmPosition/Outputs/PalmPosition" sink="Nodes/Y/Inputs/Input" />
-                      <Link source="Nodes/Y/Outputs/Y" sink="Outlets/Result" />
-                      <Link source="Inlets/Source" sink="Nodes/PalmPosition/Inputs/Hand" />
-                    </LINKS>
-                  </BODY>
-                </REGION>
                 <REGION Name="Where" Layer="Selector" Kind="HigherOrderFunction">
-                  <POSITION x="796.1898" y="714.13916" />
+                  <POSITION x="791.512" y="739.207031" />
                   <SIZE x="100" y="100" />
                   <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
                     <OPERATIONNODE Name="Where" />
@@ -3891,19 +3846,19 @@
                     </LAYERS>
                     <INLETS>
                       <INLET Name="Source" Layer="Predicate">
-                        <POSITION x="798.6898" y="714.517334" />
+                        <POSITION x="806.9953" y="739.707031" />
                       </INLET>
                     </INLETS>
                     <OUTLETS>
                       <OUTLET Name="Result" Layer="Predicate">
-                        <POSITION x="798.6898" y="814.517334" />
+                        <POSITION x="794.5691" y="835.3959" />
                       </OUTLET>
                     </OUTLETS>
                     <CONSTS />
                     <REGIONS />
                     <NODES>
                       <OPERATION Name="=" Layer="Predicate">
-                        <POSITION x="801.4687" y="784.067261" />
+                        <POSITION x="796.512" y="796.5184" />
                         <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
                           <OPERATIONNODE Name="=" />
                           <CATEGORY Name="Adaptive" IsDirectParent="true" />
@@ -3916,29 +3871,15 @@
                           <OUPUT Name="Result" />
                         </OUTPUTS>
                       </OPERATION>
-                      <OPERATION Name="Apply" Layer="Predicate">
-                        <POSITION x="809.7651" y="744.017944" />
-                        <NODEREF LastCat="Control.Delegation" LastFile="VL.Lib.Basics.dll">
-                          <OPERATIONNODE Name="Apply" Version="1 =&gt; 1" />
-                        </NODEREF>
-                        <INPUTS>
-                          <INPUT Name="Input" />
-                          <INPUT Name="Delegate" />
-                        </INPUTS>
-                        <OUTPUTS>
-                          <OUPUT Name="Result" />
-                        </OUTPUTS>
-                      </OPERATION>
                     </NODES>
                     <LINKS>
                       <Link source="Nodes/=/Outputs/Result" sink="Outlets/Result" />
-                      <Link source="Inlets/Source" sink="Nodes/Apply/Inputs/Input" />
-                      <Link source="Nodes/Apply/Outputs/Result" sink="Nodes/=/Inputs/Input 2" />
+                      <Link source="Inlets/Source" sink="Nodes/=/Inputs/Input 2" />
                     </LINKS>
                   </BODY>
                 </REGION>
                 <REGION Name="Where#1" Layer="Selector" Kind="HigherOrderFunction">
-                  <POSITION x="926.9281" y="716.326233" />
+                  <POSITION x="920.631653" y="737.3319" />
                   <SIZE x="100" y="100" />
                   <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
                     <OPERATIONNODE Name="Where" />
@@ -3957,19 +3898,19 @@
                     </LAYERS>
                     <INLETS>
                       <INLET Name="Source" Layer="Predicate">
-                        <POSITION x="937.859863" y="716.7044" />
+                        <POSITION x="940.4312" y="737.8319" />
                       </INLET>
                     </INLETS>
                     <OUTLETS>
                       <OUTLET Name="Result" Layer="Predicate">
-                        <POSITION x="931.1339" y="809.312" />
+                        <POSITION x="923.131653" y="828.6948" />
                       </OUTLET>
                     </OUTLETS>
                     <CONSTS />
                     <REGIONS />
                     <NODES>
                       <OPERATION Name="=" Layer="Predicate">
-                        <POSITION x="931.9281" y="774.432251" />
+                        <POSITION x="926.586548" y="798.4534" />
                         <NODEREF LastCat="Adaptive" LastFile="VL.Lib.Basics.dll">
                           <OPERATIONNODE Name="=" />
                           <CATEGORY Name="Adaptive" IsDirectParent="true" />
@@ -3982,45 +3923,17 @@
                           <OUPUT Name="Result" />
                         </OUTPUTS>
                       </OPERATION>
-                      <OPERATION Name="Apply" Layer="Predicate">
-                        <POSITION x="947.1633" y="745.663147" />
-                        <NODEREF LastCat="Control.Delegation" LastFile="VL.Lib.Basics.dll">
-                          <OPERATIONNODE Name="Apply" Version="1 =&gt; 1" />
-                        </NODEREF>
-                        <INPUTS>
-                          <INPUT Name="Input" />
-                          <INPUT Name="Delegate" />
-                        </INPUTS>
-                        <OUTPUTS>
-                          <OUPUT Name="Result" />
-                        </OUTPUTS>
-                      </OPERATION>
                     </NODES>
                     <LINKS>
                       <Link source="Nodes/=/Outputs/Result" sink="Outlets/Result" />
-                      <Link source="Inlets/Source" sink="Nodes/Apply/Inputs/Input" />
-                      <Link source="Nodes/Apply/Outputs/Result" sink="Nodes/=/Inputs/Input 2" />
+                      <Link source="Inlets/Source" sink="Nodes/=/Inputs/Input 2" />
                     </LINKS>
                   </BODY>
                 </REGION>
               </REGIONS>
               <NODES>
-                <OPERATION Name="DetectKnockObservable" Layer="Selector">
-                  <POSITION x="796.4338" y="981.3872" />
-                  <NODEREF LastCat="Gestures" LastFile="VL.Devices.Leap.GesturesVL.vl">
-                    <OPERATIONNODE Name="DetectKnockObservable" />
-                  </NODEREF>
-                  <INPUTS>
-                    <INPUT Name="Values" />
-                    <INPUT Name="MinScale" />
-                    <INPUT Name="MaxTimespan" />
-                  </INPUTS>
-                  <OUTPUTS>
-                    <OUPUT Name="KnockGesture" />
-                  </OUTPUTS>
-                </OPERATION>
                 <OPERATION Name="TakeUntil" Layer="Selector">
-                  <POSITION x="795.5886" y="1016.91528" />
+                  <POSITION x="777.1303" y="904.19165" />
                   <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
                     <OPERATIONNODE Name="TakeUntil" />
                   </NODEREF>
@@ -4034,12 +3947,13 @@
                   </OUTPUTS>
                 </OPERATION>
                 <OPERATION Name="Apply" Layer="Selector">
-                  <POSITION x="702.7271" y="738.252258" />
+                  <POSITION x="775.821045" y="875.083" />
                   <NODEREF LastCat="Control.Delegation" LastFile="VL.Lib.Basics.dll">
-                    <OPERATIONNODE Name="Apply" Version="1 =&gt; 1" />
+                    <OPERATIONNODE Name="Apply" Version="2 =&gt; 1" />
                   </NODEREF>
                   <INPUTS>
                     <INPUT Name="Input" />
+                    <INPUT Name="Input 2" />
                     <INPUT Name="Delegate" />
                   </INPUTS>
                   <OUTPUTS>
@@ -4048,74 +3962,40 @@
                 </OPERATION>
               </NODES>
               <LINKS>
-                <Link source="Regions/Project#1/Outputs/Output" sink="Nodes/DetectKnockObservable/Inputs/Values" />
-                <Link source="Regions/Where/Outputs/Output" sink="Regions/Project#1/Inputs/Input" />
-                <Link source="Nodes/DetectKnockObservable/Outputs/KnockGesture" sink="Nodes/TakeUntil/Inputs/Input" />
                 <Link source="Nodes/TakeUntil/Outputs/Output" sink="Outlets/Result" />
                 <Link source="Regions/Where#1/Outputs/Output" sink="Nodes/TakeUntil/Inputs/Other" />
+                <Link source="Inlets/Source" sink="Regions/Where/WhereBody/Nodes/=/Inputs/Input" />
+                <Link source="Inlets/Source" sink="Regions/Where#1/WhereBody/Nodes/=/Inputs/Input" />
+                <Link source="Regions/Where/Outputs/Output" sink="Nodes/Apply/Inputs/Input 2" />
                 <Link source="Inlets/Source" sink="Nodes/Apply/Inputs/Input" />
-                <Link source="Nodes/Apply/Outputs/Result" sink="Regions/Where/WhereBody/Nodes/=/Inputs/Input" />
-                <Link source="Nodes/Apply/Outputs/Result" sink="Regions/Where#1/WhereBody/Nodes/=/Inputs/Input" />
+                <Link source="Nodes/Apply/Outputs/Result" sink="Nodes/TakeUntil/Inputs/Input" />
               </LINKS>
             </BODY>
           </REGION>
         </REGIONS>
-        <NODES>
-          <OPERATION Name="Buffer" Layer="SetupObservable">
-            <POSITION x="922.203" y="252.274109" />
-            <NODEREF LastCat="KnockGestureSampleWrapper.KnockGestureSampleHelper" LastFile="KnockGestureSampleWrapper.dll">
-              <OPERATIONNODE Name="Buffer" />
-            </NODEREF>
-            <INPUTS>
-              <INPUT Name="Source" />
-              <INPUT Name="Count" />
-              <INPUT Name="Skip" />
-            </INPUTS>
-            <OUTPUTS>
-              <OUPUT Name="Result" />
-            </OUTPUTS>
-          </OPERATION>
-          <OPERATION Name="Distinct" Layer="SetupObservable">
-            <POSITION x="697.174744" y="613.6407" />
-            <NODEREF LastCat="Reactive.Observable" LastFile="System.Reactive.Linq.dll">
-              <OPERATIONNODE Name="Distinct" Version="Selector" />
-              <CATEGORY Name="Observable" IsDirectParent="true" />
-            </NODEREF>
-            <INPUTS>
-              <INPUT Name="Input" />
-              <INPUT Name="Key Selector" />
-              <INPUT Name="Enabled" />
-            </INPUTS>
-            <OUTPUTS>
-              <OUPUT Name="Output" />
-            </OUTPUTS>
-          </OPERATION>
-        </NODES>
+        <NODES />
         <LINKS>
-          <Link source="Inlets/Source" sink="Nodes/Buffer/Inputs/Source" />
-          <Link source="Constants/Skip" sink="Nodes/Buffer/Inputs/Skip" />
-          <Link source="Constants/Count" sink="Nodes/Buffer/Inputs/Count" />
-          <Link source="Inlets/MinScale" sink="Regions/Project/ProjectBody/Nodes/DetectKnockObservable/Inputs/MinScale">
+          <Link source="Regions/Project/Outputs/Output" sink="Outlets/Output" />
+          <Link source="Inlets/Update" sink="Regions/Project/ProjectBody/Nodes/Apply/Inputs/Delegate">
             <SEGMENTS>
-              <Point x="-262.833923" y="653.8888" />
+              <Point x="-73.92944" y="221.4945" />
             </SEGMENTS>
           </Link>
-          <Link source="Inlets/MaxTimespan" sink="Regions/Project/ProjectBody/Nodes/DetectKnockObservable/Inputs/MaxTimespan">
-            <SEGMENTS>
-              <Point x="-268.393372" y="677.473755" />
-            </SEGMENTS>
-          </Link>
-          <Link source="Regions/Project/Outputs/Output" sink="Outlets/KnockGestures" />
-          <Link source="Regions/Project#1/Outputs/Output" sink="Regions/Project/ProjectBody/Regions/Where/Inputs/Input" />
-          <Link source="Nodes/Buffer/Outputs/Result" sink="Regions/Project#3/Inputs/Input" />
-          <Link source="Regions/Project#1/Outputs/Output" sink="Nodes/Distinct/Inputs/Input" />
-          <Link source="Nodes/Distinct/Outputs/Output" sink="Regions/Project/Inputs/Input" />
-          <Link source="Regions/Project#1/Outputs/Output" sink="Regions/Distinct/Inputs/Input" />
-          <Link source="Inlets/Distinct Selector" sink="Nodes/Distinct/Inputs/Key Selector" />
-          <Link source="Inlets/Distinct Selector" sink="Regions/Project/ProjectBody/Regions/Where/WhereBody/Nodes/Apply/Inputs/Delegate" />
-          <Link source="Inlets/Distinct Selector" sink="Regions/Project/ProjectBody/Nodes/Apply/Inputs/Delegate" />
-          <Link source="Inlets/Distinct Selector" sink="Regions/Project/ProjectBody/Regions/Where#1/WhereBody/Nodes/Apply/Inputs/Delegate" />
+          <Link source="Inlets/End" sink="Regions/Project/ProjectBody/Regions/Where#1/Inputs/Input" />
+          <Link source="Inlets/Input" sink="Regions/Project/ProjectBody/Regions/Where/Inputs/Input" />
+          <Link source="Inlets/Start" sink="Regions/Project/Inputs/Input" />
         </LINKS>
+      </BODY>
+    </PATCH>
+    <PATCH Name="Utils2" Category="Main">
+      <BODY Name="Utils2Body">
+        <LAYERS />
+        <INLETS />
+        <OUTLETS />
+        <CONSTS />
+        <REGIONS />
+        <NODES />
+        <LINKS />
       </BODY>
     </PATCH>
   </PATCHES>

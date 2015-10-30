@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<VLDOCUMENT Version="0.31.1299.0">
+<VLDOCUMENT Version="0.32.0.0">
   <DEPENDENCIES>
     <DEPENDENCY Name="mscorlib.dll.vlimport" Location="mscorlib.dll.vlimport" />
     <DEPENDENCY Name="SharpDX.dll.vlimport" Location="SharpDX.dll.vlimport" />
@@ -56,7 +56,6 @@
             </INPUTS>
             <OUTPUTS>
               <OUPUT Name="KnockGestures" FragmentId="OnUpdate" />
-              <OUPUT Name="Old" FragmentId="OnUpdate" />
             </OUTPUTS>
             <FRAGMENTS>
               <FRAGMENT Name="Create" />
@@ -177,7 +176,6 @@
           <Link source="Nodes/ShareInstance/Outputs/Output 2" sink="Nodes/Changed/Inputs/Value" />
           <Link source="Nodes/DetectKnock/Outputs/KnockGestures" sink="Nodes/Sampler/Inputs/Async Notifications" />
           <Link source="Nodes/Sampler/Outputs/Notifications" sink="Outlets/KnockGestures" />
-          <Link source="Inlets/MinScale" sink="Nodes/DetectKnock/Inputs/MinScale" />
           <Link source="Inlets/MaxTimespan" sink="Nodes/Changed#2/Inputs/Value" />
           <Link source="Inlets/MinScale" sink="Nodes/Changed#1/Inputs/Value" />
           <Link source="Nodes/Changed/Outputs/Result" sink="Nodes/OR/Inputs/Input" />
@@ -186,6 +184,7 @@
           <Link source="Nodes/OR/Outputs/Output" sink="Nodes/DetectKnock/Inputs/SetupObservable Enabled" />
           <Link source="Inlets/MaxTimespan" sink="Nodes/FromSeconds/Inputs/Value" />
           <Link source="Nodes/FromSeconds/Outputs/Result" sink="Nodes/DetectKnock/Inputs/MaxTimespan" />
+          <Link source="Inlets/MinScale" sink="Nodes/DetectKnock/Inputs/MinScale" />
         </LINKS>
       </BODY>
     </PATCH>
@@ -239,12 +238,11 @@
             </INPUTS>
             <OUTPUTS>
               <OUPUT Name="SwipeGesture" FragmentId="OnUpdate" />
-              <OUPUT Name="old" FragmentId="OnUpdate" />
             </OUTPUTS>
             <FRAGMENTS>
-              <FRAGMENT Name="Create" />
               <FRAGMENT Name="SetupObservable" />
               <FRAGMENT Name="OnUpdate" />
+              <FRAGMENT Name="Create" />
             </FRAGMENTS>
           </PROCESS>
           <PROCESS Name="Changed">
@@ -328,6 +326,7 @@
         <LAYERS>
           <LAYER Name="SwipeGesture" />
           <LAYER Name="TEMPdistancePointLine" />
+          <LAYER Name="=" />
         </LAYERS>
         <INLETS>
           <INLET Name="SwipeGesture" Layer="SwipeGesture">

@@ -1,6 +1,6 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv50alpha34.100.dtd" >
    <PATCH nodename="C:\Users\vvvv_2\Documents\DOMINIK\GesturesVL\vl\DetectKnock (Devices.Leap Leap) help.v4p">
-   <BOUNDS type="Window" left="19140" top="5895" width="9000" height="6585">
+   <BOUNDS type="Window" left="18975" top="1200" width="9000" height="6585">
    </BOUNDS>
    <NODE nodename="IOBox (String)" componentmode="InABox" id="3" systemname="IOBox (String)">
    <BOUNDS type="Node" left="225" top="225" width="5100" height="450">
@@ -69,7 +69,7 @@
    </BOUNDS>
    <BOUNDS type="Node" left="3045" top="2055" width="0" height="0">
    </BOUNDS>
-   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="0.06">
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="0.03">
    </PIN>
    <PIN pinname="Units" slicecount="1" values="||">
    </PIN>
@@ -95,7 +95,7 @@
    </BOUNDS>
    <BOUNDS type="Node" left="3000" top="2370" width="0" height="0">
    </BOUNDS>
-   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="1.36">
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="0.28">
    </PIN>
    <PIN pinname="Units" slicecount="1" values="||">
    </PIN>
@@ -166,14 +166,6 @@
    </NODE>
    <LINK srcnodeid="4" srcpinname="Output Enum" dstnodeid="9" dstpinname="Mode">
    </LINK>
-   <NODE systemname="Leap (Devices)" filename="..\..\LEAP_VL\vl\VVVV.Devices.Leap.vl" nodename="Leap (Devices)" componentmode="Hidden" id="17">
-   <BOUNDS type="Node" left="1485" top="1725" width="100" height="100">
-   </BOUNDS>
-   <PIN pinname="Frame" visible="1">
-   </PIN>
-   </NODE>
-   <LINK srcnodeid="14" srcpinname="Y Output Value" dstnodeid="17" dstpinname="Enabled">
-   </LINK>
    <PACK Name="addonpack" Version="34.100.0">
    </PACK>
    <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="22" systemname="IOBox (Value Advanced)">
@@ -187,21 +179,29 @@
    </PIN>
    <PIN pinname="Value Type" slicecount="1" values="Integer">
    </PIN>
-   <PIN pinname="Y Input Value">
+   <PIN pinname="Y Input Value" slicecount="1" values="0">
    </PIN>
    </NODE>
-   <NODE systemname="DetectKnock (Devices.Leap Leap)" filename="VVVV.Devices.Leap.KnockGestureSample.vl" nodename="KnockGesture (Devices.Leap Leap)" componentmode="Hidden" id="24">
+   <NODE systemname="Leap (Devices)" filename="..\..\LEAP_VL\vl\VVVV.Devices.Leap.vl" nodename="Leap (Devices)" componentmode="Hidden" id="26">
+   <BOUNDS type="Node" left="1485" top="1725" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Frame" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="14" srcpinname="Y Output Value" dstnodeid="26" dstpinname="Enabled">
+   </LINK>
+   <NODE systemname="DetectKnock (Devices.Leap Leap)" filename="VVVV.Devices.Leap.KnockGestureSample.vl" nodename="KnockGesture (Devices.Leap Leap)" componentmode="Hidden" id="28">
    <BOUNDS type="Node" left="1455" top="2595" width="100" height="100">
    </BOUNDS>
+   <PIN pinname="Frames" visible="1">
+   </PIN>
    </NODE>
-   <LINK srcnodeid="13" srcpinname="Y Output Value" dstnodeid="24" dstpinname="MinScale">
+   <LINK srcnodeid="13" srcpinname="Y Output Value" dstnodeid="28" dstpinname="MinScale">
    </LINK>
-   <LINK srcnodeid="11" srcpinname="Y Output Value" dstnodeid="24" dstpinname="MaxTimespan">
+   <LINK srcnodeid="11" srcpinname="Y Output Value" dstnodeid="28" dstpinname="MaxTimespan">
    </LINK>
-   <LINK srcnodeid="17" srcpinname="Frame" dstnodeid="24" dstpinname="Frames">
+   <LINK srcnodeid="28" srcpinname="KnockGestures" dstnodeid="8" dstpinname="Input">
    </LINK>
-   <LINK srcnodeid="24" srcpinname="Notifications" dstnodeid="22" dstpinname="Y Input Value">
-   </LINK>
-   <LINK srcnodeid="24" srcpinname="KnockGestures" dstnodeid="8" dstpinname="Input">
+   <LINK srcnodeid="26" srcpinname="Frame" dstnodeid="28" dstpinname="Frames">
    </LINK>
    </PATCH>
